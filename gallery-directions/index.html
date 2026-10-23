@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Galeria pamięci — trzy kierunki wizualne</title>
+  <style>
+    :root{color-scheme:light;--navy:#172139;--copper:#965d2b;--muted:#596173;--line:#dfd6ca;--paper:#f7f3ed}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--navy);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    a{color:inherit}a:focus-visible{outline:3px solid var(--copper);outline-offset:4px}main{width:min(1280px,calc(100% - 36px));margin:auto;padding:48px 0 80px}
+    header{max-width:850px;margin-bottom:35px}small,.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);font-weight:700}h1,h2{font-family:Georgia,"Times New Roman",serif;line-height:1.12;letter-spacing:-.03em}h1{font-size:clamp(36px,5vw,64px);margin:8px 0 16px}h2{font-size:clamp(28px,3vw,42px);margin:4px 0 12px}p{margin:0;color:var(--muted)}header p{font-size:17px}
+    nav{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 42px}nav a,.original{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 18px;border:1px solid var(--line);border-radius:999px;background:#fff;text-decoration:none;font-size:14px;font-weight:600}nav a:hover,.original:hover{border-color:var(--copper);color:var(--copper)}
+    section{scroll-margin-top:20px;margin:0 0 52px;padding:clamp(18px,3vw,34px);background:#fff;border:1px solid #e9e1d7;border-radius:18px;box-shadow:0 16px 50px #1721390b}section.favorite{border-color:#c6a480}section .head{display:flex;justify-content:space-between;align-items:flex-start;gap:22px;flex-wrap:wrap;margin-bottom:22px}section .head p{max-width:680px}section .head .original{white-space:nowrap}figure{margin:0}figure a{display:block;border-radius:11px;overflow:hidden;border:1px solid #e8e0d6;background:#e8e2da}figure img{display:block;width:100%;height:auto}figcaption{padding-top:12px;font-size:13px;color:var(--muted)}
+    .badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:99px;background:#f4e8da;color:#784916;font:600 11px/1.6 system-ui;letter-spacing:0;vertical-align:middle}footer{border-top:1px solid var(--line);padding-top:22px;font-size:13px;color:var(--muted)}
+    @media(max-width:600px){main{padding-top:28px}nav{gap:7px;margin-bottom:26px}nav a{flex:1;min-width:90px}section{margin-bottom:24px}.head .original{width:100%}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <span class="eyebrow">W Modlitwie · przegląd koncepcji</span>
+    <h1>Galeria pamięci</h1>
+    <p>Trzy propozycje układu publicznej galerii stron pamięci. Otwórz dowolną makietę w pełnym rozmiarze, aby porównać wersję komputerową i telefoniczną.</p>
+  </header>
+  <nav aria-label="Przejdź do wariantu"><a href="#a">A · Siatka</a><a href="#b">B · Sceny pamięci</a><a href="#c">C · Karuzela i lista</a></nav>
+  <section id="a" aria-labelledby="title-a">
+    <div class="head"><div><small>Wariant A</small><h2 id="title-a">Galeria portretów</h2><p>Najczytelniejsza siatka kart. Wszystkie osoby i podstawowe informacje są widoczne od razu, bez dodatkowego przewijania poziomego.</p></div><a class="original" href="./a-grid.png" target="_blank" rel="noopener">Otwórz pełny obraz ↗</a></div>
+    <figure><a href="./a-grid.png" target="_blank" rel="noopener" aria-label="Otwórz makietę A w pełnym rozmiarze"><img src="./a-grid.png" width="1536" height="1024" alt="Makieta A: galeria portretów w regularnej siatce na komputerze i telefonie"></a><figcaption>Kliknij obraz, aby obejrzeć oryginał 1536 × 1024 px.</figcaption></figure>
+  </section>
+  <section id="b" class="favorite" aria-labelledby="title-b">
+    <div class="head"><div><small>Wariant B <span class="badge">Rekomendowany</span></small><h2 id="title-b">Galeria scen pamięci</h2><p>Duże fotograficzne sceny dla świec 90-dniowych, niżej zwarta siatka pozostałych. Ten kierunek najlepiej przenosi klimat istniejącej strony pamięci.</p></div><a class="original" href="./b-scenes.png" target="_blank" rel="noopener">Otwórz pełny obraz ↗</a></div>
+    <figure><a href="./b-scenes.png" target="_blank" rel="noopener" aria-label="Otwórz makietę B w pełnym rozmiarze"><img src="./b-scenes.png" width="1536" height="1024" loading="lazy" alt="Makieta B: duże sceny pamięci dla świec 90-dniowych i siatka pozostałych na komputerze i telefonie"></a><figcaption>Kliknij obraz, aby obejrzeć oryginał 1536 × 1024 px.</figcaption></figure>
+  </section>
+  <section id="c" aria-labelledby="title-c">
+    <div class="head"><div><small>Wariant C</small><h2 id="title-c">Karuzela i lista</h2><p>Najpierw pozioma karuzela niedawno zapalonych świec, potem lista wszystkich osób. Mocniej podkreśla najnowsze strony, ale wymaga więcej interakcji.</p></div><a class="original" href="./c-carousel.png" target="_blank" rel="noopener">Otwórz pełny obraz ↗</a></div>
+    <figure><a href="./c-carousel.png" target="_blank" rel="noopener" aria-label="Otwórz makietę C w pełnym rozmiarze"><img src="./c-carousel.png" width="1312" height="1199" loading="lazy" alt="Makieta C: karuzela świec i lista osób na komputerze i telefonie"></a><figcaption>Kliknij obraz, aby obejrzeć oryginał 1312 × 1199 px.</figcaption></figure>
+  </section>
+  <footer>To wyłącznie makiety koncepcyjne z przykładowymi osobami i danymi. Nazwy, daty, ceny, okresy oraz podpisy wygenerowane na obrazach nie są rekordami serwisu ani gotową logiką galerii.</footer>
+</main>
+</body>
+</html>
