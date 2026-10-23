@@ -172,3 +172,102 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 @media(prefers-reduced-motion:reduce){.memorial-flame,.memorial-lit-photo{animation:none!important}}
 
 .memorial-photo > .memorial-foreground{z-index:4;pointer-events:none}
+
+/* Three-step memorial creator */
+.memorial-creator{width:min(1280px,calc(100% - 64px));margin:36px auto 80px;color:#17253b}
+.creator-intro{max-width:720px;margin-bottom:28px}
+.creator-intro h1{font:500 clamp(35px,4vw,56px)/1.13 var(--serif);letter-spacing:-.035em;color:#17253b}
+.creator-intro p{margin-top:12px;color:#4d5868;font-size:16px;line-height:1.6}
+.creator-steps{display:flex;gap:8px;margin-bottom:26px;border-bottom:1px solid #dcd5ca}
+.creator-steps button{flex:1;display:flex;align-items:center;gap:10px;min-height:55px;padding:8px 10px;border:0;border-bottom:3px solid transparent;background:transparent;color:#525d6d;text-align:left;font-size:13px;font-weight:600;cursor:pointer}
+.creator-steps button[aria-current="step"]{border-color:#9c602d;color:#17253b}
+.creator-steps button span{display:inline-grid;place-items:center;flex:none;width:26px;height:26px;border:1px solid #bcac96;border-radius:50%;font-size:12px}
+.creator-steps button[aria-current="step"] span{background:#17253b;border-color:#17253b;color:#fff}
+.creator-layout{display:grid;grid-template-columns:minmax(0,485px) minmax(0,1fr);align-items:start;gap:34px}
+.creator-form{padding:30px;background:#fff;border:1px solid #e7dfd4;border-radius:14px;box-shadow:0 18px 50px #17253b0d}
+.creator-form h2{font:500 31px/1.2 var(--serif);color:#17253b;letter-spacing:-.02em}
+.creator-section-note{color:#566173;font-size:14px;line-height:1.55;margin:9px 0 26px}
+.creator-field{display:flex;flex-direction:column;gap:7px;margin:22px 0}
+.creator-field label,.creator-date-field>label{font-size:14px;font-weight:600;color:#26354a}
+.creator-field label strong{color:#97572f}
+.creator-field input,.creator-field textarea,.creator-date-inputs input,.creator-date-inputs select,.creator-prayer textarea{width:100%;border:1px solid #c9c8c4;background:#fff;color:#17253b;border-radius:8px;padding:12px 13px;font:15px/1.4 inherit;min-height:44px}
+.creator-field textarea,.creator-prayer textarea{font:15px/1.5 var(--sans);resize:vertical}
+.creator-field input:focus,.creator-field textarea:focus,.creator-date-inputs input:focus,.creator-date-inputs select:focus,.creator-prayer textarea:focus{outline:2px solid #a66a35;outline-offset:2px}
+.creator-field small,.creator-date-field small,.creator-photo small,.creator-prayer small{color:#596173;font-size:12px;line-height:1.45}
+.creator-field-error,.creator-field .creator-field-error,.creator-date-field .creator-field-error{color:#a1262d;font-size:13px}
+.creator-dates{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0 15px}
+.creator-date-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.creator-date-field>label span,.creator-photo h3 span{font-weight:400;color:#596173}
+.creator-date-inputs{display:flex;flex-direction:column;gap:7px}
+.creator-date-inputs select{font-size:13px}
+.creator-check{display:flex;align-items:flex-start;gap:10px;color:#304054;font-size:13px;line-height:1.5;margin:20px 0}
+.creator-check input{margin-top:3px;accent-color:#17253b}
+.creator-check a{text-decoration:underline;text-underline-offset:3px;color:#7b4d27}
+.creator-photo{border-top:1px solid #e5dfd5;margin-top:30px;padding-top:24px}
+.creator-photo h3,.creator-candle-choice h3{font:500 21px/1.25 var(--serif);color:#17253b}
+.creator-photo p,.creator-candle-choice p{color:#566173;font-size:13px;line-height:1.55;margin:8px 0 16px}
+.creator-photo-pick{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 17px;border:1px solid #a66a35;border-radius:99px;color:#7b4d27;cursor:pointer;font-size:13px;font-weight:600;position:relative}
+.creator-photo-pick input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.creator-photo-pick:focus-within{outline:3px solid #a66a35;outline-offset:3px}
+.creator-photo>label:not(.creator-photo-pick){display:block;font-size:13px;color:#304054;margin-top:14px}
+.creator-photo input[type="range"]{display:block;width:100%;accent-color:#a66a35;margin-top:5px}
+.creator-crop-preview{height:190px;aspect-ratio:4/5;width:auto;margin:16px 0;border:5px solid #9c7247;box-shadow:0 8px 20px #0002;overflow:hidden;background:#e9dfd1}
+.creator-crop-preview img{width:100%;height:100%;object-fit:cover}
+.creator-text-button{border:0;background:none;color:#7b4d27;text-decoration:underline;text-underline-offset:3px;padding:8px 0;cursor:pointer;font-size:13px}
+.creator-inspirations{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.creator-inspirations span{width:100%;font-size:13px;color:#596173}
+.creator-inspirations button{min-height:34px;padding:5px 13px;background:#f5eee5;border:1px solid #dccab5;border-radius:99px;color:#6a4829;cursor:pointer;font-size:12px}
+.creator-inspirations button:hover{background:#eaddca}
+.creator-prayer,.creator-access{border:0;padding:0;margin:28px 0 0;display:grid;gap:10px}
+.creator-prayer legend,.creator-access legend{font-size:14px;font-weight:600;margin-bottom:12px;color:#26354a}
+.creator-prayer label,.creator-candle-choice label{display:flex;align-items:center;gap:10px;min-height:36px;font-size:14px;color:#304054}
+.creator-prayer input,.creator-access input,.creator-candle-choice input{accent-color:#17253b}
+.creator-access label{display:flex;align-items:flex-start;gap:12px;padding:13px;border:1px solid #ded4c6;border-radius:9px;cursor:pointer}
+.creator-access label:has(input:checked){border-color:#9c602d;background:#fcf8f1}
+.creator-access input{margin-top:3px}
+.creator-access span{display:flex;flex-direction:column;gap:4px}
+.creator-access small{color:#596173;font-size:12px;line-height:1.45}
+.creator-summary{display:grid;gap:10px;margin:20px 0 28px;border-bottom:1px solid #e5dfd5;padding-bottom:20px}
+.creator-summary div{display:grid;grid-template-columns:88px 1fr;gap:10px;font-size:13px;line-height:1.5}
+.creator-summary dt{color:#596173}.creator-summary dd{color:#17253b;overflow-wrap:anywhere;white-space:pre-wrap}
+.creator-candle-choice{border-top:1px solid #e5dfd5;padding-top:24px;margin-top:27px}
+.creator-account-note{background:#f5f0e9;border-radius:8px;padding:13px 15px;color:#435065;font-size:12px;line-height:1.5;margin-top:26px}
+.creator-account-note a,.creator-published a{color:#784916;text-decoration:underline;text-underline-offset:3px}
+.creator-published{padding:12px;background:#edf5ea;color:#264f31;border-radius:8px;font-size:13px}
+.creator-navigation{display:flex;justify-content:flex-end;gap:10px;margin-top:30px}
+.creator-navigation .button{min-height:44px}
+.creator-navigation .button:disabled{opacity:.5;cursor:not-allowed}
+.creator-preview{position:sticky;top:20px;min-width:0;background:#fff;border:1px solid #e7dfd4;border-radius:12px;overflow:hidden;box-shadow:0 18px 50px #17253b0d}
+.creator-preview-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 17px;color:#26354a;font-size:13px}
+.creator-preview-heading span{font-size:11px;color:#596173}
+.creator-preview .memorial-scene{aspect-ratio:2.15}
+.creator-preview .memorial-scene-content{left:56%;top:15%;width:42%}
+.creator-preview .memorial-scene h2{font-size:clamp(24px,2.5vw,38px);letter-spacing:-.03em}
+.creator-preview .memorial-dedication{font-size:clamp(12px,1.1vw,16px);margin-top:8px}
+.creator-preview .memorial-scene-dates,.creator-preview .memorial-scene-signature{font-size:clamp(11px,.95vw,13px);color:#f3e5ce;margin-top:5px}
+.creator-preview .memorial-scene-actions{margin-top:10px}
+.creator-preview .memorial-access{min-height:28px;font-size:10px;padding:4px 11px}
+.creator-preview .memorial-motion-toggle{font-size:10px;margin-top:3px}
+.creator-preview-details{padding:17px 22px;color:#334159;font:14px/1.6 var(--serif)}
+.creator-preview-details p,.creator-preview-details blockquote{margin:0 0 9px;white-space:pre-wrap;overflow-wrap:anywhere}
+.creator-preview-details blockquote{border-top:1px solid #e4dbcf;padding-top:13px;font-style:italic}
+@media(max-width:1100px){.creator-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}.creator-form{padding:22px}.creator-preview .memorial-scene h2{font-size:25px}}
+@media(max-width:800px){.memorial-creator{width:calc(100% - 32px);margin:22px auto 50px}.creator-intro h1{font-size:37px}.creator-intro p{font-size:14px}.creator-steps button{font-size:11px;gap:6px;padding:7px 4px}.creator-steps button span{width:23px;height:23px}.creator-layout{display:flex;flex-direction:column}.creator-layout[data-step="3"] .creator-preview{order:-1}.creator-form,.creator-preview{width:100%}.creator-preview{position:relative;top:auto}.creator-preview .memorial-scene{aspect-ratio:auto}.creator-preview .memorial-photo{width:120%;margin-left:-4%;aspect-ratio:2.15}.creator-preview .memorial-scene-content{position:relative;left:auto;top:auto;width:100%;padding:18px 20px 20px}.creator-preview .memorial-scene h2{font-size:33px}.creator-preview .memorial-dedication{font-size:16px}.creator-preview .memorial-scene-dates,.creator-preview .memorial-scene-signature{font-size:12px;margin-top:7px}.creator-preview .memorial-scene-actions{margin-top:12px}.creator-preview .memorial-motion-toggle{font-size:11px}.creator-dates{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:20px}.creator-steps button{font-size:10px}.creator-navigation{flex-wrap:wrap}.creator-navigation .button{flex:1}}
+
+.demo-create-link{padding:10px 30px;background:#f4eee5;text-align:center;color:#704826;font-size:13px;font-weight:600}
+.demo-create-link a{text-decoration:underline;text-underline-offset:3px}
+body:has(.memorial-header) main.memorial-creator{width:min(1280px,calc(100% - 48px));padding:36px 32px;margin:0 auto 40px;background:#f9f6f1}
+.memorial-creator .button{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:10px 20px;border:1px solid #17253b;border-radius:99px;background:#17253b;color:#fff;font:600 13px var(--sans);text-decoration:none}
+.memorial-creator .button.secondary{background:transparent;color:#17253b}
+.memorial-creator .button:hover{filter:brightness(1.12)}
+.memorial-creator .memorial-photo>.memorial-foreground{z-index:4}
+.creator-final-result{margin-top:25px;padding:28px;background:#fff;border:1px solid #e7dfd4;border-radius:12px}
+.creator-final-result p{margin:10px 0 18px}
+@media(max-width:800px){body:has(.memorial-header) main.memorial-creator{width:100%;padding:22px 16px;margin:0 auto 40px}}
+.memorial-creator.is-final .creator-layout{display:block}
+.memorial-creator.is-final .creator-preview{position:relative;top:auto;width:100%}
+.memorial-creator.is-final .creator-preview .memorial-scene h2{font-size:clamp(35px,4.7vw,64px)}
+.memorial-creator.is-final .creator-preview .memorial-dedication{font-size:clamp(15px,1.7vw,23px)}
+.memorial-creator.is-final .creator-preview .memorial-scene-content{left:57%;top:19%;width:39%}
+@media(max-width:800px){.memorial-creator.is-final .creator-preview .memorial-scene-content{position:relative;left:auto;top:auto;width:100%}.memorial-creator.is-final .creator-preview .memorial-scene h2{font-size:clamp(39px,10vw,54px)}.memorial-creator.is-final .creator-preview .memorial-dedication{font-size:19px}}
