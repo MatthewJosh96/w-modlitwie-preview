@@ -69,7 +69,7 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 .memorial-photo{position:absolute;inset:0;z-index:0;container-type:inline-size}
 .memorial-photo>img{object-fit:cover;object-position:center}
 .memorial-photo>.memorial-lit-photo{z-index:1;-webkit-mask-image:radial-gradient(ellipse 2.4% 6% at 45.45% 60.1%,transparent 53%,#000 100%);mask-image:radial-gradient(ellipse 2.4% 6% at 45.45% 60.1%,transparent 53%,#000 100%)}
-.memorial-scene.is-animated .memorial-lit-photo{animation:memorial-light 2.3s ease-in-out infinite alternate}
+.memorial-scene.is-animated .memorial-lit-photo{animation:memorial-light 1.75s linear infinite}
 .memorial-scene:after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,transparent 35%,#07101a12 52%,#040a12a8 76%,#040a12ba);pointer-events:none}
 .memorial-portrait{position:absolute;z-index:2;inset:0;width:100%;height:100%;overflow:visible}
 .memorial-portrait image{filter:sepia(.17) saturate(.82) brightness(.84) contrast(1.05)}
@@ -90,10 +90,17 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 .memorial-share-message{color:#fff;font-size:12px}
 .memorial-flame-patch{position:absolute;z-index:3;inset:0;overflow:hidden;-webkit-mask-image:radial-gradient(ellipse 2.4% 6% at 45.45% 60.1%,#000 53%,transparent 100%);mask-image:radial-gradient(ellipse 2.4% 6% at 45.45% 60.1%,#000 53%,transparent 100%)}
 .memorial-flame-patch .memorial-flame{object-fit:cover;object-position:center;transform-origin:45.45% 64.5%}
-.memorial-scene.is-animated .memorial-flame{animation:memorial-flicker 1.8s ease-in-out infinite alternate}
-@keyframes memorial-light{from{opacity:.88}to{opacity:1}}
-@keyframes memorial-flicker{0%{transform:rotate(-.45deg) scaleY(.99)}45%{transform:rotate(.3deg) scaleY(1.012)}100%{transform:rotate(.55deg) scaleY(.982)}}
+.memorial-scene.is-animated .memorial-flame{animation:memorial-flicker 1.37s ease-in-out infinite}
+@keyframes memorial-light{0%,100%{opacity:.76}19%{opacity:1}34%{opacity:.83}57%{opacity:.96}72%{opacity:.71}}
+@keyframes memorial-flicker{0%,100%{transform:rotate(-1.4deg) scaleX(.98) scaleY(.92)}20%{transform:rotate(.8deg) scaleX(1.01) scaleY(1.08)}43%{transform:rotate(-2deg) scaleX(.97) scaleY(.97)}71%{transform:rotate(2deg) scaleX(1.03) scaleY(1.14)}}
 .memorial-background-lights{position:absolute;z-index:1;inset:0;pointer-events:none}
+.memorial-background-lights:before,.memorial-background-lights:after{content:"";position:absolute;left:45.45%;translate:-50% -50%;border-radius:50%;mix-blend-mode:screen;pointer-events:none}
+.memorial-background-lights:before{top:59%;width:15cqw;height:18cqw;background:radial-gradient(ellipse,#ffd18b40 0%,#ee92301c 42%,transparent 75%);opacity:.58}
+.memorial-background-lights:after{top:93%;width:20cqw;height:3cqw;background:radial-gradient(ellipse,#ffc46a66 0%,#ea883022 40%,transparent 75%);opacity:.4}
+.memorial-scene.is-animated .memorial-background-lights:before{animation:memorial-main-glow 1.75s linear infinite}
+.memorial-scene.is-animated .memorial-background-lights:after{animation:memorial-main-reflection 1.75s linear infinite}
+@keyframes memorial-main-glow{0%,100%{opacity:.42;transform:scale(.96)}19%{opacity:.88;transform:scale(1.06)}34%{opacity:.5;transform:scale(.98)}57%{opacity:.78;transform:scale(1.04)}72%{opacity:.36;transform:scale(.95)}}
+@keyframes memorial-main-reflection{0%,100%{opacity:.28}19%{opacity:.7}34%{opacity:.36}57%{opacity:.6}72%{opacity:.23}}
 .memorial-background-glow{position:absolute;left:var(--light-x);top:var(--light-y);translate:-50% -50%;width:var(--light-width);height:var(--light-height);opacity:.26;border-radius:50%;background:radial-gradient(ellipse,#ffe3a970 0%,#ffac393b 24%,transparent 72%);mix-blend-mode:screen}
 .memorial-scene.is-animated .memorial-background-glow{animation:memorial-background-flicker var(--light-duration) ease-in-out var(--light-delay) infinite alternate}
 .glow-left{--light-x:34.31%;--light-y:61.33%;--light-width:3.4cqw;--light-height:5.2cqw;--light-duration:2.13s;--light-delay:-.6s}
