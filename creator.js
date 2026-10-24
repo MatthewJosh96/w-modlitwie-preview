@@ -163,9 +163,23 @@
     setError('photo', '');
   }
 
-  $('#demo-photo').addEventListener('change', async (event) => {
+  // Recreate the native control after dismissal so a cancelled iOS picker cannot retain state.
+  function renewPhotoPicker() {
+    const previous = $('#demo-photo');
+    const fresh = previous.cloneNode(false);
+    fresh.value = '';
+    previous.replaceWith(fresh);
+    bindPhotoPicker(fresh);
+  }
+  function bindPhotoPicker(input) {
+    input.addEventListener('click', () => { input.value = ''; });
+    input.addEventListener('cancel', renewPhotoPicker);
+    input.addEventListener('change', selectPhoto);
+  }
+  bindPhotoPicker($('#demo-photo'));
+  async function selectPhoto(event) {
     const file = event.target.files?.[0];
-    event.target.value = '';
+    renewPhotoPicker();
     if (!file) return;
     if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) { setError('photo', 'Wybierz zdjęcie JPG, PNG lub WebP do 5 MB.'); return; }
     const url = URL.createObjectURL(file);
@@ -176,7 +190,7 @@
       $('#demo-zoom').value = '1'; $('#demo-x').value = '0'; $('#demo-y').value = '0';
       drawPhoto();
     } catch { URL.revokeObjectURL(url); setError('photo', 'Nie udało się odczytać zdjęcia. Wybierz inny plik.'); }
-  });
+  }
   $('#photo-reset').addEventListener('click', () => { if (imageUrl) URL.revokeObjectURL(imageUrl); imageUrl = null; image = null; photoData = null; $('#photo-tools').hidden = true; $('.creator-photo-pick strong').textContent = 'Dodaj zdjęcie'; $('.memorial-portrait').setAttribute('hidden', ''); $('.memorial-foreground').hidden = true; $('.memorial-empty-frame').hidden = false; $('#portrait-image').removeAttribute('href'); setError('photo', ''); });
   for (const id of ['demo-zoom', 'demo-x', 'demo-y']) $(`#${id}`).addEventListener('input', drawPhoto);
   for (const kind of ['birth', 'death']) {
