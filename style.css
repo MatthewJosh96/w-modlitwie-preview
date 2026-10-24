@@ -355,10 +355,10 @@ body:has(.memorial-header) main.memorial-creator{width:min(1280px,calc(100% - 48
 .creator-side-help span{color:#586272}
 .creator-preview{position:relative;top:auto;border-radius:8px;box-shadow:none}
 .creator-preview .memorial-scene{aspect-ratio:auto}
-.creator-preview .memorial-photo{position:relative;inset:auto;aspect-ratio:1.65;width:100%;margin:0}
+.creator-preview .memorial-photo{position:relative;inset:auto;aspect-ratio:1836 / 856;width:100%;margin:0}
 .creator-preview .memorial-scene-content{position:relative;left:auto;top:auto;width:100%;padding:18px 20px}
 .creator-preview .memorial-scene h2{font-size:29px}
-@media(max-width:800px){.memorial-creator{width:calc(100% - 32px);margin-bottom:54px}.creator-hero{min-height:240px;margin-bottom:0;padding:36px 18px;background-position:61% center}.creator-hero blockquote{display:none}.creator-intro h1{font-size:clamp(35px,9vw,45px)}.creator-intro p{font-size:14px}.creator-layout{display:flex;flex-direction:column}.creator-layout[data-step='3'] .creator-preview{order:initial}.creator-sidebar{width:100%}.creator-form{padding:26px}.creator-steps button{font-size:11px}.creator-side-quote{min-height:150px}.creator-preview .memorial-photo{aspect-ratio:2.15}.creator-preview .memorial-scene h2{font-size:31px}}
+@media(max-width:800px){.memorial-creator{width:calc(100% - 32px);margin-bottom:54px}.creator-hero{min-height:240px;margin-bottom:0;padding:36px 18px;background-position:61% center}.creator-hero blockquote{display:none}.creator-intro h1{font-size:clamp(35px,9vw,45px)}.creator-intro p{font-size:14px}.creator-layout{display:flex;flex-direction:column}.creator-layout[data-step='3'] .creator-preview{order:initial}.creator-sidebar{width:100%}.creator-form{padding:26px}.creator-steps button{font-size:11px}.creator-side-quote{min-height:150px}.creator-preview .memorial-photo{aspect-ratio:1836 / 856}.creator-preview .memorial-scene h2{font-size:31px}}
 @media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:22px}.creator-steps{gap:2px}.creator-steps button{font-size:11px;gap:5px;padding:8px 4px}.creator-navigation .button{min-width:0}}
 
 body:has(.memorial-header) main.memorial-creator{width:min(1240px,calc(100% - 48px));padding:0;margin:0 auto 80px;background:transparent}
