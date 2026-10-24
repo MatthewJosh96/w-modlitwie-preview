@@ -1584,6 +1584,29 @@ html[data-input="pointer"] .skip-link:focus-visible{top:-60px}
 @media(max-width:1050px){.fr-hero-quote{display:none}.fr-nav{justify-content:flex-start;gap:24px}.fr-layout{grid-template-columns:minmax(0,1.5fr) minmax(270px,1fr)}.fr-timeline-panel{grid-template-columns:minmax(0,1fr) 170px}.fr-assisi{min-height:345px}.fr-about{grid-template-columns:minmax(0,1fr) 155px}}
 @media(max-width:760px){.fr-hero{height:auto;min-height:530px}.fr-hero-image{object-position:58% center}.fr-hero:after{background:linear-gradient(0deg,rgba(18,20,20,.94) 0%,rgba(18,20,20,.8) 35%,rgba(18,20,20,.12) 82%)}.fr-hero-inner{justify-content:flex-end;min-height:530px;padding-block:22px 28px}.fr-hero h1{font-size:37px;max-width:360px}.fr-years{font-size:15px}.fr-feast{font-size:13px}.fr-hero-lead{font-size:15px;max-width:340px}.fr-hero-actions{gap:13px;margin-top:19px}.fr-primary{font-size:12px;min-height:40px}.fr-action-group{gap:12px;width:100%}.fr-hero-action{font-size:11px}.fr-action-icon{width:35px;height:35px}.fr-action-feedback{top:100%;white-space:normal}.fr-layout{grid-template-columns:1fr;gap:17px}.fr-nav a{padding-block:15px}.fr-main,.fr-side{gap:16px}.fr-about{grid-template-columns:1fr}.fr-quote-card{min-height:145px}.fr-timeline-panel{grid-template-columns:minmax(0,1fr) 32%}.fr-inspiration-card img{height:110px}}
 @media(max-width:520px){.fr-page{padding-bottom:35px}.fr-hero{min-height:565px}.fr-hero-inner{min-height:565px}.fr-hero h1{font-size:33px;max-width:320px}.fr-hero-lead{font-size:14px}.fr-panel{padding:18px}.fr-panel h2,.fr-inspiration h2{font-size:21px}.fr-timeline-panel{grid-template-columns:1fr}.fr-assisi{height:210px;min-height:0}.fr-assisi img{object-position:center 35%}.fr-facts{grid-template-columns:1fr}.fr-inspiration-grid{grid-template-columns:1fr}.fr-inspiration-card{display:grid;grid-template-columns:40% 1fr;min-height:115px}.fr-inspiration-card img{height:100%}.fr-patron-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.fr-article-list a,.fr-similar-list a{grid-template-columns:64px 1fr}.fr-article-list img,.fr-similar-list img{width:64px}}
+
+/* Long-form lives below the concise chronology and keeps a comfortable reading measure. */
+.fr-story{padding:clamp(22px,3vw,38px)}
+.fr-main{grid-template-columns:minmax(0,1fr)}
+.fr-main>*{min-width:0}
+.fr-about p{font-size:14px;line-height:1.7}
+.fr-story-heading{padding-bottom:17px;border-bottom:1px solid #e8e1d8}
+.fr-story-heading h2{font-size:clamp(25px,2.3vw,33px);line-height:1.2}
+.fr-story-heading p{font-size:13px;color:#626b7c;margin-top:8px}
+.fr-story-toc{padding:18px 0 20px;border-bottom:1px solid #e8e1d8}
+.fr-story-toc>p{font-size:12px;font-weight:600;color:#26334a;margin-bottom:10px}
+.fr-story-toc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 18px}
+.fr-story-toc a{display:block;padding:8px 4px;color:#825025;font-size:13px;line-height:1.4;text-decoration:underline;text-decoration-color:#c49a6e;text-underline-offset:4px}
+.fr-story-toc a:hover{color:#5f3817;text-decoration-color:currentColor}
+.fr-story-chapter{padding-top:29px;max-width:70ch}
+.fr-story-chapter+.fr-story-chapter{margin-top:24px;border-top:1px solid #e8e1d8}
+.fr-story-chapter h3{font:600 clamp(20px,2vw,24px)/1.28 var(--serif);letter-spacing:-.02em;color:#172139;margin-bottom:14px}
+.fr-story-chapter p{font-size:16px;line-height:1.78;color:#303b4c;margin:0 0 16px}
+.fr-story-chapter p:last-of-type{margin-bottom:0}
+.fr-story-chapter-sources{font-size:11px;line-height:1.65;color:#626b7c;margin-top:15px;overflow-wrap:anywhere}
+.fr-story-chapter-sources a{color:#825025;text-decoration:underline;text-underline-offset:3px}
+.fr-story a:focus-visible{outline:2px solid #825025;outline-offset:3px;border-radius:2px}
+@media(max-width:520px){.fr-story{padding:20px 18px}.fr-story-heading p{font-size:12px}.fr-story-toc{margin-right:-18px;padding-right:18px}.fr-story-toc ol{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;scrollbar-width:thin;padding:1px 3px 10px 0}.fr-story-toc li{flex:0 0 auto;scroll-snap-align:start}.fr-story-toc a{display:flex;align-items:center;max-width:220px;min-height:48px;padding:8px 12px;border:1px solid #e4d5c5;border-radius:5px;background:#faf8f5;text-decoration:none;font-size:12px}.fr-story-chapter{padding-top:25px}.fr-story-chapter p{font-size:15.5px;line-height:1.75}}
 .plan-layout>aside,.plan-layout>article{min-width:0}.plan-days{max-width:100%}
 
 /* Kalendarz liturgiczny */
