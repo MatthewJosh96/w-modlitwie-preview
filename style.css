@@ -66,6 +66,7 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 .memorial-scene{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:2.15;background:#060c14;color:#fff}
 .memorial-photo{position:absolute;inset:0;z-index:0;container-type:inline-size}
 .memorial-photo>img{object-fit:cover;object-position:center}
+.memorial-photo>.memorial-no-frame{z-index:2;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 31%,transparent 35%);mask-image:linear-gradient(90deg,#000 0%,#000 31%,transparent 35%)}
 .memorial-photo>.memorial-lit-photo{z-index:1;-webkit-mask-image:radial-gradient(ellipse 2.4% 6% at 45.45% 60.1%,transparent 53%,#000 100%);mask-image:radial-gradient(ellipse 2.4% 6% at 45.45% 60.1%,transparent 53%,#000 100%)}
 .memorial-scene.is-animated .memorial-lit-photo{animation:memorial-light 1.75s linear infinite}
 .memorial-scene:after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,transparent 35%,#07101a12 52%,#040a12a8 76%,#040a12ba);pointer-events:none}
@@ -390,3 +391,6 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
   .memorial-creator .creator-navigation .button{flex:1 1 100%;width:100%;min-width:0;min-height:48px;margin-left:0}
   .memorial-creator .creator-photo-pick{min-height:124px}
 }
+
+.creator-photo-choice{display:flex;gap:9px;margin:12px 0 16px}.creator-photo-choice button{border:1px solid #c7b9a7;border-radius:6px;background:#fff;color:#203047;padding:10px 17px;cursor:pointer;font-size:13px;font-weight:600}.creator-photo-choice button[aria-pressed="true"]{border-color:#98612e;background:#f7ead8;color:#6b3f1e}.creator-photo-choice button:focus-visible{outline:3px solid #a66a35;outline-offset:2px}
+.memorial-portrait[hidden]{display:none}

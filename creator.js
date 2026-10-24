@@ -18,6 +18,7 @@
   let image = null;
   let imageUrl = null;
   let photoData = null;
+  let photoChoice = null;
   let paused = false;
   let inView = true;
 
@@ -72,8 +73,9 @@
     setError('name', name.length < 2 ? 'Podaj imię — co najmniej dwa znaki.' : '');
     setError('birth', birthIssue);
     setError('death', deathIssue || deathOrderIssue);
-    setError('photo', !photoData ? imageUrl ? 'Poczekaj na przygotowanie zdjęcia.' : 'Dodaj zdjęcie bliskiej osoby, aby przejść dalej.' : '');
-    return name.length >= 2 && !birthIssue && !deathIssue && !deathOrderIssue && !!photoData;
+    const photoIssue = !photoChoice ? 'Wybierz, czy chcesz dodać zdjęcie.' : photoChoice === 'with' && !photoData ? imageUrl ? 'Poczekaj na przygotowanie zdjęcia.' : 'Wybierz zdjęcie albo zaznacz „Bez zdjęcia”.' : '';
+    setError('photo', photoIssue);
+    return name.length >= 2 && !birthIssue && !deathIssue && !deathOrderIssue && !photoIssue;
   }
 
   function validateStepTwo() {
@@ -157,7 +159,7 @@
     $('#portrait-image').setAttribute('href', photoData);
     $('.memorial-portrait').removeAttribute('hidden');
     $('.memorial-foreground').hidden = false;
-    $('.memorial-empty-frame').hidden = true;
+    $('.memorial-no-frame').hidden = true;
     $('#photo-tools').hidden = false;
     $('.creator-photo-pick strong').textContent = 'Zmień zdjęcie';
     setError('photo', '');
@@ -187,11 +189,22 @@
       const nextImage = new Image(); nextImage.src = url; await nextImage.decode();
       if (imageUrl) URL.revokeObjectURL(imageUrl);
       imageUrl = url; image = nextImage;
+      choosePhoto('with');
       $('#demo-zoom').value = '1'; $('#demo-x').value = '0'; $('#demo-y').value = '0';
       drawPhoto();
     } catch { URL.revokeObjectURL(url); setError('photo', 'Nie udało się odczytać zdjęcia. Wybierz inny plik.'); }
   }
-  $('#photo-reset').addEventListener('click', () => { if (imageUrl) URL.revokeObjectURL(imageUrl); imageUrl = null; image = null; photoData = null; $('#photo-tools').hidden = true; $('.creator-photo-pick strong').textContent = 'Dodaj zdjęcie'; $('.memorial-portrait').setAttribute('hidden', ''); $('.memorial-foreground').hidden = true; $('.memorial-empty-frame').hidden = false; $('#portrait-image').removeAttribute('href'); setError('photo', ''); });
+  function choosePhoto(choice) {
+    photoChoice = choice;
+    $$('[data-photo-choice]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.photoChoice === choice)));
+    $('#photo-input-area').hidden = choice !== 'with';
+    $('.memorial-portrait').toggleAttribute('hidden', choice !== 'with' || !photoData);
+    $('.memorial-foreground').hidden = choice !== 'with' || !photoData;
+    $('.memorial-no-frame').hidden = choice !== 'without';
+    setError('photo', '');
+  }
+  $$('[data-photo-choice]').forEach(button => button.addEventListener('click', () => choosePhoto(button.dataset.photoChoice)));
+  $('#photo-reset').addEventListener('click', () => choosePhoto('without'));
   for (const id of ['demo-zoom', 'demo-x', 'demo-y']) $(`#${id}`).addEventListener('input', drawPhoto);
   for (const kind of ['birth', 'death']) {
     $(`#demo-${kind}-precision`).addEventListener('change', (event) => { const input = $(`#demo-${kind}`); input.value = ''; input.type = event.target.value === 'date' ? 'date' : 'text'; input.inputMode = event.target.value === 'year' ? 'numeric' : ''; input.placeholder = event.target.value === 'year' ? 'np. 1948' : ''; input.maxLength = event.target.value === 'year' ? 4 : 20; setError(kind, ''); update(); });
