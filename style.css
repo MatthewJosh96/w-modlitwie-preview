@@ -26,8 +26,6 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #7b56
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip-link{position:fixed;top:-60px;left:20px;z-index:100;background:#fff;padding:10px 14px}
 .skip-link:focus{top:12px}
-.demo-banner{padding:7px 16px;background:#1c273b;color:#fff;text-align:center;font-size:12px;font-weight:500;letter-spacing:.02em}
-.demo-banner span{color:#d9af76;padding:0 4px}
 .site-header{background:#fff;border-bottom:1px solid var(--line);position:relative;z-index:20}
 .header-inner{max-width:1400px;margin:auto;padding:18px 32px;display:flex;align-items:center;gap:36px}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:24px;white-space:nowrap;line-height:1.2}
@@ -46,7 +44,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #7b56
 .memorial-next h3{font-size:20px}
 .memorial-share-message:empty{display:none}
 @media(max-width:800px){.main-nav{gap:14px;margin-left:auto}.main-nav a{font-size:11px}}
-@media(max-width:600px){.header-inner{padding:11px 20px}.brand{font-size:21px;gap:7px}.brand-cross{font-size:33px}.brand small{font-size:6px;letter-spacing:1.55px}.main-nav{display:none}.container{width:calc(100% - 36px)}.footer-inner{align-items:flex-start}.footer-inner p{font-size:11px}}
+@media(max-width:600px){.header-inner{padding:11px 20px;flex-wrap:wrap;gap:6px}.brand{font-size:21px;gap:7px}.brand-cross{font-size:33px}.brand small{font-size:6px;letter-spacing:1.55px}.main-nav{display:flex;flex-basis:100%;gap:18px;overflow-x:auto;margin:0;scrollbar-width:thin}.main-nav a{flex:none}.container{width:calc(100% - 36px)}.footer-inner{align-items:flex-start}.footer-inner p{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 
 /* Memorial pages follow the supplied photographic composition. */
@@ -80,7 +78,6 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 .memorial-scene.has-long-copy .memorial-dedication{font-size:clamp(14px,1.4vw,18px)}
 .memorial-scene h2{color:#fff;font-size:clamp(35px,4.7vw,64px);line-height:1.07;letter-spacing:-.045em;font-weight:500;overflow-wrap:anywhere;max-width:12ch}
 .memorial-dedication{color:#fff;font:clamp(15px,1.7vw,23px)/1.48 var(--serif);white-space:pre-wrap;overflow-wrap:anywhere;margin-top:14px;max-width:27ch}
-.memorial-demo-note{font-size:clamp(10px,1vw,13px);color:#eee6db;margin-top:10px}
 .memorial-scene-actions{display:flex;align-items:flex-start;flex-direction:column;gap:12px;margin-top:22px}
 .memorial-access{display:inline-flex;align-items:center;gap:8px;min-height:35px;padding:7px 19px;background:#f6e5c9;border-radius:999px;color:#53351f;text-shadow:none;font-size:12px;font-weight:600}
 .memorial-share-button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:43px;min-width:220px;padding:9px 20px;border:1px solid #fff;border-radius:99px;color:#fff;background:#06101caa;font-size:13px}
@@ -256,7 +253,7 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 @media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:20px}.creator-steps button{font-size:10px}.creator-navigation{flex-wrap:wrap}.creator-navigation .button{flex:1}}
 
 .demo-create-link{padding:10px 30px;background:#f4eee5;text-align:center;color:#704826;font-size:13px;font-weight:600}
-.demo-create-link a{text-decoration:underline;text-underline-offset:3px}
+.demo-create-link a{display:inline-block;text-decoration:underline;text-underline-offset:3px}
 body:has(.memorial-header) main.memorial-creator{width:min(1280px,calc(100% - 48px));padding:36px 32px;margin:0 auto 40px;background:#f9f6f1}
 .memorial-creator .button{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:10px 20px;border:1px solid #17253b;border-radius:99px;background:#17253b;color:#fff;font:600 13px var(--sans);text-decoration:none}
 .memorial-creator .button.secondary{background:transparent;color:#17253b}
@@ -308,11 +305,11 @@ body:has(.memorial-header) main.memorial-creator{width:min(1280px,calc(100% - 48
 .gallery-feedback h2{font:500 28px/1.25 var(--serif);color:#172139}
 .gallery-feedback p{margin:9px auto 0;max-width:50ch;color:#536073}
 .gallery-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid #ddd2c5;margin-top:42px;padding-top:24px}
-.gallery-bottom p{max-width:650px;color:#536073;font-size:13px}
 .gallery-bottom a{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;color:#784916;font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
 @media(prefers-reduced-motion:reduce){.gallery-card,.gallery-card-flame>img,.gallery-card-glow{animation:none!important;transition:none!important}}
 @media(max-width:800px){.gallery-hero{min-height:200px}.gallery-hero>div{padding:38px 28px}.gallery-inner{padding:24px 20px 42px}.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gallery-bottom{align-items:start;flex-direction:column}}
 @media(max-width:600px){.gallery-hero{min-height:160px}.gallery-hero>div{padding:28px 22px}.gallery-inner{padding:20px 14px 38px}.gallery-toolbar{margin-bottom:20px;gap:7px}.gallery-search{flex-basis:100%;max-width:none}.gallery-order p{padding-bottom:0}.gallery-card{aspect-ratio:1}.gallery-card-info{padding:14px 10px 13px 10px}.gallery-card h2{max-width:calc(100% - 16px);font-size:clamp(16px,4.1vw,18px);line-height:1.13;letter-spacing:-.035em}.gallery-card-years{font-size:10px;letter-spacing:.1em}.gallery-eternal-label{color:#e0bc78;font-size:11px;gap:4px;margin-top:6px}.gallery-eternal-label svg{width:14px;height:14px;flex:none}.gallery-card-chevron{right:5px;bottom:13px;width:16px;height:16px}}
+@media(max-width:600px){.memorial-header .main-nav{gap:2px 18px;margin:0;flex-wrap:wrap;overflow:visible;justify-content:center}.memorial-header .main-nav a{font-size:11px}}
 
 .creator-gallery-entry{margin-top:12px;font-size:13px}.creator-gallery-entry a{color:#784916;text-decoration:underline;text-underline-offset:4px}
 

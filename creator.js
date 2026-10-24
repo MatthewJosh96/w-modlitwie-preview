@@ -114,7 +114,7 @@
     $('#scene-dates').hidden = !dates;
     $('#scene-signature').textContent = signature ? `Od: ${signature}` : '';
     $('#scene-signature').hidden = !signature;
-    $('#scene-access').textContent = $('input[name="visibility"]:checked').value === 'private' ? 'Tylko dla właściciela' : $('input[name="visibility"]:checked').value === 'public' ? 'Publiczna galeria (podgląd)' : 'Dostęp przez link';
+    $('#scene-access').textContent = $('input[name="visibility"]:checked').value === 'private' ? 'Tylko dla właściciela' : $('input[name="visibility"]:checked').value === 'public' ? 'Publiczna galeria' : 'Dostęp przez link';
     $('#full-words').textContent = words;
     $('#full-words').hidden = words.length <= 85;
     const prayer = $('input[name="prayer"]:checked').value;
@@ -186,7 +186,7 @@
   $('#step-next').addEventListener('click', () => { if (step === 1 && !validateStepOne()) return; if (step === 2 && !validateStepTwo()) return; setStep(step + 1); });
   $('#step-back').addEventListener('click', () => setStep(step - 1));
   $$('.creator-steps button').forEach(button => button.addEventListener('click', () => { const next = Number(button.dataset.step); if (next > 1 && !validateStepOne()) { setStep(1); return; } if (next > 2 && !validateStepTwo()) { setStep(2); return; } setStep(next); }));
-  $('#show-final').addEventListener('click', () => { if (!validateStepOne() || !validateStepTwo()) return; $('.memorial-creator').classList.add('is-final'); $('.creator-form').hidden = true; $('.creator-steps').hidden = true; $('#final-result').hidden = false; $('.creator-preview-heading span').textContent = 'Pełny podgląd · bez publikacji'; $('.creator-preview').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  $('#show-final').addEventListener('click', () => { if (!validateStepOne() || !validateStepTwo()) return; $('.memorial-creator').classList.add('is-final'); $('.creator-form').hidden = true; $('.creator-steps').hidden = true; $('#final-result').hidden = false; $('.creator-preview-heading span').textContent = 'Pełna strona pamięci'; $('.creator-preview').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   $('#edit-again').addEventListener('click', (event) => { event.preventDefault(); $('.memorial-creator').classList.remove('is-final'); $('.creator-form').hidden = false; $('.creator-steps').hidden = false; $('#final-result').hidden = true; $('.creator-preview-heading span').textContent = 'Zmienia się wraz z formularzem'; $('#creator').scrollIntoView({ behavior: 'smooth' }); });
   motionButton.addEventListener('click', () => { paused = !paused; syncMotion(); });
   reducedMotion.addEventListener('change', syncMotion);

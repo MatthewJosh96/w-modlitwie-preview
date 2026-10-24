@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  // All people and labels exist only in this self-contained demonstration.
+  // The gallery contains illustrative people and memories only.
   const people = [
     {id:'maria',name:'Maria Wesołowska',eternalLight:true,portrait:'./assets/memorial-reference-portrait.webp',dedication:'Z wdzięcznością za ciepło, które zostaje z nami.'},
     {id:'jan',name:'Jan Kowalski',eternalLight:true,portrait:null,dedication:'Pamięć o wspólnych chwilach trwa w naszych sercach.'},
@@ -18,7 +18,7 @@
     const portrait = person.portrait ? `<svg class="gallery-card-portrait" viewBox="0 0 1836 856" preserveAspectRatio="none"><defs><clipPath id="frame-${person.id}"><path d="M 145 160 L 475 181 L 525 635 L 185 658 Z"></path></clipPath></defs><g clip-path="url(#frame-${person.id})"><image href="${person.portrait}" width="600" height="750" preserveAspectRatio="xMidYMid slice" transform="matrix(.57 .035 .052 .68 145 160)"></image></g></svg><img class="gallery-card-foreground" src="./assets/memorial-scene-foreground.webp" alt="" width="1836" height="856" loading="lazy">` : crossIcon;
     const flameIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c4.1 0 7-2.9 7-7 0-2.7-1.6-5-4.5-8-.1 2.3-1.1 3.4-2 3.9C12.1 7.4 10.3 5 8 2c.4 3.5-.7 5.3-2 7.3A9.4 9.4 0 0 0 5 15c0 4.1 2.9 7 7 7Z"/></svg>';
     const years = person.birthYear && person.deathYear ? `${person.birthYear} – ${person.deathYear}` : person.birthYear ? `ur. ${person.birthYear}` : person.deathYear ? `zm. ${person.deathYear}` : '';
-    return `<a class="gallery-card${person.eternalLight ? ' gallery-card-eternal' : ''}" href="./gallery-person.html?id=${person.id}"><div class="gallery-card-scene" aria-hidden="true"><div class="gallery-card-art"><img src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856" loading="lazy">${portrait}<span class="gallery-card-flame"><img src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856" loading="lazy"></span><span class="gallery-card-glow"></span></div></div><div class="gallery-card-info"><h2>${escape(person.name)}</h2>${years ? `<p class="gallery-card-years">${years}</p>` : ''}${person.eternalLight ? `<span class="gallery-eternal-label">${flameIcon}Wieczne Światło</span>` : ''}<svg class="gallery-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></div></a>`;
+    return `<a class="gallery-card${person.eternalLight ? ' gallery-card-eternal' : ''}" href="./gallery-person.html?id=${person.id}"><div class="gallery-card-scene" aria-hidden="true"><div class="gallery-card-art"><img src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856" loading="lazy">${portrait}<span class="gallery-card-flame"><img src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856" loading="lazy"></span><span class="gallery-card-glow"></span></div></div><div class="gallery-card-info"><h2>${escape(person.name)}</h2>${years ? `<p class="gallery-card-years">${years}</p>` : ''}${person.eternalLight ? `<span class="gallery-eternal-label">${flameIcon}Światło Pamięci</span>` : ''}<svg class="gallery-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></div></a>`;
   }
 
   function syncMotion() {
@@ -50,13 +50,13 @@
     const id = new URLSearchParams(location.search).get('id');
     const person = people.find(entry => entry.id === id);
     if (!person) {
-      document.querySelector('#person').innerHTML = '<div class="gallery-feedback"><h1>Nie ma takiego przykładu</h1><p>Wybierz osobę z demonstracyjnej galerii.</p><a class="button secondary" href="./gallery.html">Wróć do galerii</a></div>';
+      document.querySelector('#person').innerHTML = '<div class="gallery-feedback"><h1>Nie znaleziono wspomnienia</h1><p>Wybierz osobę z galerii.</p><a class="button secondary" href="./gallery.html">Wróć do galerii</a></div>';
       return;
     }
-    document.title = `${person.name} · fikcyjny podgląd · W Modlitwie`;
+    document.title = `${person.name} · W Modlitwie`;
     document.querySelector('#person-name').textContent = person.name;
     document.querySelector('#person-dedication').textContent = person.dedication;
-    document.querySelector('#person-period').textContent = person.eternalLight ? 'Wieczne Światło — oznaczenie wyłącznie w fikcyjnym podglądzie. Usługa nie jest aktywna.' : 'Fikcyjna strona pamięci w podglądzie projektu. Znicz i usługa nie są aktywne.';
+    document.querySelector('#person-period').textContent = person.eternalLight ? 'Światło Pamięci' : 'Świeca pamięci.';
     if (person.portrait) {
       document.querySelector('#person-portrait').setAttribute('href',person.portrait);
       document.querySelector('.memorial-portrait').removeAttribute('hidden');

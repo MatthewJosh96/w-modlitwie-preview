@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Strona pamięci i modlitwy za bliskich w W Modlitwie.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' blob:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'">
+  <title>Pamięć o bliskich · W Modlitwie</title>
+  <link rel="preload" as="image" href="./assets/memorial-scene-unlit.webp">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#memory">Przejdź do treści</a>
+  <header class="site-header memorial-header">
+    <div class="header-inner">
+      <a href="./index.html" class="brand"><span class="brand-cross" aria-hidden="true">✝</span><span>W Modlitwie<small>BLIŻEJ BOGA. KAŻDEGO DNIA.</small></span></a>
+      <nav class="main-nav" aria-label="Nawigacja główna">
+        <a href="./index.html">Strona główna</a><a href="./pamiec.html" aria-current="page">Pamięć</a>
+        <a href="./modlitwy/">Modlitwy</a>
+        <a href="./gallery.html">Galeria</a>
+        <a href="./creator.html">Stwórz stronę</a>
+      </nav>
+    </div>
+  </header>
+  <main id="memory">
+    <p class="demo-create-link"><a href="./creator.html">Stwórz stronę pamięci →</a> <a href="./gallery.html">Zobacz galerię pamięci →</a></p>
+    <article class="memorial-page">
+      <section class="memorial-scene is-burning" aria-label="Strona pamięci">
+        <div class="memorial-photo" role="img" aria-label="Fotograficzna scena pamięci z zapaloną symboliczną świecą">
+          <img src="./assets/memorial-scene-unlit.webp" alt="" width="1836" height="856">
+          <img class="memorial-lit-photo" src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856">
+          <svg class="memorial-portrait" aria-hidden="true" viewBox="0 0 1836 856" preserveAspectRatio="none"><defs><clipPath id="memorial-portrait-cut"><path d="M 145 160 L 475 181 L 525 635 L 185 658 Z"></path></clipPath></defs><g clip-path="url(#memorial-portrait-cut)"><image id="portrait-image" href="./assets/memorial-reference-portrait.webp" width="600" height="750" preserveAspectRatio="xMidYMid slice" transform="matrix(.57 .035 .052 .68 145 160)"></image></g></svg>
+          <img class="memorial-foreground" src="./assets/memorial-scene-foreground.webp" alt="" width="1836" height="856">
+          <span class="memorial-flame-patch" aria-hidden="true"><img class="memorial-flame" src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856"></span>
+          <div class="memorial-background-lights" aria-hidden="true">
+            <span class="memorial-background-glow glow-left"></span><span class="memorial-background-glow glow-middle"></span>
+            <span class="memorial-background-glow glow-upper-one"></span><span class="memorial-background-glow glow-upper-two"></span>
+            <span class="memorial-background-glow glow-lower"></span><span class="memorial-background-glow glow-edge"></span>
+            <span class="memorial-background-glow glow-reflection-one"></span><span class="memorial-background-glow glow-reflection-two"></span>
+          </div>
+        </div>
+        <div class="memorial-scene-content">
+          <h1 class="sr-only">Strona pamięci</h1>
+          <h2>Pamiętamy<br>o Annie</h2>
+          <p class="memorial-dedication">Z wdzięcznością za wspólne chwile.</p>
+          <div class="memorial-scene-actions">
+            <span class="memorial-access">Dostęp przez link</span>
+            <button class="memorial-share-button" id="share-button" type="button" aria-label="Udostępnij stronę"><span aria-hidden="true">↗</span> Udostępnij bliskim</button>
+          </div>
+          <button class="memorial-motion-toggle" id="motion-button" type="button" aria-label="Wstrzymaj animację płomienia"><span aria-hidden="true">Ⅱ</span> <span id="motion-label">Wstrzymaj ruch</span></button>
+          <p class="memorial-share-message" id="share-message" role="status"></p>
+        </div>
+      </section>
+      <div class="memorial-preview-controls" aria-label="Wygląd strony pamięci">
+        <span>Wygląd świecy:</span>
+        <button type="button" id="state-active" aria-pressed="true">Świeca płonie</button>
+        <button type="button" id="state-expired" aria-pressed="false">Po wygaśnięciu</button>
+        <label class="memorial-photo-input">Zobacz własne zdjęcie w ramce<input id="photo-input" type="file" accept="image/jpeg,image/png,image/webp"></label>
+        <button type="button" id="photo-reset" hidden>Przywróć zdjęcie</button>
+        <small>Zdjęcie jest widoczne tylko w tej karcie i nie jest wysyłane.</small>
+        <p id="photo-error" role="alert" hidden></p>
+      </div>
+      <div class="memorial-body" id="prayer">
+        <div class="memorial-prayer-heading"><p class="memorial-kicker">Chwila modlitwy</p><h3>Boże, przyjmij naszą pamięć i wdzięczność.</h3></div>
+        <div class="memorial-prayer-card"><span aria-hidden="true" class="memorial-cross">✝</span><p>Panie Jezu, dziękujemy za życie bliskich nam osób, za dobro, które wniosły w nasze dni, i za wspólne chwile, które pozostaną w naszych sercach. Przyjmij ich do swojego domu wiecznego pokoju.</p></div>
+        <div class="memorial-details"><p class="memorial-privacy">Wspomnienie bliskiej osoby</p><p class="memorial-state" id="state-message" role="status">Symboliczna świeca płonie.</p><p class="memorial-dates" id="date-message">Świeca płonie na scenie pamięci.</p></div>
+        <div class="memorial-next" id="about"><span aria-hidden="true">✝</span><h3>Pamięć i modlitwa</h3><p>Możesz zachować bliską osobę w pamięci i poświęcić jej chwilę modlitwy. Ta strona nie przyjmuje płatności ani nie publikuje przesłanych zdjęć.</p></div>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a href="./index.html" class="brand"><span class="brand-cross" aria-hidden="true">✝</span><span>W Modlitwie<small>BLIŻEJ BOGA. KAŻDEGO DNIA.</small></span></a><p>Pamięć o bliskich</p></div><div class="container footer-note">Modlitwa jest bezpłatna.</div></footer>
+</body>
+</html>

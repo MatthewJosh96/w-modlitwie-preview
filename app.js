@@ -42,11 +42,11 @@
     activeButton.setAttribute('aria-pressed', String(active));
     expiredButton.setAttribute('aria-pressed', String(!active));
     stateMessage.textContent = burning
-      ? 'Twoja symboliczna świeca płonie.'
+      ? 'Symboliczna świeca płonie.'
       : 'Okres wyświetlania świecy zakończył się. Pamięć i modlitwa mogą trwać dalej.';
     dateMessage.textContent = burning
-      ? 'Przykładowy aktywny okres wyświetlania świecy.'
-      : 'Przykładowy zakończony okres wyświetlania świecy.';
+      ? 'Świeca płonie na scenie pamięci.'
+      : 'Świeca zgasła na scenie pamięci.';
   }
 
   activeButton.addEventListener('click', () => { active = true; syncScene(); });
@@ -106,10 +106,10 @@
     shareMessage.textContent = '';
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'Podgląd strony pamięci · W Modlitwie', url: window.location.href });
+        await navigator.share({ title: 'Pamięć o bliskich · W Modlitwie', url: window.location.href });
       } else if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(window.location.href);
-        shareMessage.textContent = 'Link do podglądu skopiowany.';
+        shareMessage.textContent = 'Link do strony skopiowany.';
       } else {
         shareMessage.textContent = 'Skopiuj adres strony z paska przeglądarki.';
       }

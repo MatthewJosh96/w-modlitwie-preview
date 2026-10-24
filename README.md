@@ -1,21 +1,11 @@
-# W Modlitwie — statyczny podgląd strony pamięci
+# W Modlitwie — strona publiczna
 
-Ten folder jest samodzielnym, publicznym **podglądem projektu**. `index.html`, `creator.html` i `gallery.html` działają bez Next.js, backendu, kont, bazy danych i operatora płatności. Wszystkie odnośniki oraz pliki są względne, więc zawartość folderu można umieścić w katalogu głównym osobnego repozytorium GitHub Pages lub pod ścieżką projektu.
+Statyczne wydanie portalu przygotowane do GitHub Pages. `index.html` jest stroną główną, a podkatalogi zawierają modlitwy, świętych, artykuły, plany modlitwy, różaniec, czytania, kalendarz oraz strony informacyjne. `pamiec.html`, `creator.html`, `gallery.html` i `gallery-person.html` dotyczą miejsca pamięci.
 
-Strona główna podglądu pokazuje wyłącznie fikcyjną osobę. Przyciski „Świeca płonie” i „Po wygaśnięciu” zmieniają lokalny stan demonstracji; nie uruchamiają usługi ani okresu płatnego. Animacja świecy i odległych świateł reaguje na pauzę, ustawienie ograniczonego ruchu, ukrycie karty i wyjście sceny poza ekran. Przycisk udostępniania udostępnia tylko adres tego podglądu.
+Treści modlitw, biografii, artykułów, bezpłatnych części planów i kolejnych kroków różańca pochodzą z aplikacji W Modlitwie. Wygląd stron publicznych korzysta z jej styli, obrazów i fontów. Kalendarz Polski, obliczony z Romcal, obejmuje lata 2025–2035. Czytania prowadzą do Niezbędnika Katolika; strona nie kopiuje współczesnych przekładów Pisma Świętego.
 
-W kreatorze można przejść wszystkie trzy kroki, dobrać daty, słowa pamięci i modlitwę, dopasować własne zdjęcie w ramce oraz zobaczyć końcową scenę. Wynik pozostaje wyłącznie lokalnym podglądem — przycisk końcowy nie publikuje strony, nie tworzy konta ani zamówienia. Wybór własnego zdjęcia tworzy lokalny adres `blob:` i obraz WebP w pamięci przeglądarki. Obraz nie opuszcza urządzenia, nie jest zapisywany ani przesyłany. Akceptowane są JPG, PNG i WebP do 10 MB. Zmiana lub usunięcie zdjęcia zwalnia poprzedni adres; zamknięcie strony również go zwalnia.
+Wyszukiwanie modlitw, różaniec, kalendarz i wybór daty czytań działają w przeglądarce. Postęp różańca jest zapisany lokalnie na urządzeniu. W kreatorze zdjęcie pozostaje na urządzeniu i służy do zobaczenia układu strony. Publikacja treści, konta, intencje, płatności i biblioteka Plus wymagają serwera i nie są uruchomione na GitHub Pages. Strony tych funkcji podają ich aktualny stan.
 
-`gallery.html` prezentuje sześć fikcyjnych osób w jednej siatce. Wyszukiwanie oraz strony osób (`gallery-person.html`) działają lokalnie. Pierwsze dwie karty noszą oznaczenie „Wieczne Światło” wyłącznie jako element projektu; nie oznacza ono aktywnej usługi ani obietnicy bezterminowego utrzymania strony. Karty nie reprezentują prawdziwych użytkowników ani zakupów; zdjęcie dodane w kreatorze nigdy nie trafia do tej galerii.
+Karty galerii pamięci przedstawiają przykładowe, fikcyjne osoby. Nie są świadectwami użytkowników, zapisem zakupów ani aktywnymi usługami.
 
-Zawartość publikacyjna:
-
-- `index.html`, `style.css`, `app.js` — kompletna statyczna strona demonstracyjna;
-- `creator.html`, `creator.js` — lokalny, trzyetapowy kreator z podglądem;
-- `gallery.html`, `gallery.js`, `gallery-person.html` — lokalna galeria i przykładowe strony fikcyjnych osób;
-- `assets/*.webp` — lokalne obrazy sceny i fikcyjnych portretów;
-- `assets/fonts/*.woff2` — lokalne fonty Inter i Lora oraz ich licencje.
-
-Pakiet nie zawiera plików `.env`, kodu backendu, kluczy, danych użytkowników ani prawdziwego zamówienia. Nie podłączaj do tego podglądu produkcyjnego checkoutu ani prywatnych zdjęć bez osobnej implementacji bezpieczeństwa i uprawnień.
-
-Do lokalnego sprawdzenia otwórz folder na zwykłym serwerze statycznym. GitHub Pages zapewnia takie środowisko. Ładowanie `index.html` bezpośrednio przez `file://` może ograniczać fonty lub schowek w niektórych przeglądarkach.
+Źródło generowania stron publicznych: `scripts/export-public-pages.ts` w lokalnym projekcie `w-modlitwie`. Skrypt zapisuje zawartość tego repozytorium oraz `output/pages-preview` w projekcie aplikacji. Pliki pamięci są utrzymywane osobno. Do lokalnego podglądu wystarczy zwykły serwer statyczny, np. `python3 -m http.server 8963`.
