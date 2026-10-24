@@ -114,7 +114,7 @@
     $('#scene-dates').hidden = !dates;
     $('#scene-signature').textContent = signature ? `Od: ${signature}` : '';
     $('#scene-signature').hidden = !signature;
-    $('#scene-access').textContent = $('input[name="visibility"]:checked').value === 'private' ? 'Tylko dla właściciela' : 'Dostęp przez link';
+    $('#scene-access').textContent = $('input[name="visibility"]:checked').value === 'private' ? 'Tylko dla właściciela' : $('input[name="visibility"]:checked').value === 'public' ? 'Publiczna galeria (podgląd)' : 'Dostęp przez link';
     $('#full-words').textContent = words;
     $('#full-words').hidden = words.length <= 85;
     const prayer = $('input[name="prayer"]:checked').value;
