@@ -72,8 +72,8 @@
     setError('name', name.length < 2 ? 'Podaj imię — co najmniej dwa znaki.' : '');
     setError('birth', birthIssue);
     setError('death', deathIssue || deathOrderIssue);
-    if (imageUrl && !photoData) setError('photo', 'Poczekaj na przygotowanie zdjęcia albo je usuń.');
-    return name.length >= 2 && !birthIssue && !deathIssue && !deathOrderIssue && (!imageUrl || !!photoData);
+    setError('photo', !photoData ? imageUrl ? 'Poczekaj na przygotowanie zdjęcia.' : 'Dodaj zdjęcie bliskiej osoby, aby przejść dalej.' : '');
+    return name.length >= 2 && !birthIssue && !deathIssue && !deathOrderIssue && !!photoData;
   }
 
   function validateStepTwo() {
@@ -159,6 +159,7 @@
     $('.memorial-foreground').hidden = false;
     $('.memorial-empty-frame').hidden = true;
     $('#photo-tools').hidden = false;
+    $('.creator-photo-pick strong').textContent = 'Zmień zdjęcie';
     setError('photo', '');
   }
 
@@ -166,7 +167,7 @@
     const file = event.target.files?.[0];
     event.target.value = '';
     if (!file) return;
-    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 10 * 1024 * 1024) { setError('photo', 'Wybierz zdjęcie JPG, PNG lub WebP do 10 MB.'); return; }
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) { setError('photo', 'Wybierz zdjęcie JPG, PNG lub WebP do 5 MB.'); return; }
     const url = URL.createObjectURL(file);
     try {
       const nextImage = new Image(); nextImage.src = url; await nextImage.decode();
@@ -176,7 +177,7 @@
       drawPhoto();
     } catch { URL.revokeObjectURL(url); setError('photo', 'Nie udało się odczytać zdjęcia. Wybierz inny plik.'); }
   });
-  $('#photo-reset').addEventListener('click', () => { if (imageUrl) URL.revokeObjectURL(imageUrl); imageUrl = null; image = null; photoData = null; $('#photo-tools').hidden = true; $('.memorial-portrait').setAttribute('hidden', ''); $('.memorial-foreground').hidden = true; $('.memorial-empty-frame').hidden = false; $('#portrait-image').removeAttribute('href'); setError('photo', ''); });
+  $('#photo-reset').addEventListener('click', () => { if (imageUrl) URL.revokeObjectURL(imageUrl); imageUrl = null; image = null; photoData = null; $('#photo-tools').hidden = true; $('.creator-photo-pick strong').textContent = 'Dodaj zdjęcie'; $('.memorial-portrait').setAttribute('hidden', ''); $('.memorial-foreground').hidden = true; $('.memorial-empty-frame').hidden = false; $('#portrait-image').removeAttribute('href'); setError('photo', ''); });
   for (const id of ['demo-zoom', 'demo-x', 'demo-y']) $(`#${id}`).addEventListener('input', drawPhoto);
   for (const kind of ['birth', 'death']) {
     $(`#demo-${kind}-precision`).addEventListener('change', (event) => { const input = $(`#demo-${kind}`); input.value = ''; input.type = event.target.value === 'date' ? 'date' : 'text'; input.inputMode = event.target.value === 'year' ? 'numeric' : ''; input.placeholder = event.target.value === 'year' ? 'np. 1948' : ''; input.maxLength = event.target.value === 'year' ? 4 : 20; setError(kind, ''); update(); });

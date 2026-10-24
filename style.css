@@ -314,3 +314,56 @@ body:has(.memorial-header) main.memorial-creator{width:min(1280px,calc(100% - 48
 .creator-gallery-entry{margin-top:12px;font-size:13px}.creator-gallery-entry a{color:#784916;text-decoration:underline;text-underline-offset:4px}
 
 .memorial-empty-frame:is(svg){width:2.4%;height:auto;font:initial;filter:drop-shadow(0 1px 8px #000)}
+
+/* Memorial creator: the reference's calm, image-led form layout. */
+.memorial-creator{width:min(1240px,calc(100% - 48px));margin:0 auto 88px}
+.creator-hero{width:100vw;min-height:290px;margin-left:calc(50% - 50vw);margin-bottom:0;padding:42px max(24px,calc((100vw - 1240px)/2));display:flex;align-items:center;justify-content:space-between;gap:48px;color:#fff;background:linear-gradient(90deg,rgba(16,15,17,.72),rgba(16,15,17,.38) 52%,rgba(16,15,17,.2)),url('./images/hero-memory.webp') center 56%/cover}
+.creator-intro{max-width:610px;margin:0}
+.creator-intro h1{color:#fff;font-size:clamp(39px,4.1vw,56px)}
+.creator-intro p{color:#fff;max-width:52ch;font-size:15px;line-height:1.65}
+.creator-gallery-entry{display:inline-block;margin-top:18px;color:#f2d1a3;text-decoration:underline;text-underline-offset:5px;font-size:14px}
+.creator-hero blockquote{flex:0 0 215px;margin:0;color:#fff;text-align:right;font:italic 19px/1.55 var(--serif);text-shadow:0 1px 10px #0009}
+.creator-steps{margin:0 0 28px;gap:12px;padding:12px 0 0}
+.creator-steps button{min-height:64px;padding:9px 12px;border-bottom-width:2px;color:#384354;font-size:13px}
+.creator-steps button span{width:31px;height:31px;font-size:13px}
+.creator-steps button[aria-current='step'] span{background:#98612e;border-color:#98612e}
+.creator-layout{grid-template-columns:minmax(0,2fr) minmax(280px,1fr);gap:28px}
+.creator-form{padding:34px 38px;border-radius:9px;box-shadow:0 10px 32px #17253b08}
+.creator-form h2{font-size:34px}
+.creator-section-note{margin-bottom:30px}
+.creator-field input,.creator-field textarea,.creator-date-inputs input,.creator-date-inputs select,.creator-prayer textarea{border-radius:5px}
+.creator-dates{gap:22px}
+.creator-photo{border-top:0;margin-top:22px;padding-top:6px}
+.creator-photo h3{font:600 14px/1.4 var(--sans)}
+.creator-photo h3 strong{color:#9b5e2a}
+.creator-photo-pick{display:flex;flex-direction:column;gap:7px;width:100%;min-height:116px;padding:17px;border:1px dashed #c7b9a7;border-radius:6px;background:#fff;color:#203047;font-size:14px}
+.creator-photo-pick:hover{background:#faf7f1;border-color:#98612e}
+.creator-photo-pick .creator-upload-icon{width:25px;height:25px}
+.creator-photo-pick small{font-weight:400}
+.creator-crop-preview{height:200px}
+.creator-navigation{justify-content:space-between}
+.creator-navigation .button{min-width:132px;background:#98612e;color:#fff;border-color:#98612e}
+.creator-navigation .button:not(.secondary){margin-left:auto}
+.creator-navigation .button.secondary{background:#fff;color:#25344a;border:1px solid #cdbda9}
+.creator-sidebar{display:flex;flex-direction:column;gap:18px;min-width:0}
+.creator-side-quote{min-height:180px;border-radius:8px;display:flex;align-items:center;padding:26px;background:linear-gradient(90deg,#21191666,#21191616),url('./images/memorial-creator-candle.webp') 66% 50%/cover;color:#fff}
+.creator-side-quote p{max-width:14ch;color:#fff;font:italic 23px/1.25 var(--serif);text-shadow:0 1px 8px #000a}
+.creator-side-help{padding:22px;background:#f9f3e9;border-radius:8px}
+.creator-side-help h3{font:600 19px/1.2 var(--serif);margin:0 0 16px}
+.creator-side-help p{margin:0 0 15px;display:flex;flex-direction:column;gap:4px;color:#2d394b;font-size:13px;line-height:1.45}
+.creator-side-help p:last-child{margin-bottom:0}
+.creator-side-help span{color:#586272}
+.creator-preview{position:relative;top:auto;border-radius:8px;box-shadow:none}
+.creator-preview .memorial-scene{aspect-ratio:auto}
+.creator-preview .memorial-photo{position:relative;inset:auto;aspect-ratio:1.65;width:100%;margin:0}
+.creator-preview .memorial-scene-content{position:relative;left:auto;top:auto;width:100%;padding:18px 20px}
+.creator-preview .memorial-scene h2{font-size:29px}
+@media(max-width:800px){.memorial-creator{width:calc(100% - 32px);margin-bottom:54px}.creator-hero{min-height:240px;margin-bottom:0;padding:36px 18px;background-position:61% center}.creator-hero blockquote{display:none}.creator-intro h1{font-size:clamp(35px,9vw,45px)}.creator-intro p{font-size:14px}.creator-layout{display:flex;flex-direction:column}.creator-layout[data-step='3'] .creator-preview{order:initial}.creator-sidebar{width:100%}.creator-form{padding:26px}.creator-steps button{font-size:11px}.creator-side-quote{min-height:150px}.creator-preview .memorial-photo{aspect-ratio:2.15}.creator-preview .memorial-scene h2{font-size:31px}}
+@media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:22px}.creator-steps{gap:2px}.creator-steps button{font-size:11px;gap:5px;padding:8px 4px}.creator-navigation .button{min-width:0}}
+
+body:has(.memorial-header) main.memorial-creator{width:min(1240px,calc(100% - 48px));padding:0;margin:0 auto 80px;background:transparent}
+body:has(.memorial-header){background:#faf8f5}
+body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 1240px)/2));padding-right:max(24px,calc((100vw - 1240px)/2))}
+@media(max-width:800px){body:has(.memorial-header) main.memorial-creator{width:calc(100% - 32px);padding:0;margin-bottom:50px}body:has(.memorial-header) .creator-hero{padding:32px 18px}}
+
+.creator-gallery-entry a{color:#f2d1a3}
