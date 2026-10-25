@@ -723,3 +723,9 @@ body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-lit-
   .gallery-page .gallery-hero>.gallery-hero-content{width:calc(100% - 40px)}
 }
 @media(max-width:600px){.gallery-page .gallery-grid{grid-template-columns:1fr}}
+
+@font-face{font-family:"Great Vibes";src:url("./assets/fonts/great-vibes-regular.woff2") format("woff2");font-style:normal;font-weight:400;font-display:swap}
+.memorial-initials{position:absolute;z-index:2;left:21%;top:46%;transform:translate(-50%,-50%);color:#e8c482;font:400 clamp(72px,8cqw,150px)/1 "Great Vibes",var(--serif);letter-spacing:-.04em;white-space:nowrap;text-shadow:0 1px 2px #271607,0 3px 10px #080604,0 0 22px #b6742e9c;pointer-events:none;user-select:none}
+.gallery-card-art>.gallery-initials{z-index:3;left:21%;top:45%;font-size:clamp(48px,15cqw,110px)}
+.creator-preview .memorial-initials{left:19%;top:45%;font-size:clamp(46px,7cqw,90px)}
+@media(max-width:800px){.memorial-detail-scene .memorial-initials{font-size:64px}}
