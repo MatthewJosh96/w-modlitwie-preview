@@ -498,3 +498,5 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 @media(prefers-reduced-motion:reduce){.gallery-hero-flame:before,.gallery-hero-flame:after{animation:none;opacity:.5}}
 @media(max-width:740px){.gallery-page .gallery-hero{min-height:220px}.gallery-page .gallery-hero>.gallery-hero-content{padding:25px 20px}.gallery-page .gallery-hero:after{background:linear-gradient(90deg,#080b10d9 0%,#080b10b3 54%,#080b1030 100%)}}
 @media(min-width:1101px){.gallery-hero-stage{top:calc(50% + 28px)}}
+/* Match the scene height to its 165%-wide artwork so the portrait and lantern base stay in frame. */
+.gallery-page .gallery-card-scene{height:auto;aspect-ratio:1.3}
