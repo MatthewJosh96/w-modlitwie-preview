@@ -394,3 +394,8 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 
 .creator-photo-choice{display:flex;gap:9px;margin:12px 0 16px}.creator-photo-choice button{border:1px solid #c7b9a7;border-radius:6px;background:#fff;color:#203047;padding:10px 17px;cursor:pointer;font-size:13px;font-weight:600}.creator-photo-choice button[aria-pressed="true"]{border-color:#98612e;background:#f7ead8;color:#6b3f1e}.creator-photo-choice button:focus-visible{outline:3px solid #a66a35;outline-offset:2px}
 .memorial-portrait[hidden]{display:none}
+.creator-photo-hint{margin:10px 0!important;color:#42546a;font-size:13px;line-height:1.5}
+.creator-face-choices{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 16px}
+.creator-face-choices button{display:flex;align-items:center;gap:8px;padding:5px 10px 5px;border:1px solid #c7b9a7;border-radius:6px;background:#fff;color:#203047;cursor:pointer;font:600 13px/1.3 var(--sans)}
+.creator-face-choices button:hover,.creator-face-choices button:focus-visible{border-color:#98612e;background:#faf7f1;outline-offset:2px}
+.creator-face-choices img{width:48px;height:48px;border-radius:4px;object-fit:cover}

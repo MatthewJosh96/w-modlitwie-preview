@@ -1,3 +1,5 @@
+import { controlsForFace, detectPortraitFaces, faceThumbnail, preparePortrait } from './portrait-vision/portrait-processing.mjs?v=8808932e';
+
 (() => {
   'use strict';
 
@@ -16,7 +18,8 @@
   const eternalRest = 'Wieczny odpoczynek racz im dać, Panie, a światłość wiekuista niechaj im świeci. Niech odpoczywają w pokoju wiecznym. Amen.';
   let step = 1;
   let image = null;
-  let imageUrl = null;
+  let selection = 0;
+  let manualCropTouched = false;
   let photoData = null;
   let photoChoice = null;
   let paused = false;
@@ -73,7 +76,7 @@
     setError('name', name.length < 2 ? 'Podaj imię — co najmniej dwa znaki.' : '');
     setError('birth', birthIssue);
     setError('death', deathIssue || deathOrderIssue);
-    const photoIssue = !photoChoice ? 'Wybierz, czy chcesz dodać zdjęcie.' : photoChoice === 'with' && !photoData ? imageUrl ? 'Poczekaj na przygotowanie zdjęcia.' : 'Wybierz zdjęcie albo zaznacz „Bez zdjęcia”.' : '';
+    const photoIssue = !photoChoice ? 'Wybierz, czy chcesz dodać zdjęcie.' : photoChoice === 'with' && !photoData ? image ? 'Poczekaj na przygotowanie zdjęcia.' : 'Wybierz zdjęcie albo zaznacz „Bez zdjęcia”.' : '';
     setError('photo', photoIssue);
     return name.length >= 2 && !birthIssue && !deathIssue && !deathOrderIssue && !photoIssue;
   }
@@ -150,8 +153,8 @@
     const context = canvas.getContext('2d');
     if (!context) { setError('photo', 'Nie udało się przygotować zdjęcia w tej przeglądarce.'); return; }
     const zoom = Number($('#demo-zoom').value), x = Number($('#demo-x').value), y = Number($('#demo-y').value);
-    const scale = Math.max(600 / image.naturalWidth, 750 / image.naturalHeight) * zoom;
-    const width = image.naturalWidth * scale, height = image.naturalHeight * scale;
+    const scale = Math.max(600 / image.width, 750 / image.height) * zoom;
+    const width = image.width * scale, height = image.height * scale;
     context.drawImage(image, (600 - width) * (x + 100) / 200, (750 - height) * (y + 100) / 200, width, height);
     photoData = canvas.toDataURL('image/webp', .82);
     if (!/^data:image\/(?:webp|png);base64,/.test(photoData) || photoData.length > 4_000_000) { photoData = null; setError('photo', 'Zdjęcie jest zbyt duże po przygotowaniu. Wybierz inny plik.'); return; }
@@ -183,18 +186,41 @@
     const file = event.target.files?.[0];
     renewPhotoPicker();
     if (!file) return;
-    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) { setError('photo', 'Wybierz zdjęcie JPG, PNG lub WebP do 5 MB.'); return; }
-    const url = URL.createObjectURL(file);
+    const current = ++selection;
+    manualCropTouched = false;
+    const hint = $('#photo-hint');
+    hint.textContent = 'Przygotowujemy zdjęcie…'; hint.hidden = false;
+    $('#face-choices').hidden = true;
+    setError('photo', '');
     try {
-      const nextImage = new Image(); nextImage.src = url; await nextImage.decode();
-      if (imageUrl) URL.revokeObjectURL(imageUrl);
-      imageUrl = url; image = nextImage;
+      const prepared = await preparePortrait(file);
+      if (current !== selection) return;
+      image = prepared;
       choosePhoto('with');
       $('#demo-zoom').value = '1'; $('#demo-x').value = '0'; $('#demo-y').value = '0';
       drawPhoto();
-    } catch { URL.revokeObjectURL(url); setError('photo', 'Nie udało się odczytać zdjęcia. Wybierz inny plik.'); }
+      hint.textContent = 'Szukamy twarzy, aby zaproponować kadr…';
+      try {
+        const faces = await Promise.race([detectPortraitFaces(prepared, './portrait-vision'), new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 10000))]);
+        if (current !== selection) return;
+        if (faces.length === 1 && !manualCropTouched) { focusFace(faces[0]); hint.textContent = 'Zaproponowaliśmy kadr twarzy i ramion. Możesz go poprawić suwakami.'; }
+        else if (faces.length === 1) { const choices = $('#face-choices'); choices.replaceChildren(); const button = document.createElement('button'); button.type = 'button'; button.textContent = 'Zastosuj proponowany kadr'; button.addEventListener('click', () => { focusFace(faces[0]); hint.textContent = 'Możesz poprawić kadr suwakami.'; }); choices.append(button); choices.hidden = false; hint.textContent = 'Wykryliśmy twarz. Możesz zastosować proponowany kadr.'; }
+        else if (faces.length > 1) {
+          hint.textContent = 'Wykryliśmy kilka osób. Wybierz twarz do wykadrowania.';
+          const choices = $('#face-choices'); choices.replaceChildren(); choices.hidden = false;
+          faces.forEach((face, index) => { const button = document.createElement('button'); button.type = 'button'; const thumb = document.createElement('img'); thumb.src = faceThumbnail(prepared, face); thumb.alt = ''; thumb.width = 48; thumb.height = 48; button.append(thumb, `Osoba ${index + 1}`); button.addEventListener('click', () => { focusFace(face); hint.textContent = 'Możesz poprawić kadr suwakami.'; }); choices.append(button); });
+        } else hint.textContent = 'Nie znaleźliśmy twarzy. Ustaw kadr ręcznie suwakami.';
+      } catch { if (current === selection) hint.textContent = 'Automatyczne kadrowanie jest niedostępne. Ustaw kadr ręcznie suwakami.'; }
+    } catch (error) { if (current === selection) { hint.hidden = true; setError('photo', error instanceof Error ? error.message : 'Nie udało się odczytać zdjęcia.'); } }
+  }
+  function focusFace(face) {
+    if (!image) return;
+    const crop = controlsForFace(face, image.width, image.height);
+    $('#demo-zoom').value = String(crop.zoom); $('#demo-x').value = String(crop.x); $('#demo-y').value = String(crop.y);
+    drawPhoto();
   }
   function choosePhoto(choice) {
+    if (choice === 'without') { selection++; $('#face-choices').hidden = true; $('#photo-hint').hidden = true; }
     photoChoice = choice;
     $$('[data-photo-choice]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.photoChoice === choice)));
     $('#photo-input-area').hidden = choice !== 'with';
@@ -205,7 +231,7 @@
   }
   $$('[data-photo-choice]').forEach(button => button.addEventListener('click', () => choosePhoto(button.dataset.photoChoice)));
   $('#photo-reset').addEventListener('click', () => choosePhoto('without'));
-  for (const id of ['demo-zoom', 'demo-x', 'demo-y']) $(`#${id}`).addEventListener('input', drawPhoto);
+  for (const id of ['demo-zoom', 'demo-x', 'demo-y']) $(`#${id}`).addEventListener('input', () => { manualCropTouched = true; drawPhoto(); });
   for (const kind of ['birth', 'death']) {
     $(`#demo-${kind}-precision`).addEventListener('change', (event) => { const input = $(`#demo-${kind}`); input.value = ''; input.type = event.target.value === 'date' ? 'date' : 'text'; input.inputMode = event.target.value === 'year' ? 'numeric' : ''; input.placeholder = event.target.value === 'year' ? 'np. 1948' : ''; input.maxLength = event.target.value === 'year' ? 4 : 20; setError(kind, ''); update(); });
   }
@@ -220,6 +246,5 @@
   reducedMotion.addEventListener('change', syncMotion);
   document.addEventListener('visibilitychange', syncMotion);
   if ('IntersectionObserver' in window) new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; syncMotion(); }, { threshold: 0.05 }).observe(scene);
-  window.addEventListener('pagehide', () => { if (imageUrl) URL.revokeObjectURL(imageUrl); });
   update();
 })();

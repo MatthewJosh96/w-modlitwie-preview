@@ -1,0 +1,10 @@
+MediaPipe Tasks Vision 1.1.1
+Copyright 2023 Google LLC
+License: Apache License 2.0 (LICENSE-APACHE-2.0.txt)
+Source: https://www.npmjs.com/package/@mediapipe/tasks-vision
+Files: wasm/vision_wasm_*.js, wasm/vision_wasm_*.wasm. The static creator also bundles the package in portrait-processing.mjs.
+
+BlazeFace short-range face detection model
+Source: https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/1/blaze_face_short_range.tflite
+Model card: https://storage.googleapis.com/mediapipe-assets/MediaPipe%20BlazeFace%20Model%20Card%20%28Short%20Range%29.pdf
+Used only locally in the browser for face bounding boxes. No face identification or remote inference.
