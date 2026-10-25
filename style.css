@@ -708,3 +708,18 @@ body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-lit-
 .memorial-detail-scene .memorial-detail-back,.memorial-detail-scene .memorial-motion-toggle{min-height:44px;font-size:12px}
 @media(max-width:800px){.memorial-detail-scene .memorial-detail-back{top:16px;left:17px}}
 .creator-preview-heading span,.creator-preview .memorial-access,.creator-preview .memorial-motion-toggle{font-size:12px}
+
+/* Let the gallery use the viewport while retaining a stable reading sidebar. */
+.gallery-page .gallery-inner{width:calc(100% - 64px);max-width:none;grid-template-columns:minmax(0,1fr) 310px;gap:32px}
+.gallery-page .gallery-hero>.gallery-hero-content{width:calc(100% - 64px)}
+@media(max-width:1200px){
+  .gallery-page .gallery-inner{width:calc(100% - 40px);grid-template-columns:minmax(0,1fr) 300px;gap:24px}
+  .gallery-page .gallery-hero>.gallery-hero-content{width:calc(100% - 40px)}
+  .gallery-page .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  .gallery-page .gallery-inner{display:block}
+  .gallery-page .gallery-sidebar{margin-top:25px}
+  .gallery-page .gallery-hero>.gallery-hero-content{width:calc(100% - 40px)}
+}
+@media(max-width:600px){.gallery-page .gallery-grid{grid-template-columns:1fr}}
