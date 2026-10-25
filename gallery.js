@@ -94,6 +94,10 @@
     const candleKey = `wmodlitwie_gallery_candle_${person.id}`;
     const candleDialog = document.querySelector('#person-candle-dialog');
     const candleButton = document.querySelector('#person-light');
+    candleButton.addEventListener('pointerdown',() => { candleDialog.dataset.pointerOpen = 'true'; });
+    candleButton.addEventListener('keydown',() => { delete candleDialog.dataset.pointerOpen; });
+    candleDialog.addEventListener('keydown',() => { delete candleDialog.dataset.pointerOpen; });
+    candleDialog.addEventListener('close',() => { delete candleDialog.dataset.pointerOpen; });
     const candleStatus = document.querySelector('#person-candle-dialog-status');
     let localCandle = null;
     try { localCandle = JSON.parse(localStorage.getItem(candleKey) || 'null'); } catch { localCandle = null; }
