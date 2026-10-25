@@ -24,13 +24,13 @@ p{color:var(--muted)}
 button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #7b562c;outline-offset:4px}
 [hidden]{display:none!important}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.skip-link{position:fixed;top:-60px;left:20px;z-index:100;background:#fff;padding:10px 14px}
+.skip-link{position:fixed;top:-60px;left:20px;z-index:100;background:#fff;padding:10px 14px;box-sizing:border-box;min-height:44px}
 .skip-link:focus{top:12px}
 .site-header{background:#fff;border-bottom:1px solid var(--line);position:relative;z-index:20}
 .header-inner{max-width:1400px;margin:auto;padding:18px 32px;display:flex;align-items:center;gap:36px}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:24px;white-space:nowrap;line-height:1.2}
+.brand{display:flex;align-items:center;gap:10px;min-height:44px;font-family:var(--serif);font-size:24px;white-space:nowrap;line-height:1.2}
 .brand-cross{font-size:41px;color:var(--copper);font-family:Georgia;line-height:1}
-.brand small{display:block;font:8px var(--sans);letter-spacing:2px;margin-top:7px}
+.brand small{display:block;font:10px var(--sans);letter-spacing:1px;margin-top:7px}
 .main-nav{display:flex;align-items:center;gap:24px;margin-left:auto;font-size:12px}
 .main-nav a{position:relative;padding:12px 0;white-space:nowrap}
 .main-nav a[aria-current="page"]:after{content:"";height:2px;background:var(--copper);position:absolute;bottom:3px;left:0;right:0}
@@ -38,13 +38,13 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #7b56
 .site-footer{border-top:1px solid var(--line);padding:30px 0 22px}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
 .footer-inner p{font-size:12px;color:#505969}
-.footer-note{font-size:10px;margin-top:25px;color:var(--muted)}
+.footer-note{font-size:12px;margin-top:25px;color:var(--muted)}
 .memorial-photo>img,.memorial-flame-patch>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 .memorial-preview-controls #photo-error{color:#a52a2a}
 .memorial-next h3{font-size:20px}
 .memorial-share-message:empty{display:none}
 @media(max-width:800px){.main-nav{gap:14px;margin-left:auto}.main-nav a{font-size:11px}}
-@media(max-width:600px){.header-inner{padding:11px 20px;flex-wrap:wrap;gap:6px}.brand{font-size:21px;gap:7px}.brand-cross{font-size:33px}.brand small{font-size:6px;letter-spacing:1.55px}.main-nav{display:flex;flex-basis:100%;gap:18px;overflow-x:auto;margin:0;scrollbar-width:thin}.main-nav a{flex:none}.container{width:calc(100% - 36px)}.footer-inner{align-items:flex-start}.footer-inner p{font-size:11px}}
+@media(max-width:600px){.header-inner{padding:11px 20px;flex-wrap:wrap;gap:6px}.brand{font-size:21px;gap:7px}.brand-cross{font-size:33px}.brand small{font-size:8px;letter-spacing:.6px}.main-nav{display:flex;flex-basis:100%;gap:18px;overflow-x:auto;margin:0;scrollbar-width:thin}.main-nav a{flex:none}.container{width:calc(100% - 36px)}.footer-inner{align-items:flex-start}.footer-inner p{font-size:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 
 /* Memorial pages follow the supplied photographic composition. */
@@ -250,8 +250,8 @@ body:has(.memorial-header) main{width:100%;margin:0;background:#fff;box-shadow:n
 .creator-preview-details p,.creator-preview-details blockquote{margin:0 0 9px;white-space:pre-wrap;overflow-wrap:anywhere}
 .creator-preview-details blockquote{border-top:1px solid #e4dbcf;padding-top:13px;font-style:italic}
 @media(max-width:1100px){.creator-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}.creator-form{padding:22px}.creator-preview .memorial-scene h2{font-size:25px}}
-@media(max-width:800px){.memorial-creator{width:calc(100% - 32px);margin:22px auto 50px}.creator-intro h1{font-size:37px}.creator-intro p{font-size:14px}.creator-steps button{font-size:11px;gap:6px;padding:7px 4px}.creator-steps button span{width:23px;height:23px}.creator-layout{display:flex;flex-direction:column}.creator-layout[data-step="3"] .creator-preview{order:-1}.creator-form,.creator-preview{width:100%}.creator-preview{position:relative;top:auto}.creator-preview .memorial-scene{aspect-ratio:auto}.creator-preview .memorial-photo{width:120%;margin-left:-4%;aspect-ratio:2.15}.creator-preview .memorial-scene-content{position:relative;left:auto;top:auto;width:100%;padding:18px 20px 20px}.creator-preview .memorial-scene h2{font-size:33px}.creator-preview .memorial-dedication{font-size:16px}.creator-preview .memorial-scene-dates,.creator-preview .memorial-scene-signature{font-size:12px;margin-top:7px}.creator-preview .memorial-scene-actions{margin-top:12px}.creator-preview .memorial-motion-toggle{font-size:11px}.creator-dates{grid-template-columns:1fr 1fr}}
-@media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:20px}.creator-steps button{font-size:10px}.creator-navigation{flex-wrap:wrap}.creator-navigation .button{flex:1}}
+@media(max-width:800px){.memorial-creator{width:calc(100% - 32px);margin:22px auto 50px}.creator-intro h1{font-size:37px}.creator-intro p{font-size:14px}.creator-steps button{font-size:12px;gap:6px;padding:7px 4px}.creator-steps button span{width:23px;height:23px}.creator-layout{display:flex;flex-direction:column}.creator-layout[data-step="3"] .creator-preview{order:-1}.creator-form,.creator-preview{width:100%}.creator-preview{position:relative;top:auto}.creator-preview .memorial-scene{aspect-ratio:auto}.creator-preview .memorial-photo{width:120%;margin-left:-4%;aspect-ratio:2.15}.creator-preview .memorial-scene-content{position:relative;left:auto;top:auto;width:100%;padding:18px 20px 20px}.creator-preview .memorial-scene h2{font-size:33px}.creator-preview .memorial-dedication{font-size:16px}.creator-preview .memorial-scene-dates,.creator-preview .memorial-scene-signature{font-size:12px;margin-top:7px}.creator-preview .memorial-scene-actions{margin-top:12px}.creator-preview .memorial-motion-toggle{font-size:11px}.creator-dates{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:20px}.creator-steps button{font-size:12px}.creator-navigation{flex-wrap:wrap}.creator-navigation .button{flex:1}}
 
 .demo-create-link{padding:10px 30px;background:#f4eee5;text-align:center;color:#704826;font-size:13px;font-weight:600}
 .demo-create-link a{display:inline-block;text-decoration:underline;text-underline-offset:3px}
@@ -306,10 +306,10 @@ body:has(.memorial-header) main.memorial-creator{width:min(1280px,calc(100% - 48
 .gallery-feedback h2{font:500 28px/1.25 var(--serif);color:#172139}
 .gallery-feedback p{margin:9px auto 0;max-width:50ch;color:#536073}
 .gallery-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid #ddd2c5;margin-top:42px;padding-top:24px}
-.gallery-bottom a{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;color:#784916;font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.gallery-bottom a{display:inline-flex;align-items:center;gap:8px;min-height:44px;white-space:nowrap;color:#784916;font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
 @media(prefers-reduced-motion:reduce){.gallery-card,.gallery-card-flame>img,.gallery-card-glow{animation:none!important;transition:none!important}}
 @media(max-width:800px){.gallery-hero{min-height:200px}.gallery-hero>.gallery-hero-content{padding:38px 28px}.gallery-inner{padding:24px 20px 42px}.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gallery-bottom{align-items:start;flex-direction:column}}
-@media(max-width:600px){.gallery-hero{min-height:160px}.gallery-hero>.gallery-hero-content{padding:28px 22px}.gallery-inner{padding:20px 14px 38px}.gallery-toolbar{margin-bottom:20px;gap:7px}.gallery-search{flex-basis:100%;max-width:none}.gallery-order p{padding-bottom:0}.gallery-card{aspect-ratio:1}.gallery-card-info{padding:14px 10px 13px 10px}.gallery-card h2{max-width:calc(100% - 16px);font-size:clamp(16px,4.1vw,18px);line-height:1.13;letter-spacing:-.035em}.gallery-card-years{font-size:10px;letter-spacing:.1em}.gallery-eternal-label{color:#e0bc78;font-size:11px;gap:4px;margin-top:6px}.gallery-eternal-label svg{width:14px;height:14px;flex:none}.gallery-card-chevron{right:5px;bottom:13px;width:16px;height:16px}}
+@media(max-width:600px){.gallery-hero{min-height:160px}.gallery-hero>.gallery-hero-content{padding:28px 22px}.gallery-inner{padding:20px 14px 38px}.gallery-toolbar{margin-bottom:20px;gap:7px}.gallery-search{flex-basis:100%;max-width:none}.gallery-order p{padding-bottom:0}.gallery-card{aspect-ratio:1}.gallery-card-info{padding:14px 10px 13px 10px}.gallery-card h2{max-width:calc(100% - 16px);font-size:clamp(16px,4.1vw,18px);line-height:1.13;letter-spacing:-.035em}.gallery-card-years{font-size:12px;letter-spacing:.1em}.gallery-eternal-label{color:#e0bc78;font-size:11px;gap:4px;margin-top:6px}.gallery-eternal-label svg{width:14px;height:14px;flex:none}.gallery-card-chevron{right:5px;bottom:13px;width:16px;height:16px}}
 @media(max-width:600px){.memorial-header .main-nav{gap:2px 18px;margin:0;flex-wrap:wrap;overflow:visible;justify-content:center}.memorial-header .main-nav a{font-size:11px}}
 
 .creator-gallery-entry{margin-top:12px;font-size:13px}.creator-gallery-entry a{color:#784916;text-decoration:underline;text-underline-offset:4px}
@@ -360,7 +360,7 @@ body:has(.memorial-header) main.memorial-creator{width:min(1280px,calc(100% - 48
 .creator-preview .memorial-scene-content{position:relative;left:auto;top:auto;width:100%;padding:18px 20px}
 .creator-preview .memorial-scene h2{font-size:29px}
 @media(max-width:800px){.memorial-creator{width:calc(100% - 40px);margin-bottom:54px}.creator-hero{min-height:240px;margin-bottom:0;padding:36px 20px;background-position:61% center}.creator-hero blockquote{display:none}.creator-intro h1{font-size:clamp(35px,9vw,45px)}.creator-intro p{font-size:14px}.creator-layout{display:flex;flex-direction:column}.creator-layout[data-step='3'] .creator-preview{order:initial}.creator-sidebar{width:100%}.creator-form{padding:26px}.creator-steps button{font-size:11px}.creator-side-quote{min-height:150px}.creator-preview .memorial-photo{aspect-ratio:1836 / 856}.creator-preview .memorial-scene h2{font-size:31px}}
-@media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:22px}.creator-steps{gap:2px}.creator-steps button{font-size:11px;gap:5px;padding:8px 4px}.creator-navigation .button{min-width:0}}
+@media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:22px}.creator-steps{gap:2px}.creator-steps button{font-size:12px;gap:5px;padding:8px 4px}.creator-navigation .button{min-width:0}}
 
 body:has(.memorial-header) main.memorial-creator{width:min(1240px,calc(100% - 64px));padding:0;margin:0 auto 80px;background:transparent}
 body:has(.memorial-header){background:#faf8f5}
@@ -406,7 +406,7 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
   .memorial-creator .creator-photo-pick{min-height:124px}
 }
 
-.creator-photo-choice{display:flex;gap:9px;margin:12px 0 16px}.creator-photo-choice button{border:1px solid #c7b9a7;border-radius:6px;background:#fff;color:#203047;padding:10px 17px;cursor:pointer;font-size:13px;font-weight:600}.creator-photo-choice button[aria-pressed="true"]{border-color:#98612e;background:#f7ead8;color:#6b3f1e}.creator-photo-choice button:focus-visible{outline:3px solid #a66a35;outline-offset:2px}
+.creator-photo-choice{display:flex;gap:9px;margin:12px 0 16px}.creator-photo-choice button{border:1px solid #c7b9a7;border-radius:6px;background:#fff;color:#203047;min-height:44px;padding:10px 17px;cursor:pointer;font-size:13px;font-weight:600}.creator-photo-choice button[aria-pressed="true"]{border-color:#98612e;background:#f7ead8;color:#6b3f1e}.creator-photo-choice button:focus-visible{outline:3px solid #a66a35;outline-offset:2px}
 .memorial-portrait[hidden]{display:none}
 .creator-photo-hint{margin:10px 0!important;color:#42546a;font-size:13px;line-height:1.5}
 .creator-face-choices{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 16px}
@@ -449,11 +449,11 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 .gallery-sidebar p{color:#3c4859;font-size:13px;line-height:1.55}
 .gallery-about-icon{float:right;font:52px/1 var(--serif);color:#ad7938;margin-left:8px}
 .gallery-about blockquote{margin:16px -3px;padding:13px 12px;background:#faf7f2;border-radius:5px;color:#344057;font:italic 13px/1.35 var(--serif)}
-.gallery-about cite{display:block;font:11px/1.4 var(--sans);margin-top:5px}
+.gallery-about cite{display:block;font:12px/1.4 var(--sans);margin-top:5px}
 .gallery-add-button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:39px;border-radius:24px;color:#fff!important;background:#b47b37;text-decoration:none;font-size:12px}
 .gallery-add-button:hover{background:#965e21}
 .gallery-prayer>svg{float:right;color:#b47b37}
-.gallery-prayer a{display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:#9e6728;font-size:12px;font-weight:700;text-decoration:none}
+.gallery-prayer a{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:12px;color:#9e6728;font-size:12px;font-weight:700;text-decoration:none}
 .gallery-prayer a:hover{text-decoration:underline}
 @media(max-width:1050px){.gallery-page .gallery-inner{grid-template-columns:minmax(0,1fr) 250px;gap:18px;width:calc(100% - 40px);padding-left:0;padding-right:0}.gallery-page .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:740px){.gallery-page .gallery-inner{display:block;width:calc(100% - 40px);padding:18px 0 45px}.gallery-sidebar{margin-top:25px}.gallery-page .gallery-hero{min-height:220px}.gallery-page .gallery-hero-content{width:calc(100% - 40px);padding:25px 0}.gallery-page .gallery-hero h1{font-size:39px}}
@@ -470,12 +470,12 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 .gallery-prayer-stats>div+div{border-left:1px solid #eee8df}
 .gallery-prayer-stats svg{width:23px;height:23px;margin-bottom:8px;color:#b47b37}
 .gallery-prayer-stats strong{font:700 17px/1.1 var(--serif);color:#1c2a43}
-.gallery-prayer-stats span{margin-top:4px;color:#667181;font:10px/1.3 var(--sans)}
-.gallery-sidebar .gallery-metrics-note{margin-top:12px;text-align:center;color:#7a8190;font-size:11px;line-height:1.35}
+.gallery-prayer-stats span{margin-top:4px;color:#667181;font:12px/1.3 var(--sans)}
+.gallery-sidebar .gallery-metrics-note{margin-top:12px;text-align:center;color:#7a8190;font-size:12px;line-height:1.35}
 .gallery-prayer>a{display:inline-flex;align-items:center;gap:6px;margin-top:14px}
 .gallery-page .gallery-card-eternal-label,.gallery-page .gallery-eternal-label{margin:7px 0 3px;color:#a87330;text-shadow:none;font-size:11px;font-weight:700}
 .gallery-page .gallery-card-footer{min-height:42px;color:#7c603e}
-.gallery-memory-count{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;color:#7c603e;font-size:11px}
+.gallery-memory-count{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;color:#7c603e;font-size:12px}
 .gallery-memory-count svg{width:14px;height:14px;flex:none;color:#b47b37}
 /* One cover-scaled stage keeps flame coordinates locked to the artwork. */
 .gallery-page .gallery-hero{min-height:clamp(235px,14vw,360px)}
@@ -563,7 +563,7 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 .memorial-detail-quote h3{font:600 17px var(--serif);color:#27364e}
 .memorial-detail-quote h3:after{content:"";display:block;width:30px;height:1px;background:#b8864a;margin:12px 0}
 .memorial-detail-quote p{font-style:normal;font-size:15px}
-.memorial-detail-memory .memorial-detail-label{display:block;margin:0 0 10px;color:#a87538;font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.15em}
+.memorial-detail-memory .memorial-detail-label{display:block;margin:0 0 10px;color:#a87538;font:700 12px var(--sans);text-transform:uppercase;letter-spacing:.15em}
 .memorial-detail-count{margin-top:9px!important;color:#596374!important;font-size:12px!important}
 .memorial-detail-count strong{color:#172139;font:600 20px var(--serif);margin-right:4px}
 @media(max-width:800px){.memorial-detail-scene .memorial-scene-content h1{font-size:clamp(37px,9vw,52px)}}
@@ -694,3 +694,17 @@ body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-lit-
  .site-header .main-nav>a.nav-community-cta[aria-current="page"]:after{display:none}
 }
 @media(max-width:380px){.site-header .main-nav.is-open,.site-header.memorial-header .main-nav.is-open{grid-template-columns:1fr}}
+
+/* Usable targets for standalone support actions. */
+.creator-hero a,.gallery-feedback .button{display:inline-flex;align-items:center;min-height:44px}
+
+/* Full-width detail artwork: crop one native-ratio stage so every scene layer stays aligned. */
+@media(min-width:1240px){
+  .memorial-detail-page .memorial-detail-scene{width:100%;max-width:none;height:clamp(577px,37vw,860px);aspect-ratio:auto}
+  .memorial-detail-scene .memorial-photo{inset:auto 0 auto;top:50%;width:100%;height:auto;aspect-ratio:1836/856;transform:translateY(-50%)}
+  .memorial-detail-scene .memorial-scene-content,.memorial-detail-scene.has-long-copy .memorial-scene-content{left:calc(50% + 87px);width:min(484px,calc(50% - 110px))}
+  .memorial-detail-scene .memorial-detail-back{left:calc(max(0px,(100% - 1240px)/2) + clamp(24px,4vw,54px))}
+}
+.memorial-detail-scene .memorial-detail-back,.memorial-detail-scene .memorial-motion-toggle{min-height:44px;font-size:12px}
+@media(max-width:800px){.memorial-detail-scene .memorial-detail-back{top:16px;left:17px}}
+.creator-preview-heading span,.creator-preview .memorial-access,.creator-preview .memorial-motion-toggle{font-size:12px}
