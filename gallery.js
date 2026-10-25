@@ -43,6 +43,13 @@
   if (document.body.dataset.galleryPage === 'list') {
     const input = document.querySelector('#gallery-search');
     const target = document.querySelector('#gallery-results');
+    // In this static sample, the array's order is the authored addition order.
+    document.querySelector('#gallery-recent-list').innerHTML = people.slice(-3).reverse().map(person => {
+      const thumbnail = person.portrait
+        ? `<img src="${person.portrait}" alt="" width="48" height="48" loading="lazy">`
+        : `<span class="gallery-recent-initials" aria-hidden="true">${escape(initials(person.name))}</span>`;
+      return `<a class="gallery-recent-item" href="./gallery-person.html?id=${person.id}"><span class="gallery-recent-thumb">${thumbnail}</span><span class="gallery-recent-name">${escape(person.name)}</span><span class="gallery-recent-arrow" aria-hidden="true">›</span></a>`;
+    }).join('');
     function render() {
       const query = input.value.trim().toLocaleLowerCase('pl-PL');
       const visible = people.filter(person => person.name.toLocaleLowerCase('pl-PL').includes(query));
