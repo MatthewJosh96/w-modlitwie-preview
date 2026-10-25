@@ -44,7 +44,8 @@
     const input = document.querySelector('#gallery-search');
     const target = document.querySelector('#gallery-results');
     // In this static sample, the array's order is the authored addition order.
-    document.querySelector('#gallery-recent-list').innerHTML = people.slice(-3).reverse().map(person => {
+    const recentList = document.querySelector('#gallery-recent-list');
+    if (recentList) recentList.innerHTML = people.slice(-3).reverse().map(person => {
       const thumbnail = person.portrait
         ? `<img src="${person.portrait}" alt="" width="48" height="48" loading="lazy">`
         : `<span class="gallery-recent-initials" aria-hidden="true">${escape(initials(person.name))}</span>`;
@@ -60,6 +61,12 @@
     }
     input.addEventListener('input',render);
     document.querySelector('.gallery-search button').addEventListener('click',render);
+    document.querySelector('#gallery-show-all')?.addEventListener('click', event => {
+      event.preventDefault();
+      input.value = '';
+      render();
+      input.focus();
+    });
     render();
   } else {
     const id = new URLSearchParams(location.search).get('id');
