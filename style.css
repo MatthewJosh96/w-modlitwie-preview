@@ -500,3 +500,67 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 @media(min-width:1101px){.gallery-hero-stage{top:calc(50% + 28px)}}
 /* Match the scene height to its 165%-wide artwork so the portrait and lantern base stay in frame. */
 .gallery-page .gallery-card-scene{height:auto;aspect-ratio:1.3}
+
+/* Person detail page */
+.memorial-detail-scene .memorial-scene-content h1{color:#fff;font:400 clamp(35px,4.7vw,64px)/1.07 var(--serif);letter-spacing:-.025em;overflow-wrap:anywhere;max-width:12ch}
+.memorial-detail-scene.has-long-copy .memorial-scene-content h1{font-size:clamp(31px,3.8vw,52px)}
+.memorial-detail-facts .person-fact-icon{color:#b77f41;font:24px/1.1 var(--serif)}
+.memorial-detail-scene .memorial-detail-back{position:absolute;z-index:5;top:24px;left:clamp(24px,4vw,54px);display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:13px;text-shadow:0 2px 8px #000}
+.memorial-detail-scene .memorial-detail-back:hover{text-decoration:underline;text-underline-offset:4px}
+.memorial-detail-scene .memorial-scene-content{top:22%;left:57%;width:39%}
+.memorial-detail-scene.has-long-copy .memorial-scene-content{top:15%}
+.memorial-detail-scene .memorial-scene-content h2{font-family:var(--serif);font-weight:400;letter-spacing:-.025em}
+.memorial-detail-scene .memorial-scene-dates{font-size:clamp(14px,1.5vw,20px);color:#fff}
+.memorial-detail-scene .memorial-dedication{font-style:italic;margin-top:33px}
+.memorial-detail-scene .memorial-dedication:before{content:"";display:block;width:31px;height:1px;background:#ddd0b9;margin-bottom:20px}
+.memorial-detail-scene .memorial-scene-actions{flex-direction:row;align-items:center;flex-wrap:wrap;gap:10px;margin-top:32px}
+.memorial-detail-primary,.memorial-detail-secondary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:47px;padding:10px 19px;border-radius:99px;color:#fff;font-size:13px;text-shadow:none;white-space:nowrap}
+.memorial-detail-primary{background:#b77f41}
+.memorial-detail-primary:hover{background:#99642b}
+.memorial-detail-secondary{border:1px solid #ffffffbd;background:#070e16a8}
+.memorial-detail-secondary:hover{background:#293140}
+.memorial-detail-scene .memorial-share-button{width:47px;min-width:47px;height:47px;padding:0;background:#070e16a8}
+.memorial-detail-scene .memorial-motion-toggle{font-size:11px}
+.memorial-detail-body{width:min(1160px,calc(100% - 64px));margin:0 auto;padding:43px 0 55px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:30px 50px;color:#172139}
+.memorial-detail-main{min-width:0}
+.memorial-detail-about h2,.memorial-detail-memories h2,.memorial-detail-prayer h2{font:500 clamp(32px,3.2vw,42px)/1.15 var(--serif)}
+.memorial-detail-about>p{max-width:65ch;margin-top:14px;font:17px/1.65 var(--serif);color:#3e4958;white-space:pre-wrap}
+.memorial-detail-about .memorial-detail-signature{margin-top:11px;color:#a87538;font:13px var(--sans)}
+.memorial-detail-facts{display:flex;flex-wrap:wrap;gap:24px 38px;margin-top:35px;padding-bottom:40px;border-bottom:1px solid #e5e0d9}
+.memorial-detail-facts>div{display:flex;align-items:flex-start;gap:12px;min-width:145px}
+.memorial-detail-facts svg{flex:none;color:#b77f41}
+.memorial-detail-facts span{display:grid;gap:3px}
+.memorial-detail-facts small{font-size:12px;color:#6a7280}
+.memorial-detail-facts strong{font:600 14px var(--serif)}
+.memorial-detail-aside{display:grid;align-content:start;gap:18px}
+.memorial-detail-quote,.memorial-detail-candle{border-radius:8px;background:#f7f3ed;box-shadow:0 4px 20px #2115090a}
+.memorial-detail-quote{padding:24px 28px 29px;background:linear-gradient(135deg,#f8f4ee,#f0e9df)}
+.memorial-detail-quote>span{display:block;height:30px;color:#ba8b51;font:70px/1 var(--serif)}
+.memorial-detail-quote p{font:italic 18px/1.45 var(--serif);color:#27364e;white-space:pre-wrap}
+.memorial-detail-quote small{display:block;margin-top:20px;color:#687282;font-size:12px}
+.memorial-detail-candle{display:flex;align-items:center;gap:17px;padding:23px;color:#af7636}
+.memorial-detail-candle h3{color:#172139;font:600 17px var(--serif)}
+.memorial-detail-candle p{margin-top:5px;color:#667080;font-size:12px}
+.memorial-detail-memories{margin-top:46px}
+.memorial-detail-memory{max-width:580px;margin-top:19px;padding:21px 24px;background:#faf8f4;border-left:2px solid #c39562}
+.memorial-detail-memory>span{display:block;height:23px;color:#b8864a;font:50px/1 var(--serif)}
+.memorial-detail-memory p{font:italic 17px/1.55 var(--serif);white-space:pre-wrap}
+.memorial-detail-memory small{display:block;margin-top:10px;color:#687282}
+.memorial-detail-prayer{margin-top:46px;scroll-margin-top:24px}
+.memorial-detail-prayer h2{margin:8px 0 19px}
+.memorial-detail-prayer .memorial-prayer-card{max-width:680px}
+.memorial-detail-body>.memorial-details,.memorial-detail-body>.memorial-next{grid-column:1/-1}
+@media(max-width:900px){.memorial-detail-body{grid-template-columns:minmax(0,1fr) 250px;gap:28px}.memorial-detail-scene .memorial-scene-content{left:54%;width:43%}.memorial-detail-scene .memorial-scene-actions{margin-top:20px}.memorial-detail-primary,.memorial-detail-secondary{min-height:42px;padding:8px 13px;font-size:12px}.memorial-detail-scene .memorial-share-button{height:42px;width:42px;min-width:42px}}
+@media(max-width:800px){.memorial-detail-scene .memorial-photo{width:145%;margin-left:0;aspect-ratio:1836/856}.memorial-detail-scene .memorial-detail-back{top:16px;left:17px;font-size:11px}.memorial-detail-scene .memorial-scene-content,.memorial-detail-scene.has-long-copy .memorial-scene-content{position:relative;top:auto;left:auto;width:100%;padding:23px 21px 28px;background:#10141b}.memorial-detail-scene .memorial-scene-content h2{font-size:clamp(37px,9vw,52px)}.memorial-detail-scene .memorial-scene-dates{font-size:15px}.memorial-detail-scene .memorial-dedication{margin-top:17px;font-size:19px}.memorial-detail-scene .memorial-dedication:before{margin-bottom:13px}.memorial-detail-scene .memorial-scene-actions{gap:8px}.memorial-detail-body{width:calc(100% - 40px);display:flex;flex-direction:column;padding:32px 0 42px}.memorial-detail-aside{grid-template-columns:1fr 1fr}.memorial-detail-memories{margin-top:35px}}
+@media(max-width:570px){.memorial-detail-aside{grid-template-columns:1fr}.memorial-detail-facts{gap:18px 24px}.memorial-detail-facts>div{min-width:135px}.memorial-detail-about h2,.memorial-detail-memories h2,.memorial-detail-prayer h2{font-size:32px}.memorial-detail-about>p{font-size:16px}.memorial-detail-scene .memorial-scene-actions{flex-wrap:wrap}.memorial-detail-primary,.memorial-detail-secondary{flex:1 1 auto}.memorial-detail-scene .memorial-share-button{flex:none}}
+.memorial-life-dates{grid-column:1/-1;text-align:center;color:#70502e;font:500 16px/1.5 var(--serif);margin:0}
+.memorial-signature{font-style:italic;color:#6f5234!important}
+
+
+.memorial-detail-quote h3{font:600 17px var(--serif);color:#27364e}
+.memorial-detail-quote h3:after{content:"";display:block;width:30px;height:1px;background:#b8864a;margin:12px 0}
+.memorial-detail-quote p{font-style:normal;font-size:15px}
+.memorial-detail-memory .memorial-detail-label{display:block;margin:0 0 10px;color:#a87538;font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.15em}
+.memorial-detail-count{margin-top:9px!important;color:#596374!important;font-size:12px!important}
+.memorial-detail-count strong{color:#172139;font:600 20px var(--serif);margin-right:4px}
+@media(max-width:800px){.memorial-detail-scene .memorial-scene-content h1{font-size:clamp(37px,9vw,52px)}}
