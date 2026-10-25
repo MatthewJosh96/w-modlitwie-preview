@@ -1,10 +1,8 @@
 (() => {
   const menu = document.querySelector('.menu-toggle'), nav = document.querySelector('#site-nav');
-  const more = document.querySelector('.nav-more-toggle'), panel = document.querySelector('#nav-more-panel');
-  const close = (focus = false) => { const target = menu?.getAttribute('aria-expanded') === 'true' ? menu : more; if (menu) { menu.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-label', 'Otwórz menu'); nav?.classList.remove('is-open'); } if (more) { more.setAttribute('aria-expanded', 'false'); panel?.classList.remove('is-open'); } if (focus) target?.focus(); };
+  const close = (focus = false) => { if (menu) { menu.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-label', 'Otwórz menu'); nav?.classList.remove('is-open'); if (focus) menu.focus(); } };
   menu?.addEventListener('click', () => { const open = menu.getAttribute('aria-expanded') !== 'true'; menu.setAttribute('aria-expanded', String(open)); menu.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu'); nav?.classList.toggle('is-open', open); if (open) requestAnimationFrame(() => nav?.querySelector('a')?.focus()); });
-  more?.addEventListener('click', () => { const open = more.getAttribute('aria-expanded') !== 'true'; more.setAttribute('aria-expanded', String(open)); panel?.classList.toggle('is-open', open); if (open) requestAnimationFrame(() => panel?.querySelector('a')?.focus()); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && (menu?.getAttribute('aria-expanded') === 'true' || more?.getAttribute('aria-expanded') === 'true')) close(true); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu?.getAttribute('aria-expanded') === 'true') close(true); });
   document.addEventListener('pointerdown', e => { if (!e.target.closest('.site-header')) close(); });
   nav?.addEventListener('click', e => { if (e.target.closest('a')) close(); });
   const search = document.querySelector('[data-filter]'); search?.addEventListener('input', () => { const query = search.value.trim().toLocaleLowerCase('pl'); let visible = 0; document.querySelectorAll(search.dataset.filter).forEach(item => { item.hidden = !item.dataset.search.includes(query); if (!item.hidden) visible++; }); const empty = document.querySelector('#filter-empty'); if (empty) empty.hidden = visible > 0; });
