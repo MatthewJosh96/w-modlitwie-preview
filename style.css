@@ -564,3 +564,46 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 .memorial-detail-count{margin-top:9px!important;color:#596374!important;font-size:12px!important}
 .memorial-detail-count strong{color:#172139;font:600 20px var(--serif);margin-right:4px}
 @media(max-width:800px){.memorial-detail-scene .memorial-scene-content h1{font-size:clamp(37px,9vw,52px)}}
+
+/* Realistic cross UI mark: the same transparent artwork across generated and static pages. */
+.brand-cross,.cross-mark{display:inline-block;flex:none;background-image:url('./images/realistic-cross.webp');background-repeat:no-repeat;background-position:center;background-size:contain;vertical-align:middle}
+.brand-cross{width:30px;height:41px;background-size:41px 41px}
+.memorial-header .brand-cross{width:27px;height:37px;background-size:37px 37px}
+.cross-mark{width:24px;height:24px}
+.memorial-cross.cross-mark{width:35px;height:35px}
+.memorial-next>.cross-mark{display:block;width:25px;height:25px;margin:0 auto 8px}
+.gallery-about-icon.cross-mark{float:right;width:52px;height:52px;margin-left:8px}
+.memorial-fact-cross.cross-mark{width:23px;height:23px}
+.calendar-cross.cross-mark{width:22px;height:22px}
+.memorial-detail-secondary .cross-mark{width:18px;height:18px}
+@media(max-width:600px){.brand-cross,.memorial-header .brand-cross{width:24px;height:33px;background-size:33px 33px}}
+
+/* Current-person candle action */
+.memorial-candle-dialog{position:fixed;inset:0;margin:auto;width:min(520px,calc(100% - 28px));max-height:min(88vh,820px);padding:0;border:0;border-radius:14px;color:#172139;background:#fff;box-shadow:0 25px 80px #050c1880;overflow:auto}
+.memorial-candle-dialog::backdrop{background:#07101ad1;backdrop-filter:blur(3px)}
+.memorial-candle-dialog-panel{position:relative;padding:29px 32px 32px}
+.memorial-candle-close{position:absolute;top:16px;right:16px;display:grid;place-items:center;width:35px;height:35px;border:1px solid #e2d7c9;border-radius:50%;background:#fff;color:#172139;font-size:23px}
+.memorial-candle-symbol{display:grid;place-items:center;width:48px;height:48px;margin-bottom:15px;border-radius:50%;background:#f8eee1;color:#b77f41}
+.memorial-candle-dialog h2{font:500 29px/1.18 var(--serif);max-width:16ch}
+.memorial-candle-dialog h2+p{margin:13px 0 19px;color:#596374;font-size:13px;line-height:1.55}
+.memorial-candle-dialog fieldset{padding:0;margin:0 0 18px;border:0}
+.memorial-candle-dialog legend{margin-bottom:8px;font-weight:700;font-size:13px}
+.memorial-candle-option{display:flex;align-items:center;gap:11px;padding:11px 13px;border:1px solid #e2d9cd;border-radius:8px;margin-top:7px;cursor:pointer}
+.memorial-candle-option:has(input:checked){border-color:#b77f41;background:#fbf5ed}
+.memorial-candle-option strong{margin-left:auto;color:#8b5b28}
+.memorial-candle-dialog input[type=radio],.memorial-candle-dialog input[type=checkbox]{accent-color:#ae7535}
+.memorial-candle-field{display:block;margin:13px 0 6px;font-size:13px;font-weight:700}
+.memorial-candle-field span{font-weight:400;color:#687282}
+.memorial-candle-dialog textarea,.memorial-candle-dialog input[type=text]{display:block;width:100%;border:1px solid #d9d4cd;border-radius:7px;background:#fff;color:#172139;padding:10px 12px;font:13px/1.5 var(--sans);resize:vertical}
+.memorial-candle-hint{font-size:11px;color:#687282;margin:7px 0 16px}
+.memorial-candle-consent{display:flex;align-items:flex-start;gap:9px;font-size:12px;line-height:1.4;margin:12px 0}
+.memorial-candle-consent input{margin-top:2px;flex:none}
+.memorial-candle-consent a,.memorial-candle-error a{color:#8b5b28;text-decoration:underline}
+.memorial-candle-error{color:#a12d2d;font-size:12px;margin:8px 0}
+.memorial-candle-submit{width:100%;min-height:45px;padding:10px 16px;border:0;border-radius:24px;background:#b77f41;color:#fff;font-weight:700;font-size:13px}
+.memorial-candle-submit:hover:not(:disabled){background:#955f29}
+.memorial-candle-submit:disabled{opacity:.55;cursor:not-allowed}
+#person-candle-dialog-status:not(:empty){color:#755022;font-size:12px;margin:10px 0}
+@media(max-width:570px){.memorial-candle-dialog-panel{padding:25px 22px 26px}.memorial-candle-dialog h2{font-size:26px}}
+
+body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-lit-photo,body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-flame-patch,body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-background-lights{visibility:hidden}

@@ -1641,6 +1641,7 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 .memorial-photo{position:absolute;inset:0;z-index:0;container-type:inline-size}
 .memorial-photo>img{object-fit:cover;object-position:center}
 .memorial-photo>.memorial-lit-photo{z-index:1;-webkit-mask-image:radial-gradient(ellipse 2.4% 6% at 45.45% 60.1%,transparent 53%,#000 100%);mask-image:radial-gradient(ellipse 2.4% 6% at 45.45% 60.1%,transparent 53%,#000 100%)}
+.memorial-photo>.memorial-no-frame,.gallery-card-art>.gallery-card-no-frame{z-index:2;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 31%,transparent 35%);mask-image:linear-gradient(90deg,#000 0%,#000 31%,transparent 35%)}
 .memorial-scene.is-animated .memorial-lit-photo{animation:memorial-light 1.75s linear infinite}
 .memorial-scene:after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,transparent 35%,#07101a12 52%,#040a12a8 76%,#040a12ba);pointer-events:none}
 .memorial-portrait{position:absolute;z-index:2;inset:0;width:100%;height:100%;overflow:visible}
@@ -1747,6 +1748,56 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 @media(prefers-reduced-motion:reduce){.memorial-flame,.memorial-lit-photo{animation:none!important}}
 
 .memorial-photo > .memorial-foreground{z-index:4;pointer-events:none}
+
+/* Person detail page */
+.memorial-detail-scene .memorial-detail-back{position:absolute;z-index:5;top:24px;left:clamp(24px,4vw,54px);display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:13px;text-shadow:0 2px 8px #000}
+.memorial-detail-scene .memorial-detail-back:hover{text-decoration:underline;text-underline-offset:4px}
+.memorial-detail-scene .memorial-scene-content{top:22%;left:57%;width:39%}
+.memorial-detail-scene.has-long-copy .memorial-scene-content{top:15%}
+.memorial-detail-scene .memorial-scene-content h2{font-family:var(--serif);font-weight:400;letter-spacing:-.025em}
+.memorial-detail-scene .memorial-scene-dates{font-size:clamp(14px,1.5vw,20px);color:#fff}
+.memorial-detail-scene .memorial-dedication{font-style:italic;margin-top:33px}
+.memorial-detail-scene .memorial-dedication:before{content:"";display:block;width:31px;height:1px;background:#ddd0b9;margin-bottom:20px}
+.memorial-detail-scene .memorial-scene-actions{flex-direction:row;align-items:center;flex-wrap:wrap;gap:10px;margin-top:32px}
+.memorial-detail-primary,.memorial-detail-secondary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:47px;padding:10px 19px;border-radius:99px;color:#fff;font-size:13px;text-shadow:none;white-space:nowrap}
+.memorial-detail-primary{background:#b77f41}
+.memorial-detail-primary:hover{background:#99642b}
+.memorial-detail-secondary{border:1px solid #ffffffbd;background:#070e16a8}
+.memorial-detail-secondary:hover{background:#293140}
+.memorial-detail-scene .memorial-share-button{width:47px;min-width:47px;height:47px;padding:0;background:#070e16a8}
+.memorial-detail-scene .memorial-motion-toggle{font-size:11px}
+.memorial-detail-body{width:min(1160px,calc(100% - 64px));margin:0 auto;padding:43px 0 55px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:30px 50px;color:#172139}
+.memorial-detail-main{min-width:0}
+.memorial-detail-about h2,.memorial-detail-memories h2,.memorial-detail-prayer h2{font:500 clamp(32px,3.2vw,42px)/1.15 var(--serif)}
+.memorial-detail-about>p{max-width:65ch;margin-top:14px;font:17px/1.65 var(--serif);color:#3e4958;white-space:pre-wrap}
+.memorial-detail-about .memorial-detail-signature{margin-top:11px;color:#a87538;font:13px var(--sans)}
+.memorial-detail-facts{display:flex;flex-wrap:wrap;gap:24px 38px;margin-top:35px;padding-bottom:40px;border-bottom:1px solid #e5e0d9}
+.memorial-detail-facts>div{display:flex;align-items:flex-start;gap:12px;min-width:145px}
+.memorial-detail-facts svg{flex:none;color:#b77f41}
+.memorial-detail-facts span{display:grid;gap:3px}
+.memorial-detail-facts small{font-size:12px;color:#6a7280}
+.memorial-detail-facts strong{font:600 14px var(--serif)}
+.memorial-detail-aside{display:grid;align-content:start;gap:18px}
+.memorial-detail-quote,.memorial-detail-candle{border-radius:8px;background:#f7f3ed;box-shadow:0 4px 20px #2115090a}
+.memorial-detail-quote{padding:24px 28px 29px;background:linear-gradient(135deg,#f8f4ee,#f0e9df)}
+.memorial-detail-quote>span{display:block;height:30px;color:#ba8b51;font:70px/1 var(--serif)}
+.memorial-detail-quote p{font:italic 18px/1.45 var(--serif);color:#27364e;white-space:pre-wrap}
+.memorial-detail-quote small{display:block;margin-top:20px;color:#687282;font-size:12px}
+.memorial-detail-candle{display:flex;align-items:center;gap:17px;padding:23px;color:#af7636}
+.memorial-detail-candle h3{color:#172139;font:600 17px var(--serif)}
+.memorial-detail-candle p{margin-top:5px;color:#667080;font-size:12px}
+.memorial-detail-memories{margin-top:46px}
+.memorial-detail-memory{max-width:580px;margin-top:19px;padding:21px 24px;background:#faf8f4;border-left:2px solid #c39562}
+.memorial-detail-memory>span{display:block;height:23px;color:#b8864a;font:50px/1 var(--serif)}
+.memorial-detail-memory p{font:italic 17px/1.55 var(--serif);white-space:pre-wrap}
+.memorial-detail-memory small{display:block;margin-top:10px;color:#687282}
+.memorial-detail-prayer{margin-top:46px;scroll-margin-top:24px}
+.memorial-detail-prayer h2{margin:8px 0 19px}
+.memorial-detail-prayer .memorial-prayer-card{max-width:680px}
+.memorial-detail-body>.memorial-details,.memorial-detail-body>.memorial-next{grid-column:1/-1}
+@media(max-width:900px){.memorial-detail-body{grid-template-columns:minmax(0,1fr) 250px;gap:28px}.memorial-detail-scene .memorial-scene-content{left:54%;width:43%}.memorial-detail-scene .memorial-scene-actions{margin-top:20px}.memorial-detail-primary,.memorial-detail-secondary{min-height:42px;padding:8px 13px;font-size:12px}.memorial-detail-scene .memorial-share-button{height:42px;width:42px;min-width:42px}}
+@media(max-width:800px){.memorial-detail-scene .memorial-photo{width:145%;margin-left:0;aspect-ratio:1836/856}.memorial-detail-scene .memorial-detail-back{top:16px;left:17px;font-size:11px}.memorial-detail-scene .memorial-scene-content,.memorial-detail-scene.has-long-copy .memorial-scene-content{position:relative;top:auto;left:auto;width:100%;padding:23px 21px 28px;background:#10141b}.memorial-detail-scene .memorial-scene-content h2{font-size:clamp(37px,9vw,52px)}.memorial-detail-scene .memorial-scene-dates{font-size:15px}.memorial-detail-scene .memorial-dedication{margin-top:17px;font-size:19px}.memorial-detail-scene .memorial-dedication:before{margin-bottom:13px}.memorial-detail-scene .memorial-scene-actions{gap:8px}.memorial-detail-body{width:calc(100% - 40px);display:flex;flex-direction:column;padding:32px 0 42px}.memorial-detail-aside{grid-template-columns:1fr 1fr}.memorial-detail-memories{margin-top:35px}}
+@media(max-width:570px){.memorial-detail-aside{grid-template-columns:1fr}.memorial-detail-facts{gap:18px 24px}.memorial-detail-facts>div{min-width:135px}.memorial-detail-about h2,.memorial-detail-memories h2,.memorial-detail-prayer h2{font-size:32px}.memorial-detail-about>p{font-size:16px}.memorial-detail-scene .memorial-scene-actions{flex-wrap:wrap}.memorial-detail-primary,.memorial-detail-secondary{flex:1 1 auto}.memorial-detail-scene .memorial-share-button{flex:none}}
 .memorial-life-dates{grid-column:1/-1;text-align:center;color:#70502e;font:500 16px/1.5 var(--serif);margin:0}
 .memorial-signature{font-style:italic;color:#6f5234!important}
 
@@ -1783,6 +1834,7 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 .creator-check a{text-decoration:underline;text-underline-offset:3px;color:#7b4d27}
 .creator-photo{border-top:1px solid #e5dfd5;margin-top:30px;padding-top:24px}
 .creator-photo h3,.creator-candle-choice h3{font:500 21px/1.25 var(--serif);color:#17253b}
+.creator-photo-choice{display:flex;gap:9px;margin:12px 0 16px}.creator-photo-choice button{border:1px solid #c7b9a7;border-radius:6px;background:#fff;color:#203047;padding:10px 17px;cursor:pointer;font-size:13px;font-weight:600}.creator-photo-choice button[aria-pressed="true"]{border-color:#98612e;background:#f7ead8;color:#6b3f1e}.creator-photo-choice button:focus-visible{outline:3px solid #a66a35;outline-offset:2px}
 .creator-photo p,.creator-candle-choice p{color:#566173;font-size:13px;line-height:1.55;margin:8px 0 16px}
 .creator-photo-pick{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 17px;border:1px solid #a66a35;border-radius:99px;color:#7b4d27;cursor:pointer;font-size:13px;font-weight:600;position:relative}
 .creator-photo-pick input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
@@ -1836,12 +1888,58 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 @media(max-width:700px){.creator-navigation{flex-wrap:wrap;gap:10px}.creator-navigation .button.secondary{flex:1 1 calc(50% - 5px)}.creator-navigation .button:not(.secondary){order:2;flex:1 0 100%;width:100%}}
 @media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:20px}.creator-steps button{font-size:10px}}
 
+/* Memorial creator: the reference's calm, image-led form layout. */
+.memorial-creator{width:min(1240px,calc(100% - 48px));margin:0 auto 88px}
+.creator-hero{width:100vw;min-height:290px;margin-left:calc(50% - 50vw);margin-bottom:0;padding:42px max(24px,calc((100vw - 1240px)/2));display:flex;align-items:center;justify-content:space-between;gap:48px;color:#fff;background:linear-gradient(90deg,rgba(16,15,17,.72),rgba(16,15,17,.38) 52%,rgba(16,15,17,.2)),url('/images/hero-memory.webp') center 56%/cover}
+.creator-intro{max-width:610px;margin:0}
+.creator-intro h1{color:#fff;font-size:clamp(39px,4.1vw,56px)}
+.creator-intro p{color:#fff;max-width:52ch;font-size:15px;line-height:1.65}
+.creator-gallery-entry{display:inline-block;margin-top:18px;color:#f2d1a3;text-decoration:underline;text-underline-offset:5px;font-size:14px}
+.creator-hero blockquote{flex:0 0 215px;margin:0;color:#fff;text-align:right;font:italic 19px/1.55 var(--serif);text-shadow:0 1px 10px #0009}
+.creator-steps{margin:0 0 28px;gap:12px;padding:12px 0 0}
+.creator-steps button{min-height:64px;padding:9px 12px;border-bottom-width:2px;color:#384354;font-size:13px}
+.creator-steps button span{width:31px;height:31px;font-size:13px}
+.creator-steps button[aria-current='step'] span{background:#98612e;border-color:#98612e}
+.creator-layout{grid-template-columns:minmax(0,2fr) minmax(280px,1fr);gap:28px}
+.creator-form{padding:34px 38px;border-radius:9px;box-shadow:0 10px 32px #17253b08}
+.creator-form h2{font-size:34px}
+.creator-section-note{margin-bottom:30px}
+.creator-field input,.creator-field textarea,.creator-date-inputs input,.creator-date-inputs select,.creator-prayer textarea{border-radius:5px}
+.creator-dates{gap:22px}
+.creator-photo{border-top:0;margin-top:22px;padding-top:6px}
+.creator-photo h3{font:600 14px/1.4 var(--sans)}
+.creator-photo h3 strong{color:#9b5e2a}
+.creator-photo-pick{display:flex;flex-direction:column;gap:7px;width:100%;min-height:116px;padding:17px;border:1px dashed #c7b9a7;border-radius:6px;background:#fff;color:#203047;font-size:14px}
+.creator-photo-pick:hover{background:#faf7f1;border-color:#98612e}
+.creator-photo-pick .creator-upload-icon{width:25px;height:25px}
+.creator-photo-pick small{font-weight:400}
+.creator-crop-preview{height:200px}
+.creator-navigation{justify-content:space-between}
+.creator-navigation .button{min-width:132px;background:#98612e;color:#fff;border-color:#98612e}
+.creator-navigation .button:not(.secondary){margin-left:auto}
+.creator-navigation .button.secondary{background:#fff;color:#25344a;border:1px solid #cdbda9}
+.creator-sidebar{display:flex;flex-direction:column;gap:18px;min-width:0}
+.creator-side-quote{min-height:180px;border-radius:8px;display:flex;align-items:center;padding:26px;background:linear-gradient(90deg,#21191666,#21191616),url('/images/memorial-creator-candle.webp') 66% 50%/cover;color:#fff}
+.creator-side-quote p{max-width:14ch;color:#fff;font:italic 23px/1.25 var(--serif);text-shadow:0 1px 8px #000a}
+.creator-side-help{padding:22px;background:#f9f3e9;border-radius:8px}
+.creator-side-help h3{font:600 19px/1.2 var(--serif);margin:0 0 16px}
+.creator-side-help p{margin:0 0 15px;display:flex;flex-direction:column;gap:4px;color:#2d394b;font-size:13px;line-height:1.45}
+.creator-side-help p:last-child{margin-bottom:0}
+.creator-side-help span{color:#586272}
+.creator-preview{position:relative;top:auto;border-radius:8px;box-shadow:none}
+.creator-preview .memorial-scene{aspect-ratio:auto}
+.creator-preview .memorial-photo{position:relative;inset:auto;aspect-ratio:1836 / 856;width:100%;margin:0}
+.creator-preview .memorial-scene-content{position:relative;left:auto;top:auto;width:100%;padding:18px 20px}
+.creator-preview .memorial-scene h2{font-size:29px}
+@media(max-width:800px){.memorial-creator{width:calc(100% - 32px);margin-bottom:54px}.creator-hero{min-height:240px;margin-bottom:0;padding:36px 18px;background-position:61% center}.creator-hero blockquote{display:none}.creator-intro h1{font-size:clamp(35px,9vw,45px)}.creator-intro p{font-size:14px}.creator-layout{display:flex;flex-direction:column}.creator-layout[data-step='3'] .creator-preview{order:initial}.creator-sidebar{width:100%}.creator-form{padding:26px}.creator-steps button{font-size:11px}.creator-side-quote{min-height:150px}.creator-preview .memorial-photo{aspect-ratio:1836 / 856}.creator-preview .memorial-scene h2{font-size:31px}}
+@media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:22px}.creator-steps{gap:2px}.creator-steps button{font-size:11px;gap:5px;padding:8px 4px}.creator-navigation .button{min-width:0}}
+
 /* Public memorial gallery */
 .gallery-page{background:#f8f5f0;color:#172139;min-height:70vh}
 .gallery-hero{position:relative;isolation:isolate;min-height:210px;overflow:hidden;background:#0b1420;color:#fff}
 .gallery-hero>img{object-fit:cover;object-position:center 55%}
 .gallery-hero:after{content:"";position:absolute;z-index:0;inset:0;background:linear-gradient(90deg,#09121eeb 0%,#09121ec0 38%,#09121e10 85%)}
-.gallery-hero>div{position:relative;z-index:1;padding:38px clamp(20px,4vw,54px);max-width:750px}
+.gallery-hero>.gallery-hero-content{position:relative;z-index:1;padding:38px clamp(20px,4vw,54px);max-width:750px}
 .gallery-hero h1{font:500 clamp(40px,4.3vw,60px)/1.1 var(--serif);letter-spacing:-.035em;color:#fff}
 .gallery-hero p{margin-top:7px;font:clamp(17px,1.8vw,23px)/1.4 var(--serif);color:#fff}
 .gallery-inner{padding:24px clamp(18px,4vw,54px) 52px}
@@ -1870,4 +1968,165 @@ body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 aut
 .gallery-more{text-align:center;margin:30px 0}.gallery-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid #ddd2c5;margin-top:28px;padding-top:24px}.gallery-bottom p{max-width:650px;color:#536073;font-size:13px}.gallery-bottom a{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;color:#784916;font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
 @media(prefers-reduced-motion:reduce){.gallery-card,.gallery-card-flame>img,.gallery-card-glow{animation:none!important;transition:none!important}}
 @media(max-width:800px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gallery-bottom{align-items:start;flex-direction:column}}
-@media(max-width:600px){.gallery-hero{min-height:165px}.gallery-hero>div{padding:26px 22px}.gallery-hero h1{font-size:39px}.gallery-hero p{font-size:17px}.gallery-inner{padding:16px 14px 38px}.gallery-toolbar{grid-template-columns:1fr;gap:7px}.gallery-sort-note{margin:9px 0 14px}.gallery-card{aspect-ratio:1}.gallery-card-info{padding:14px 10px 13px 10px}.gallery-card h2{max-width:calc(100% - 16px);font-size:clamp(16px,4.1vw,18px);line-height:1.13;letter-spacing:-.035em}.gallery-card-years{font-size:10px;letter-spacing:.1em}.gallery-card-eternal-label{font-size:11px;gap:4px;margin-top:6px}.gallery-card-eternal-label svg{width:14px;height:14px;flex:none}.gallery-card-chevron{right:5px;bottom:13px;width:16px;height:16px}}
+@media(max-width:600px){.gallery-hero{min-height:165px}.gallery-hero>.gallery-hero-content{padding:26px 22px}.gallery-hero h1{font-size:39px}.gallery-hero p{font-size:17px}.gallery-inner{padding:16px 14px 38px}.gallery-toolbar{grid-template-columns:1fr;gap:7px}.gallery-sort-note{margin:9px 0 14px}.gallery-card{aspect-ratio:1}.gallery-card-info{padding:14px 10px 13px 10px}.gallery-card h2{max-width:calc(100% - 16px);font-size:clamp(16px,4.1vw,18px);line-height:1.13;letter-spacing:-.035em}.gallery-card-years{font-size:10px;letter-spacing:.1em}.gallery-card-eternal-label{font-size:11px;gap:4px;margin-top:6px}.gallery-card-eternal-label svg{width:14px;height:14px;flex:none}.gallery-card-chevron{right:5px;bottom:13px;width:16px;height:16px}}
+
+/* Native date controls must fit the card, including iOS intrinsic sizing. */
+.memorial-creator .creator-date-inputs{min-width:0}
+.memorial-creator .creator-date-inputs input,
+.memorial-creator .creator-date-inputs select{box-sizing:border-box;min-width:0;max-width:100%;width:100%}
+@media(max-width:600px){
+  .memorial-creator .creator-form{padding:24px 20px}
+  .memorial-creator .creator-form h2{font-size:30px;line-height:1.2}
+  .memorial-creator .creator-section-note{font-size:14px;line-height:1.6;margin-bottom:24px}
+  .memorial-creator .creator-dates{grid-template-columns:minmax(0,1fr);gap:20px;margin-top:24px}
+  .memorial-creator .creator-date-inputs{gap:8px}
+  .memorial-creator .creator-field input,
+  .memorial-creator .creator-field textarea,
+  .memorial-creator .creator-date-inputs input,
+  .memorial-creator .creator-date-inputs select,
+  .memorial-creator .creator-prayer textarea{font-size:16px;min-height:48px}
+  .memorial-creator .creator-date-inputs select{appearance:none;-webkit-appearance:none;height:48px;padding:12px 36px 12px 13px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23596173' stroke-width='1.5'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");background-position:right 12px center;background-repeat:no-repeat}
+  .memorial-creator .creator-date-inputs input[type=date]{appearance:none;-webkit-appearance:none;display:block;text-align:left}
+  .memorial-creator .creator-date-inputs input::-webkit-date-and-time-value{text-align:left;min-height:1.4em}
+  .memorial-creator .creator-navigation{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+  .memorial-creator .creator-navigation .button{flex:1 1 100%;width:100%;min-width:0;min-height:48px;margin-left:0}
+  .memorial-creator .creator-photo-pick{min-height:124px}
+}
+.creator-photo-hint{margin:10px 0!important;color:#42546a;font-size:13px;line-height:1.5}
+.creator-face-choices{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 16px}
+.creator-face-choices button{display:flex;align-items:center;gap:8px;padding:5px 10px 5px 5px;border:1px solid #c7b9a7;border-radius:6px;background:#fff;color:#203047;cursor:pointer;font:600 13px/1.3 var(--sans)}
+.creator-face-choices button:hover,.creator-face-choices button:focus-visible{border-color:#98612e;background:#faf7f1;outline-offset:2px}
+.creator-face-choices img{width:48px;height:48px;border-radius:4px;object-fit:cover}
+/* Gallery layout based on the supplied memory gallery reference. */
+.gallery-page{background:#fcfaf7;color:#172139}
+.gallery-page .gallery-hero{min-height:235px}
+.gallery-page .gallery-hero>img{object-position:center 58%}
+.gallery-page .gallery-hero:after{background:linear-gradient(90deg,#0a0c10e8 0%,#0a0c10b5 36%,#0a0c1020 75%)}
+.gallery-page .gallery-hero-content{width:100%;max-width:1280px;margin:0 auto;padding:32px 32px 28px}
+.gallery-hero-kicker{display:block;margin-bottom:5px;color:#d5a251;font-size:12px;letter-spacing:.16em;font-weight:700}
+.gallery-page .gallery-hero h1{font-size:clamp(36px,3.4vw,53px);letter-spacing:-.025em}
+.gallery-page .gallery-hero p{margin-top:7px;font-size:clamp(16px,1.5vw,20px)}
+.gallery-hero blockquote{margin:13px 0 0;color:#fff;font:italic 15px/1.35 var(--serif)}
+.gallery-page .gallery-inner{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:32px;max-width:1360px;margin:0 auto;padding:25px 32px 60px}
+.gallery-main{min-width:0}
+.gallery-page .gallery-toolbar{display:block;margin:0 0 20px}
+.gallery-page .gallery-search{max-width:none}
+.gallery-page .gallery-search label{display:block;margin:0 0 9px;color:#192942;font:700 20px/1.2 var(--serif)}
+.gallery-page .gallery-search>div{position:relative}
+.gallery-page .gallery-search input{min-height:42px;background:#fff;border:1px solid #e9e5e0;border-radius:24px;box-shadow:0 2px 12px #20170e08;padding:10px 16px 10px 44px;font-size:13px}
+.gallery-page .gallery-search svg{left:16px}
+.gallery-page .gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.gallery-page .gallery-card{aspect-ratio:auto;min-height:307px;background:#fff;color:#172139;border:1px solid #e9e4de;border-radius:6px;box-shadow:0 5px 16px #261e1308;display:flex;flex-direction:column}
+.gallery-page .gallery-card-eternal{border-color:#bd945b;box-shadow:0 0 0 1px #bd945b,0 5px 16px #261e1308}
+.gallery-page .gallery-card-scene{position:relative;inset:auto;height:190px;flex:none;background:#191716}
+.gallery-page .gallery-card-scene:after{background:linear-gradient(180deg,transparent 65%,#0b0d1338)}
+.gallery-page .gallery-card-art{width:165%;aspect-ratio:1836/856;top:0;-webkit-mask-image:none;mask-image:none}
+.gallery-page .gallery-card-info{position:relative;inset:auto;flex:1;display:flex;flex-direction:column;padding:13px 13px 0;text-shadow:none;background:#fff}
+.gallery-page .gallery-card h2{max-width:none;color:#192942;font:700 18px/1.16 var(--serif);letter-spacing:-.015em}
+.gallery-page .gallery-card-years{margin:5px 0 12px;color:#6a7280;font:12px/1.35 var(--sans);letter-spacing:0}
+.gallery-card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;min-height:42px;border-top:1px solid #f0ece7;color:#8c704f;font-size:12px}
+.gallery-page .gallery-card-eternal-label{margin:0;color:#a87330;font-size:11px;text-shadow:none}
+.gallery-card-arrow{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#f7f3ed;color:#a96e27;flex:none}
+.gallery-sidebar{display:flex;flex-direction:column;gap:18px;min-width:0}
+.gallery-sidebar section{background:#fff;border:1px solid #efeae3;border-radius:8px;padding:20px 18px;box-shadow:0 4px 18px #22170e06}
+.gallery-sidebar h2{color:#1c2a43;font:700 17px/1.2 var(--serif);margin-bottom:12px}
+.gallery-sidebar p{color:#3c4859;font-size:13px;line-height:1.55}
+.gallery-about-icon{float:right;font:52px/1 var(--serif);color:#ad7938;margin-left:8px}
+.gallery-about blockquote{margin:16px -3px;padding:13px 12px;background:#faf7f2;border-radius:5px;color:#344057;font:italic 13px/1.35 var(--serif)}
+.gallery-about cite{display:block;font:11px/1.4 var(--sans);margin-top:5px}
+.gallery-add-button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:39px;border-radius:24px;color:#fff!important;background:#b47b37;text-decoration:none;font-size:12px}
+.gallery-add-button:hover{background:#965e21}
+.gallery-prayer>svg{float:right;color:#b47b37}
+.gallery-prayer a{display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:#9e6728;font-size:12px;font-weight:700;text-decoration:none}
+.gallery-prayer a:hover{text-decoration:underline}
+@media(max-width:1050px){.gallery-page .gallery-inner{grid-template-columns:minmax(0,1fr) 250px;gap:18px;padding-left:20px;padding-right:20px}.gallery-page .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:740px){.gallery-page .gallery-inner{display:block;padding:18px 16px 45px}.gallery-sidebar{margin-top:25px}.gallery-page .gallery-hero{min-height:220px}.gallery-page .gallery-hero-content{padding:25px 20px}.gallery-page .gallery-hero h1{font-size:39px}}
+@media(max-width:440px){.gallery-page .gallery-grid{grid-template-columns:1fr}.gallery-page .gallery-card{min-height:0}.gallery-page .gallery-card-scene{height:205px}.gallery-page .gallery-hero h1{font-size:35px}.gallery-hero blockquote{font-size:13px}}
+.gallery-page .gallery-search input{padding-right:108px}
+.gallery-page .gallery-search button{position:absolute;right:2px;top:2px;bottom:2px;width:88px;border:0;border-radius:22px;color:#fff;background:#b47b37;font-size:12px;font-weight:600}
+.gallery-page .gallery-search button:hover{background:#965e21}
+.gallery-page .gallery-search button:focus-visible{outline:3px solid #855222;outline-offset:2px}
+.gallery-prayer-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:16px -4px 0;text-align:center}
+.gallery-prayer-stats>div{min-width:0;padding:0 5px 2px;display:flex;flex-direction:column;align-items:center}
+.gallery-prayer-stats>div+div{border-left:1px solid #eee8df}
+.gallery-prayer-stats svg{width:23px;height:23px;margin-bottom:8px;color:#b47b37}
+.gallery-prayer-stats strong{font:700 17px/1.1 var(--serif);color:#1c2a43}
+.gallery-prayer-stats span{margin-top:4px;color:#667181;font:10px/1.3 var(--sans)}
+.gallery-sidebar .gallery-metrics-note{margin-top:12px;text-align:center;color:#7a8190;font-size:11px;line-height:1.35}
+.gallery-prayer>a{display:inline-flex;align-items:center;gap:6px;margin-top:14px}
+.gallery-page .gallery-card-eternal-label,.gallery-page .gallery-eternal-label{margin:7px 0 3px;color:#a87330;text-shadow:none;font-size:11px;font-weight:700}
+.gallery-page .gallery-card-footer{min-height:42px;color:#7c603e}
+.gallery-memory-count{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;color:#7c603e;font-size:11px}
+.gallery-memory-count svg{width:14px;height:14px;flex:none;color:#b47b37}
+/* One cover-scaled stage keeps flame coordinates locked to the artwork. */
+.gallery-page .gallery-hero{min-height:clamp(235px,14vw,360px)}
+.gallery-hero-art{position:absolute;inset:0;overflow:hidden;container-type:size;z-index:0;pointer-events:none}
+.gallery-hero-stage{position:absolute;left:50%;top:50%;width:max(100cqw,300cqh);aspect-ratio:3/1;transform:translate(-50%,-50%)}
+.gallery-hero-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+.gallery-page .gallery-hero:after{z-index:1;background:linear-gradient(90deg,#080b10e8 0%,#080b10bd 29%,#080b1048 52%,#080b1008 78%)}
+.gallery-page .gallery-hero>.gallery-hero-content{position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:32px 32px 28px}
+.gallery-page .gallery-hero-content h1,.gallery-page .gallery-hero-content p,.gallery-page .gallery-hero-content blockquote{max-width:650px}
+.gallery-hero-flame{position:absolute;left:var(--flame-x);top:var(--flame-y);width:var(--flame-w);height:var(--flame-h);transform:translate(-50%,-50%);isolation:isolate;mix-blend-mode:screen}
+.gallery-hero-flame:before{content:"";position:absolute;inset:3% 22% 7%;border-radius:50% 50% 44% 44%;clip-path:polygon(50% 0,70% 23%,84% 60%,71% 88%,50% 100%,25% 87%,13% 59%,31% 27%);background:linear-gradient(90deg,#ffa52a00,#ffd37aad 28%,#fffce4e6 51%,#ffd477b8 75%,#f48b1900);filter:blur(1.1px);transform-origin:50% 88%;animation:gallery-hero-flicker var(--flame-speed) ease-in-out var(--flame-delay) infinite alternate}
+.gallery-hero-flame:after{content:"";position:absolute;inset:-45% -110%;border-radius:50%;background:radial-gradient(ellipse,#ffc76d5c 0%,#fa9f281f 38%,transparent 73%);filter:blur(5px);animation:gallery-hero-glow calc(var(--flame-speed) * 1.4) ease-in-out var(--flame-delay) infinite alternate}
+.flame-main{--flame-x:65.4%;--flame-y:51.3%;--flame-w:1.45%;--flame-h:10.5%;--flame-speed:1.37s;--flame-delay:-.22s}
+.flame-left{--flame-x:47.5%;--flame-y:44.4%;--flame-w:1.05%;--flame-h:7.2%;--flame-speed:1.72s;--flame-delay:-.81s}
+.flame-back{--flame-x:76.2%;--flame-y:28.1%;--flame-w:1.1%;--flame-h:7.8%;--flame-speed:1.54s;--flame-delay:-1.04s}
+.flame-upper{--flame-x:88.1%;--flame-y:19.5%;--flame-w:1.1%;--flame-h:7.4%;--flame-speed:1.88s;--flame-delay:-.54s}
+.flame-right{--flame-x:95.5%;--flame-y:22.5%;--flame-w:1.15%;--flame-h:7.6%;--flame-speed:1.46s;--flame-delay:-1.18s}
+@keyframes gallery-hero-flicker{0%{transform:rotate(-5deg) scale(.92,1.02);opacity:.52}19%{transform:rotate(2deg) scale(1.04,.94);opacity:.78}43%{transform:rotate(-2deg) scale(.94,1.08);opacity:.65}68%{transform:rotate(5deg) scale(1.02,.96);opacity:.88}100%{transform:rotate(-3deg) scale(.93,1.06);opacity:.58}}
+@keyframes gallery-hero-glow{0%{opacity:.38;transform:scale(.95)}37%{opacity:.72;transform:scale(1.1)}72%{opacity:.46;transform:scale(.99)}100%{opacity:.64;transform:scale(1.05)}}
+@media(prefers-reduced-motion:reduce){.gallery-hero-flame:before,.gallery-hero-flame:after{animation:none;opacity:.5}}
+@media(max-width:740px){.gallery-page .gallery-hero{min-height:220px}.gallery-page .gallery-hero>.gallery-hero-content{padding:25px 20px}.gallery-page .gallery-hero:after{background:linear-gradient(90deg,#080b10d9 0%,#080b10b3 54%,#080b1030 100%)}}
+@media(min-width:1101px){.gallery-hero-stage{top:calc(50% + 28px)}}
+/* Match the scene height to its 165%-wide artwork so the portrait and lantern base stay in frame. */
+.gallery-page .gallery-card-scene{height:auto;aspect-ratio:1.3}
+
+.memorial-detail-quote h3{font:600 17px var(--serif);color:#27364e}
+.memorial-detail-quote h3:after{content:"";display:block;width:30px;height:1px;background:#b8864a;margin:12px 0}
+.memorial-detail-quote p{font-style:normal;font-size:15px}
+.memorial-detail-memory .memorial-detail-label{display:block;margin:0 0 10px;color:#a87538;font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.15em}
+.memorial-detail-count{margin-top:9px!important;color:#596374!important;font-size:12px!important}
+.memorial-detail-count strong{color:#172139;font:600 20px var(--serif);margin-right:4px}
+@media(max-width:800px){.memorial-detail-scene .memorial-scene-content h1{font-size:clamp(37px,9vw,52px)}}
+
+/* Realistic cross UI mark: the same transparent artwork across generated and static pages. */
+.brand-cross,.cross-mark{display:inline-block;flex:none;background-image:url("./images/realistic-cross.webp");background-repeat:no-repeat;background-position:center;background-size:contain;vertical-align:middle}
+.brand-cross{width:30px;height:41px;background-size:41px 41px}
+.memorial-header .brand-cross{width:27px;height:37px;background-size:37px 37px}
+.cross-mark{width:24px;height:24px}
+.memorial-cross.cross-mark{width:35px;height:35px}
+.memorial-next>.cross-mark{display:block;width:25px;height:25px;margin:0 auto 8px}
+.gallery-about-icon.cross-mark{float:right;width:52px;height:52px;margin-left:8px}
+.memorial-fact-cross.cross-mark{width:23px;height:23px}
+.calendar-cross.cross-mark{width:22px;height:22px}
+.memorial-detail-secondary .cross-mark{width:18px;height:18px}
+@media(max-width:600px){.brand-cross,.memorial-header .brand-cross{width:24px;height:33px;background-size:33px 33px}}
+
+/* Current-person candle action */
+.memorial-candle-dialog{width:min(520px,calc(100% - 28px));max-height:min(88vh,820px);padding:0;border:0;border-radius:14px;color:#172139;background:#fff;box-shadow:0 25px 80px #050c1880;overflow:auto}
+.memorial-candle-dialog::backdrop{background:#07101ad1;backdrop-filter:blur(3px)}
+.memorial-candle-dialog-panel{position:relative;padding:29px 32px 32px}
+.memorial-candle-close{position:absolute;top:16px;right:16px;display:grid;place-items:center;width:35px;height:35px;border:1px solid #e2d7c9;border-radius:50%;background:#fff;color:#172139;font-size:23px}
+.memorial-candle-symbol{display:grid;place-items:center;width:48px;height:48px;margin-bottom:15px;border-radius:50%;background:#f8eee1;color:#b77f41}
+.memorial-candle-dialog h2{font:500 29px/1.18 var(--serif);max-width:16ch}
+.memorial-candle-dialog h2+p{margin:13px 0 19px;color:#596374;font-size:13px;line-height:1.55}
+.memorial-candle-dialog fieldset{padding:0;margin:0 0 18px;border:0}
+.memorial-candle-dialog legend{margin-bottom:8px;font-weight:700;font-size:13px}
+.memorial-candle-option{display:flex;align-items:center;gap:11px;padding:11px 13px;border:1px solid #e2d9cd;border-radius:8px;margin-top:7px;cursor:pointer}
+.memorial-candle-option:has(input:checked){border-color:#b77f41;background:#fbf5ed}
+.memorial-candle-option strong{margin-left:auto;color:#8b5b28}
+.memorial-candle-dialog input[type=radio],.memorial-candle-dialog input[type=checkbox]{accent-color:#ae7535}
+.memorial-candle-field{display:block;margin:13px 0 6px;font-size:13px;font-weight:700}
+.memorial-candle-field span{font-weight:400;color:#687282}
+.memorial-candle-dialog textarea,.memorial-candle-dialog input[type=text]{display:block;width:100%;border:1px solid #d9d4cd;border-radius:7px;background:#fff;color:#172139;padding:10px 12px;font:13px/1.5 var(--sans);resize:vertical}
+.memorial-candle-hint{font-size:11px;color:#687282;margin:7px 0 16px}
+.memorial-candle-consent{display:flex;align-items:flex-start;gap:9px;font-size:12px;line-height:1.4;margin:12px 0}
+.memorial-candle-consent input{margin-top:2px;flex:none}
+.memorial-candle-consent a,.memorial-candle-error a{color:#8b5b28;text-decoration:underline}
+.memorial-candle-error{color:#a12d2d;font-size:12px;margin:8px 0}
+.memorial-candle-submit{width:100%;min-height:45px;padding:10px 16px;border:0;border-radius:24px;background:#b77f41;color:#fff;font-weight:700;font-size:13px}
+.memorial-candle-submit:hover:not(:disabled){background:#955f29}
+.memorial-candle-submit:disabled{opacity:.55;cursor:not-allowed}
+#person-candle-dialog-status:not(:empty){color:#755022;font-size:12px;margin:10px 0}
+@media(max-width:570px){.memorial-candle-dialog-panel{padding:25px 22px 26px}.memorial-candle-dialog h2{font-size:26px}}

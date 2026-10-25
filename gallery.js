@@ -80,7 +80,7 @@
       person.family && ['family','Najbliżsi',person.family,'']
     ].filter(Boolean);
     if (facts.length) {
-      const icons = {birth:'<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 10h18"/></svg>',death:'<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 2v20M5 8h14"/></svg>',family:'<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>'};
+      const icons = {birth:'<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 10h18"/></svg>',death:'<span class="cross-mark memorial-fact-cross" aria-hidden="true"></span>',family:'<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>'};
       const target = document.querySelector('#person-facts');
       target.innerHTML = facts.map(([icon,label,value,extra]) => `<div><span class="person-fact-icon" aria-hidden="true">${icons[icon]}</span><span><small>${escape(label)}</small><strong>${escape(value)}</strong>${extra ? `<small>${escape(extra)}</small>` : ''}</span></div>`).join('');
       target.hidden = false;
@@ -91,6 +91,40 @@
       document.querySelector('.memorial-portrait').removeAttribute('hidden');
       document.querySelector('.memorial-foreground').hidden = false;
     } else document.querySelector('.memorial-no-frame').hidden = false;
+    const candleKey = `wmodlitwie_gallery_candle_${person.id}`;
+    const candleDialog = document.querySelector('#person-candle-dialog');
+    const candleButton = document.querySelector('#person-light');
+    const candleStatus = document.querySelector('#person-candle-dialog-status');
+    let localCandle = null;
+    try { localCandle = JSON.parse(localStorage.getItem(candleKey) || 'null'); } catch { localCandle = null; }
+    if (!localCandle || localCandle.lit !== true) localCandle = null;
+    function syncCandle() {
+      document.querySelector('.memorial-scene').classList.toggle('is-burning',Boolean(person.eternalLight || localCandle));
+      document.querySelector('#person-period').textContent = localCandle ? 'Znicz zapisany na tym urządzeniu' : person.eternalLight ? 'Wieczny znicz' : 'Symboliczny znicz pamięci';
+      document.querySelector('#person-light-label').textContent = localCandle ? 'Znicz zapalony' : 'Zapal znicz pamięci';
+      candleButton.setAttribute('aria-label',localCandle ? `Znicz pamięci: ${person.name}. Zapisany na tym urządzeniu. Otwórz szczegóły.` : `Zapal znicz pamięci: ${person.name}`);
+      syncMotion();
+    }
+    syncCandle();
+    candleButton.addEventListener('click',() => {
+      document.querySelector('#person-candle-title').textContent = `Znicz pamięci — ${person.name}`;
+      document.querySelector('#person-candle-words').value = localCandle?.words || '';
+      document.querySelector('#person-candle-signature').value = localCandle?.signature || '';
+      candleStatus.textContent = localCandle ? 'Znicz jest zapisany na tym urządzeniu. Możesz poprawić swoje słowa.' : '';
+      candleDialog.showModal();
+    });
+    document.querySelector('#person-candle-close').addEventListener('click',() => candleDialog.close());
+    candleDialog.addEventListener('click',event => { if (event.target === candleDialog) candleDialog.close(); });
+    document.querySelector('#person-candle-confirm').addEventListener('click',() => {
+      const entry = {lit:true,words:document.querySelector('#person-candle-words').value.trim(),signature:document.querySelector('#person-candle-signature').value.trim()};
+      try { localStorage.setItem(candleKey,JSON.stringify(entry)); }
+      catch { candleStatus.textContent = 'Nie udało się zapisać znicza na tym urządzeniu. Sprawdź ustawienia przeglądarki.'; return; }
+      localCandle = entry;
+      syncCandle();
+      candleStatus.textContent = 'Znicz zapisany na tym urządzeniu.';
+      candleDialog.close();
+      candleButton.focus();
+    });
     document.querySelector('#person-share').addEventListener('click',async () => {
       const status = document.querySelector('#person-share-status');
       try {
