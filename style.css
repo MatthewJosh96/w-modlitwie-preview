@@ -48,16 +48,16 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #7b56
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 
 /* Memorial pages follow the supplied photographic composition. */
-body:has(.memorial-header){background:#e8e3dc}
+body:has(.memorial-header){background:#fff}
 body:has(.memorial-header) .site-footer nav,body:has(.memorial-header) .footer-note{color:#505969}
-.memorial-header{width:min(1280px,calc(100% - 48px));margin:22px auto 0;border:0;border-radius:12px 12px 0 0;box-shadow:0 8px 45px #30201317;overflow:visible}
-.memorial-header .header-inner{padding:14px 32px;max-width:none}
+.memorial-header{width:100%;margin:0;border:0;border-radius:0;box-shadow:none;overflow:visible}
+.memorial-header .header-inner{padding:14px 24px;max-width:1400px}
 .memorial-header .brand{font-size:23px}
 .memorial-header .brand-cross{font-size:37px}
 .memorial-header .main-nav{gap:38px;margin-inline:auto 24px}
 .memorial-header .main-nav a{font-size:13px}
 .memorial-header .header-actions{gap:8px}
-body:has(.memorial-header) main{width:min(1280px,calc(100% - 48px));margin:0 auto;background:#fff;box-shadow:0 18px 60px #30201316}
+body:has(.memorial-header) main{width:100%;margin:0;background:#fff;box-shadow:none}
 .memorial-page{background:#fff}
 .memorial-preview-entry{margin:16px 0 28px;text-align:center;font-size:13px;color:#815327}
 .memorial-preview-entry a{text-decoration:underline;text-underline-offset:4px}
@@ -317,7 +317,7 @@ body:has(.memorial-header) main.memorial-creator{width:min(1280px,calc(100% - 48
 .memorial-empty-frame:is(svg){width:2.4%;height:auto;font:initial;filter:drop-shadow(0 1px 8px #000)}
 
 /* Memorial creator: the reference's calm, image-led form layout. */
-.memorial-creator{width:min(1240px,calc(100% - 48px));margin:0 auto 88px}
+.memorial-creator{width:min(1240px,calc(100% - 64px));margin:0 auto 88px}
 .creator-hero{width:100vw;min-height:290px;margin-left:calc(50% - 50vw);margin-bottom:0;padding:42px max(24px,calc((100vw - 1240px)/2));display:flex;align-items:center;justify-content:space-between;gap:48px;color:#fff;background:linear-gradient(90deg,rgba(16,15,17,.72),rgba(16,15,17,.38) 52%,rgba(16,15,17,.2)),url('./images/hero-memory.webp') center 56%/cover}
 .creator-intro{max-width:610px;margin:0}
 .creator-intro h1{color:#fff;font-size:clamp(39px,4.1vw,56px)}
@@ -359,13 +359,13 @@ body:has(.memorial-header) main.memorial-creator{width:min(1280px,calc(100% - 48
 .creator-preview .memorial-photo{position:relative;inset:auto;aspect-ratio:1836 / 856;width:100%;margin:0}
 .creator-preview .memorial-scene-content{position:relative;left:auto;top:auto;width:100%;padding:18px 20px}
 .creator-preview .memorial-scene h2{font-size:29px}
-@media(max-width:800px){.memorial-creator{width:calc(100% - 32px);margin-bottom:54px}.creator-hero{min-height:240px;margin-bottom:0;padding:36px 18px;background-position:61% center}.creator-hero blockquote{display:none}.creator-intro h1{font-size:clamp(35px,9vw,45px)}.creator-intro p{font-size:14px}.creator-layout{display:flex;flex-direction:column}.creator-layout[data-step='3'] .creator-preview{order:initial}.creator-sidebar{width:100%}.creator-form{padding:26px}.creator-steps button{font-size:11px}.creator-side-quote{min-height:150px}.creator-preview .memorial-photo{aspect-ratio:1836 / 856}.creator-preview .memorial-scene h2{font-size:31px}}
+@media(max-width:800px){.memorial-creator{width:calc(100% - 40px);margin-bottom:54px}.creator-hero{min-height:240px;margin-bottom:0;padding:36px 20px;background-position:61% center}.creator-hero blockquote{display:none}.creator-intro h1{font-size:clamp(35px,9vw,45px)}.creator-intro p{font-size:14px}.creator-layout{display:flex;flex-direction:column}.creator-layout[data-step='3'] .creator-preview{order:initial}.creator-sidebar{width:100%}.creator-form{padding:26px}.creator-steps button{font-size:11px}.creator-side-quote{min-height:150px}.creator-preview .memorial-photo{aspect-ratio:1836 / 856}.creator-preview .memorial-scene h2{font-size:31px}}
 @media(max-width:400px){.creator-dates{grid-template-columns:1fr}.creator-form{padding:22px}.creator-steps{gap:2px}.creator-steps button{font-size:11px;gap:5px;padding:8px 4px}.creator-navigation .button{min-width:0}}
 
-body:has(.memorial-header) main.memorial-creator{width:min(1240px,calc(100% - 48px));padding:0;margin:0 auto 80px;background:transparent}
+body:has(.memorial-header) main.memorial-creator{width:min(1240px,calc(100% - 64px));padding:0;margin:0 auto 80px;background:transparent}
 body:has(.memorial-header){background:#faf8f5}
 body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 1240px)/2));padding-right:max(24px,calc((100vw - 1240px)/2))}
-@media(max-width:800px){body:has(.memorial-header) main.memorial-creator{width:calc(100% - 32px);padding:0;margin-bottom:50px}body:has(.memorial-header) .creator-hero{padding:32px 18px}}
+@media(max-width:800px){body:has(.memorial-header) main.memorial-creator{width:calc(100% - 40px);padding:0;margin-bottom:50px}body:has(.memorial-header) .creator-hero{padding:32px 20px}}
 
 /* The finished page uses the scene alone; editing guidance belongs to the form. */
 .memorial-creator.is-final .creator-side-quote,
@@ -418,12 +418,12 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 .gallery-page .gallery-hero{min-height:235px}
 .gallery-page .gallery-hero>img{object-position:center 58%}
 .gallery-page .gallery-hero:after{background:linear-gradient(90deg,#0a0c10e8 0%,#0a0c10b5 36%,#0a0c1020 75%)}
-.gallery-page .gallery-hero-content{width:100%;max-width:1280px;margin:0 auto;padding:32px 32px 28px}
+.gallery-page .gallery-hero-content{width:min(1240px,calc(100% - 64px));max-width:none;margin:0 auto;padding:32px 0 28px}
 .gallery-hero-kicker{display:block;margin-bottom:5px;color:#d5a251;font-size:12px;letter-spacing:.16em;font-weight:700}
 .gallery-page .gallery-hero h1{font-size:clamp(36px,3.4vw,53px);letter-spacing:-.025em}
 .gallery-page .gallery-hero p{margin-top:7px;font-size:clamp(16px,1.5vw,20px)}
 .gallery-hero blockquote{margin:13px 0 0;color:#fff;font:italic 15px/1.35 var(--serif)}
-.gallery-page .gallery-inner{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:32px;max-width:1360px;margin:0 auto;padding:25px 32px 60px}
+.gallery-page .gallery-inner{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:32px;width:min(1240px,calc(100% - 64px));max-width:none;margin:0 auto;padding:25px 0 60px}
 .gallery-main{min-width:0}
 .gallery-page .gallery-toolbar{display:block;margin:0 0 20px}
 .gallery-page .gallery-search{max-width:none}
@@ -455,8 +455,8 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 .gallery-prayer>svg{float:right;color:#b47b37}
 .gallery-prayer a{display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:#9e6728;font-size:12px;font-weight:700;text-decoration:none}
 .gallery-prayer a:hover{text-decoration:underline}
-@media(max-width:1050px){.gallery-page .gallery-inner{grid-template-columns:minmax(0,1fr) 250px;gap:18px;padding-left:20px;padding-right:20px}.gallery-page .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:740px){.gallery-page .gallery-inner{display:block;padding:18px 16px 45px}.gallery-sidebar{margin-top:25px}.gallery-page .gallery-hero{min-height:220px}.gallery-page .gallery-hero-content{padding:25px 20px}.gallery-page .gallery-hero h1{font-size:39px}}
+@media(max-width:1050px){.gallery-page .gallery-inner{grid-template-columns:minmax(0,1fr) 250px;gap:18px;width:calc(100% - 40px);padding-left:0;padding-right:0}.gallery-page .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:740px){.gallery-page .gallery-inner{display:block;width:calc(100% - 40px);padding:18px 0 45px}.gallery-sidebar{margin-top:25px}.gallery-page .gallery-hero{min-height:220px}.gallery-page .gallery-hero-content{width:calc(100% - 40px);padding:25px 0}.gallery-page .gallery-hero h1{font-size:39px}}
 @media(max-width:440px){.gallery-page .gallery-grid{grid-template-columns:1fr}.gallery-page .gallery-card{min-height:0}.gallery-page .gallery-card-scene{height:205px}.gallery-page .gallery-hero h1{font-size:35px}.gallery-hero blockquote{font-size:13px}}
 .gallery-page .gallery-eternal-label{color:#9a6328;text-shadow:none;margin:0}
 .gallery-page .gallery-eternal-label svg{width:15px;height:15px}
@@ -483,7 +483,7 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 .gallery-hero-stage{position:absolute;left:50%;top:50%;width:max(100cqw,300cqh);aspect-ratio:3/1;transform:translate(-50%,-50%)}
 .gallery-hero-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
 .gallery-page .gallery-hero:after{z-index:1;background:linear-gradient(90deg,#080b10e8 0%,#080b10bd 29%,#080b1048 52%,#080b1008 78%)}
-.gallery-page .gallery-hero>.gallery-hero-content{position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:32px 32px 28px}
+.gallery-page .gallery-hero>.gallery-hero-content{position:relative;z-index:2;width:min(1240px,calc(100% - 64px));max-width:none;margin:0 auto;padding:32px 0 28px}
 .gallery-page .gallery-hero-content h1,.gallery-page .gallery-hero-content p,.gallery-page .gallery-hero-content blockquote{max-width:650px}
 .gallery-hero-flame{position:absolute;left:var(--flame-x);top:var(--flame-y);width:var(--flame-w);height:var(--flame-h);transform:translate(-50%,-50%);isolation:isolate;mix-blend-mode:screen}
 .gallery-hero-flame:before{content:"";position:absolute;inset:3% 22% 7%;border-radius:50% 50% 44% 44%;clip-path:polygon(50% 0,70% 23%,84% 60%,71% 88%,50% 100%,25% 87%,13% 59%,31% 27%);background:linear-gradient(90deg,#ffa52a00,#ffd37aad 28%,#fffce4e6 51%,#ffd477b8 75%,#f48b1900);filter:blur(1.1px);transform-origin:50% 88%;animation:gallery-hero-flicker var(--flame-speed) ease-in-out var(--flame-delay) infinite alternate}
@@ -496,7 +496,7 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 @keyframes gallery-hero-flicker{0%{transform:rotate(-5deg) scale(.92,1.02);opacity:.52}19%{transform:rotate(2deg) scale(1.04,.94);opacity:.78}43%{transform:rotate(-2deg) scale(.94,1.08);opacity:.65}68%{transform:rotate(5deg) scale(1.02,.96);opacity:.88}100%{transform:rotate(-3deg) scale(.93,1.06);opacity:.58}}
 @keyframes gallery-hero-glow{0%{opacity:.38;transform:scale(.95)}37%{opacity:.72;transform:scale(1.1)}72%{opacity:.46;transform:scale(.99)}100%{opacity:.64;transform:scale(1.05)}}
 @media(prefers-reduced-motion:reduce){.gallery-hero-flame:before,.gallery-hero-flame:after{animation:none;opacity:.5}}
-@media(max-width:740px){.gallery-page .gallery-hero{min-height:220px}.gallery-page .gallery-hero>.gallery-hero-content{padding:25px 20px}.gallery-page .gallery-hero:after{background:linear-gradient(90deg,#080b10d9 0%,#080b10b3 54%,#080b1030 100%)}}
+@media(max-width:740px){.gallery-page .gallery-hero{min-height:220px}.gallery-page .gallery-hero>.gallery-hero-content{width:calc(100% - 40px);padding:25px 0}.gallery-page .gallery-hero:after{background:linear-gradient(90deg,#080b10d9 0%,#080b10b3 54%,#080b1030 100%)}}
 @media(min-width:1101px){.gallery-hero-stage{top:calc(50% + 28px)}}
 /* Match the scene height to its 165%-wide artwork so the portrait and lantern base stay in frame. */
 .gallery-page .gallery-card-scene{height:auto;aspect-ratio:1.3}
@@ -506,6 +506,9 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 .memorial-detail-scene.has-long-copy .memorial-scene-content h1{font-size:clamp(31px,3.8vw,52px)}
 .memorial-detail-facts .person-fact-icon{color:#b77f41;font:24px/1.1 var(--serif)}
 .memorial-detail-scene .memorial-detail-back{position:absolute;z-index:5;top:24px;left:clamp(24px,4vw,54px);display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:13px;text-shadow:0 2px 8px #000}
+.memorial-detail-page{background:linear-gradient(to bottom,#10141b 0 min(46.512vw,577px),#fff min(46.512vw,577px))}
+.memorial-detail-page .memorial-detail-scene{width:100%;max-width:1240px;margin-inline:auto}
+@media(max-width:800px){.memorial-detail-page{background:#fff}}
 .memorial-detail-scene .memorial-detail-back:hover{text-decoration:underline;text-underline-offset:4px}
 .memorial-detail-scene .memorial-scene-content{top:22%;left:57%;width:39%}
 .memorial-detail-scene.has-long-copy .memorial-scene-content{top:15%}
@@ -521,7 +524,7 @@ body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 124
 .memorial-detail-secondary:hover{background:#293140}
 .memorial-detail-scene .memorial-share-button{width:47px;min-width:47px;height:47px;padding:0;background:#070e16a8}
 .memorial-detail-scene .memorial-motion-toggle{font-size:11px}
-.memorial-detail-body{width:min(1160px,calc(100% - 64px));margin:0 auto;padding:43px 0 55px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:30px 50px;color:#172139}
+.memorial-detail-body{width:min(1240px,calc(100% - 64px));margin:0 auto;padding:43px 0 55px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:30px 50px;color:#172139}
 .memorial-detail-main{min-width:0}
 .memorial-detail-about h2,.memorial-detail-memories h2,.memorial-detail-prayer h2{font:500 clamp(32px,3.2vw,42px)/1.15 var(--serif)}
 .memorial-detail-about>p{max-width:65ch;margin-top:14px;font:17px/1.65 var(--serif);color:#3e4958;white-space:pre-wrap}
@@ -671,7 +674,7 @@ body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-lit-
 .site-header .header-actions{flex:none;gap:8px;margin:0}
 .site-header .header-actions .icon-button{min-width:44px;min-height:44px}
 .site-header .header-actions>.button.small{min-height:44px;padding:10px 14px;white-space:nowrap;font-size:12px}
-.site-header.memorial-header .header-inner{display:flex;max-width:none;padding:14px 20px;gap:14px}
+.site-header.memorial-header .header-inner{display:flex;max-width:1400px;padding:14px 24px;gap:16px}
 .site-header.memorial-header .brand{font-size:21px}
 .site-header.memorial-header .main-nav{display:flex;flex:1 1 auto;gap:9px;margin:0;font-size:12px}
 .site-header.memorial-header .main-nav>a{font-size:12px}

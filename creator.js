@@ -246,5 +246,6 @@ import { controlsForFace, detectPortraitFaces, faceThumbnail, preparePortrait } 
   reducedMotion.addEventListener('change', syncMotion);
   document.addEventListener('visibilitychange', syncMotion);
   if ('IntersectionObserver' in window) new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; syncMotion(); }, { threshold: 0.05 }).observe(scene);
+  choosePhoto('without');
   update();
 })();
