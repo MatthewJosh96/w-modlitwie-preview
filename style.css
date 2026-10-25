@@ -367,6 +367,20 @@ body:has(.memorial-header){background:#faf8f5}
 body:has(.memorial-header) .creator-hero{padding-left:max(24px,calc((100vw - 1240px)/2));padding-right:max(24px,calc((100vw - 1240px)/2))}
 @media(max-width:800px){body:has(.memorial-header) main.memorial-creator{width:calc(100% - 32px);padding:0;margin-bottom:50px}body:has(.memorial-header) .creator-hero{padding:32px 18px}}
 
+/* The finished page uses the scene alone; editing guidance belongs to the form. */
+.memorial-creator.is-final .creator-side-quote,
+.memorial-creator.is-final .creator-side-help{display:none}
+.memorial-creator.is-final .creator-sidebar{display:block}
+.memorial-creator.is-final .creator-preview .memorial-scene{aspect-ratio:1836 / 856}
+.memorial-creator.is-final .creator-preview .memorial-photo{position:absolute;inset:0;aspect-ratio:auto}
+.memorial-creator.is-final .creator-preview .memorial-scene-content{position:absolute;left:57%;top:19%;width:39%;padding:0}
+.memorial-creator.is-final .creator-preview-details:has(> p[hidden] + blockquote[hidden]){display:none}
+@media(max-width:800px){
+  .memorial-creator.is-final .creator-preview .memorial-scene{aspect-ratio:auto}
+  .memorial-creator.is-final .creator-preview .memorial-photo{position:relative;inset:auto;aspect-ratio:1836 / 856}
+  .memorial-creator.is-final .creator-preview .memorial-scene-content{position:relative;left:auto;top:auto;width:100%;padding:22px 24px}
+}
+
 .creator-gallery-entry a{color:#f2d1a3}
 
 /* Native date controls must fit the card, including iOS intrinsic sizing. */
