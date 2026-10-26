@@ -790,3 +790,47 @@ body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-lit-
  .gallery-page .gallery-card-years{font-size:13px;line-height:1.45}
  .gallery-page .gallery-card-footer{min-height:40px}
 }
+
+/* Compact memorial introduction and a quieter information/footer hierarchy. */
+@media(min-width:801px){
+ .memorial-detail-page .memorial-detail-scene{height:480px;min-height:480px;aspect-ratio:auto;background:#10141b}
+ .memorial-detail-scene .memorial-photo{position:absolute;inset:auto;left:50%;top:50%;width:min(100%,1280px);height:auto;aspect-ratio:1836/856;transform:translate(-50%,-50%);margin:0}
+ .memorial-detail-scene .memorial-scene-content,.memorial-detail-scene.has-long-copy .memorial-scene-content{left:calc(50% + 40px);width:calc(50% - 72px);max-width:490px;top:50%;transform:translateY(-50%)}
+ .memorial-detail-scene .memorial-scene-content h1,.memorial-detail-scene .memorial-scene-content h2{font-size:clamp(36px,3.4vw,52px);line-height:1.1}
+ .memorial-detail-scene .memorial-dedication{font-size:21px;margin-top:20px}
+ .memorial-detail-scene .memorial-scene-actions{margin-top:24px}
+}
+.memorial-detail-body>.memorial-detail-about{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,2fr) minmax(220px,1fr);gap:14px 32px;padding:26px 28px;border:1px solid #eee8df;border-radius:8px;background:#fff}
+.memorial-detail-about[hidden]{display:none}
+.memorial-detail-body>.memorial-detail-about h2{grid-column:1;margin:0;font-size:34px}
+.memorial-detail-body>.memorial-detail-about>p{grid-column:1;margin:0;font-size:16px;line-height:1.7}
+.memorial-detail-about>p:empty{display:none}
+.memorial-about-quote{grid-column:2;grid-row:1/3;align-self:stretch;margin:0;padding:24px;background:#f9f6f1;color:#4d5363;font:italic 20px/1.5 var(--serif);border-radius:6px}
+.memorial-detail-body>.memorial-detail-about .memorial-detail-facts{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:8px 0 0;padding:22px 0 0;border:0;border-top:1px solid #eee8df;gap:20px}
+.memorial-detail-body>.memorial-detail-about .memorial-detail-facts>div{min-width:0}
+.footer-compact{padding:0;background:#fff;border-top:1px solid #eee8df}
+.footer-compact .footer-inner{max-width:1240px;min-height:108px;padding-top:20px;padding-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.footer-compact .brand{font-size:22px}
+.footer-compact nav{display:flex;flex-wrap:wrap;gap:4px 20px;align-items:center}
+.footer-compact nav a{display:inline-flex;align-items:center;min-height:44px;font-size:12px}
+.footer-compact .footer-motto{display:flex;align-items:center;gap:15px;padding-left:24px;border-left:1px solid #bd915d;white-space:nowrap;color:#926030;font-size:14px}
+.footer-compact .footer-note{padding-top:0;padding-bottom:14px;font-size:11px}
+@media(max-width:800px){
+ .memorial-detail-body>.memorial-detail-about{display:block;padding:20px}
+ .memorial-detail-body>.memorial-detail-about>p{margin-top:12px}
+ .memorial-about-quote{margin-top:18px;padding:18px;font-size:18px}
+ .memorial-detail-body>.memorial-detail-about .memorial-detail-facts{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:20px}
+ .footer-compact .footer-inner{flex-wrap:wrap;gap:12px 24px}
+ .footer-compact nav{order:3;width:100%;gap:0 18px}
+ .footer-compact .footer-motto{border:0;padding:0}
+}
+@media(max-width:400px){.memorial-detail-body>.memorial-detail-about .memorial-detail-facts{grid-template-columns:1fr}.footer-compact .footer-motto{font-size:12px}}
+
+.memorial-detail-page{background:#fff}
+.footer-social{display:flex;gap:2px;flex:none}
+.footer-social button{display:grid;place-items:center;width:36px;height:40px;padding:0;border:0;background:none;color:#28364c;opacity:.65;cursor:default}
+@media(min-width:801px){
+ .memorial-detail-scene .memorial-photo{-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 95%,transparent)}
+ .memorial-detail-scene .memorial-scene-content,.memorial-detail-scene.has-long-copy .memorial-scene-content{left:calc(50% + 87px);width:calc(50% - 112px)}
+}
+@media(max-width:1100px){.footer-compact .footer-inner{flex-wrap:wrap}.footer-compact nav{gap:0 12px}}

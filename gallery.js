@@ -2,7 +2,7 @@
   'use strict';
   // The gallery contains illustrative people and memories only.
   const people = [
-    {id:'maria',name:'Maria Wesołowska',eternalLight:true,portrait:'./assets/memorial-reference-portrait.webp',dedication:'Z wdzięcznością za ciepło, które zostaje z nami.'},
+    {id:'maria',name:'Maria Wesołowska',birth:'12 marca 1942',death:'5 października 2023',eternalLight:true,portrait:'./assets/memorial-reference-portrait.webp',dedication:'Z wdzięcznością za ciepło, które zostaje z nami.'},
     {id:'jan',name:'Jan Kowalski',eternalLight:true,portrait:null,dedication:'Pamięć o wspólnych chwilach trwa w naszych sercach.'},
     {id:'helena',name:'Helena Nowak',portrait:'./assets/memorial-demo-portrait.webp',dedication:'Za dobro, uśmiech i bliskość — dziękujemy.',birth:'27 lipca 1938',death:'2 stycznia 2024',birthPlace:'Kraków',deathPlace:'Kraków',family:'Córka, syn, wnuki',biography:'Helena Nowak była osobą niezwykle ciepłą, pogodną i pełną życzliwości. Zawsze miała czas dla innych, potrafiła słuchać i wspierać. Jej dom był miejscem, w którym każdy czuł się przyjęty. Kochająca mama, babcia i przyjaciółka. Jej wiara i dobroć pozostają w naszych sercach.'},
     {id:'stanislaw',name:'Stanisław Wiśniewski',portrait:null,dedication:'W ciszy i modlitwie zachowujemy wspomnienie.'},
@@ -92,12 +92,13 @@
       dates.hidden = false;
     }
     const facts = [
-      person.birth && ['birth','Data urodzenia',person.birth,person.birthPlace],
-      person.death && ['death','Data śmierci',person.death,person.deathPlace],
+      person.birthPlace && ['place','Miejsce urodzenia',person.birthPlace,''],
+      person.birth && ['birth','Data urodzenia',person.birth,''],
+      person.death && ['death','Data śmierci',person.death,''],
       person.family && ['family','Najbliżsi',person.family,'']
     ].filter(Boolean);
     if (facts.length) {
-      const icons = {birth:'<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 10h18"/></svg>',death:'<span class="cross-mark memorial-fact-cross" aria-hidden="true"></span>',family:'<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>'};
+      const icons = {place:'<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8"/></svg>',birth:'<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 10h18"/></svg>',death:'<span class="cross-mark memorial-fact-cross" aria-hidden="true"></span>',family:'<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>'};
       const target = document.querySelector('#person-facts');
       target.innerHTML = facts.map(([icon,label,value,extra]) => `<div><span class="person-fact-icon" aria-hidden="true">${icons[icon]}</span><span><small>${escape(label)}</small><strong>${escape(value)}</strong>${extra ? `<small>${escape(extra)}</small>` : ''}</span></div>`).join('');
       target.hidden = false;
