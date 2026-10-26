@@ -9,6 +9,7 @@
     {id:'zofia',name:'Zofia Kamińska',portrait:null,dedication:'Zawsze obecna w naszej pamięci.'},
     {id:'tadeusz',name:'Tadeusz Zieliński',portrait:null,dedication:'Wspominamy z wdzięcznością wspólnie spędzony czas.'}
   ];
+  const searchKey = value => value.normalize('NFKD').toLocaleLowerCase('pl-PL').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l').replace(/\s+/g, ' ').trim();
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const escape = value => value.replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
   const lights = '<span class="memorial-background-glow glow-left"></span><span class="memorial-background-glow glow-middle"></span><span class="memorial-background-glow glow-upper-one"></span><span class="memorial-background-glow glow-upper-two"></span><span class="memorial-background-glow glow-lower"></span><span class="memorial-background-glow glow-edge"></span><span class="memorial-background-glow glow-reflection-one"></span><span class="memorial-background-glow glow-reflection-two"></span>';
@@ -49,8 +50,8 @@
       return `<a class="gallery-recent-item" href="./gallery-person.html?id=${person.id}"><span class="gallery-recent-thumb">${thumbnail}</span><span class="gallery-recent-name">${escape(person.name)}</span><span class="gallery-recent-arrow" aria-hidden="true">›</span></a>`;
     }).join('');
     function render() {
-      const query = input.value.trim().toLocaleLowerCase('pl-PL');
-      const visible = people.filter(person => person.name.toLocaleLowerCase('pl-PL').includes(query));
+      const query = searchKey(input.value);
+      const visible = people.filter(person => searchKey(person.name).includes(query));
       if (!visible.length) target.innerHTML = `<div class="gallery-feedback" role="status"><h2>Nie znaleziono osoby</h2><p>Sprawdź pisownię imienia lub nazwiska i spróbuj ponownie.</p></div>`;
       else target.innerHTML = `<div class="gallery-grid">${visible.map(card).join('')}</div>`;
       observer.disconnect();
@@ -76,6 +77,10 @@
     if (person.id === 'helena') document.querySelector('#person-about-title').textContent = 'O Helenie';
     document.querySelector('#person-name').textContent = person.name;
     document.querySelector('#person-dedication').textContent = person.dedication;
+    if (!person.biography) {
+      document.querySelector('#person-about').classList.add('memorial-about-facts-only');
+      document.querySelector('#person-about-title').textContent = 'Życie';
+    }
     if (person.biography) {
       document.querySelector('#person-biography').textContent = person.biography;
       document.querySelector('#person-about').hidden = false;
@@ -114,11 +119,17 @@
     const candleKey = `wmodlitwie_gallery_candle_${person.id}`;
     const candleDialog = document.querySelector('#person-candle-dialog');
     const candleButton = document.querySelector('#person-light');
-    candleButton.addEventListener('pointerdown',() => { candleDialog.dataset.pointerOpen = 'true'; });
-    candleButton.addEventListener('keydown',() => { delete candleDialog.dataset.pointerOpen; });
-    candleDialog.addEventListener('keydown',() => { delete candleDialog.dataset.pointerOpen; });
-    candleDialog.addEventListener('close',() => { delete candleDialog.dataset.pointerOpen; });
-    document.querySelector('#person-candle-card').addEventListener('click', () => candleButton.click());
+    const candleCard = document.querySelector('#person-candle-card');
+    let candleOpener = candleButton;
+    [candleButton, candleCard].forEach(button => {
+      button.addEventListener('pointerdown', () => { candleDialog.dataset.pointerOpen = 'true'; });
+      button.addEventListener('keydown', () => { delete candleDialog.dataset.pointerOpen; });
+    });
+    candleDialog.addEventListener('keydown', () => { delete candleDialog.dataset.pointerOpen; });
+    candleDialog.addEventListener('close', () => {
+      delete candleDialog.dataset.pointerOpen;
+      candleOpener.focus({ preventScroll: true });
+    });
     const candleStatus = document.querySelector('#person-candle-dialog-status');
     let localCandle = null;
     try { localCandle = JSON.parse(localStorage.getItem(candleKey) || 'null'); } catch { localCandle = null; }
@@ -131,13 +142,17 @@
       syncMotion();
     }
     syncCandle();
-    candleButton.addEventListener('click',() => {
+    function openCandle(event) {
+      candleOpener = event.currentTarget;
+      candleOpener.focus({ preventScroll: true });
       document.querySelector('#person-candle-title').textContent = `Znicz pamięci — ${person.name}`;
       document.querySelector('#person-candle-words').value = localCandle?.words || '';
       document.querySelector('#person-candle-signature').value = localCandle?.signature || '';
       candleStatus.textContent = localCandle ? 'Znicz jest zapisany na tym urządzeniu. Możesz poprawić swoje słowa.' : '';
       candleDialog.showModal();
-    });
+    }
+    candleButton.addEventListener('click', openCandle);
+    candleCard.addEventListener('click', openCandle);
     document.querySelector('#person-candle-close').addEventListener('click',() => candleDialog.close());
     candleDialog.addEventListener('click',event => { if (event.target === candleDialog) candleDialog.close(); });
     document.querySelector('#person-candle-confirm').addEventListener('click',() => {
@@ -148,7 +163,6 @@
       syncCandle();
       candleStatus.textContent = 'Znicz zapisany na tym urządzeniu.';
       candleDialog.close();
-      candleButton.focus();
     });
     document.querySelector('#person-share').addEventListener('click',async () => {
       const status = document.querySelector('#person-share-status');

@@ -869,3 +869,9 @@ body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-lit-
  .memorial-detail-prayer .memorial-prayer-card p{flex:1;font-size:16px}
  .memorial-detail-prayer .memorial-cross{width:38px;height:48px;background-size:16px 30px}
 }
+
+/* A compact life summary when no biography was supplied. */
+.memorial-detail-body>.memorial-about-facts-only:not([hidden]){display:block;padding:22px 28px}
+.memorial-about-facts-only .memorial-about-quote{display:none}
+.memorial-detail-body>.memorial-about-facts-only .memorial-detail-facts{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:16px;padding-top:16px}
+@media(max-width:570px){.memorial-detail-body>.memorial-about-facts-only{padding:20px}.memorial-detail-body>.memorial-about-facts-only .memorial-detail-facts{grid-template-columns:1fr}}
