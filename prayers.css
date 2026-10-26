@@ -15,3 +15,5 @@
 .pr-hero p,.pr-text-panel #pr-text{font-weight:400}.pr-text-panel #pr-text p{color:#30384b}
 .pr-text-panel audio::-webkit-media-controls-play-button{background-color:#b07842;border-radius:50%}
 @media(min-width:1101px){.pr-hero-home .pr-container{padding-top:43px;padding-bottom:38px}.pr-topics button{padding:8px 9px;font-size:9px}.pr-topics>div{gap:5px}.pr-search-row{grid-template-columns:1.08fr 1fr;padding-top:20px;padding-bottom:20px}.pr-hero-home{min-height:252px}.pr-reading-heading{margin-bottom:18px}}
+
+.pr-collections{display:flex;gap:12px 24px;flex-wrap:wrap;margin:22px 0;font-size:13px}.pr-collections a,.pr-source-link{color:#825025;text-decoration:underline;text-underline-offset:3px}.pr-source-link{display:inline-block;font-size:11px;margin:10px 0}.pr-text-panel #pr-text p{white-space:pre-line}#pr-editorial-note{margin-top:12px}.pr-sidebar #pr-prayer-menu{max-height:640px;overflow:auto;scrollbar-width:thin;scrollbar-color:#bb9570 #f5efe7}@media(max-width:700px){.pr-sidebar #pr-prayer-menu{max-height:none}.pr-collections{gap:16px}.pr-source-link{font-size:12px}}

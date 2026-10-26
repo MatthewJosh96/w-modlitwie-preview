@@ -36,7 +36,7 @@
   let selected=prayers.find(p=>p.slug===(params.get('modlitwa')||document.body.dataset.prSlug));
   const requestedCategory=params.get('kategoria');
   let category=categories.find(c=>c[0]===requestedCategory)?.[0] || selected?.categories[0] || 'codzienne';
-  if(category==='tradycyjne') category='tradycyjne';
+
   let filter=params.get('filtr') || 'wszystkie';
   const pool=()=>prayers.filter(p=>p.categories.includes(category));
   if(requestedCategory&&!params.has('modlitwa'))selected=pool()[0];
@@ -59,6 +59,10 @@
   function select(p,focus=false){selected=p;document.title=`${p.title} · W Modlitwie`;$('pr-title').textContent=p.title;$('pr-subtitle').textContent=p.description;
     $('pr-text').replaceChildren(...p.body.map(text=>{const el=document.createElement('p');el.textContent=text;return el}));
     $('pr-source').textContent=p.contentKind==='introduction'?'Autorskie wprowadzenie do modlitwy':p.sourceLabel;
+    $('pr-editorial-note').textContent=p.editorialNote||'';
+    const sourceLink=$('pr-source-link');
+    sourceLink.hidden=!p.sourceUrl;
+    if(p.sourceUrl)sourceLink.href=p.sourceUrl;
     const audio=$('pr-audio');audio.pause();audio.src=`${root}assets/prayers/${p.slug}.mp3`;audio.load();$('pr-audio-note').textContent='Odczyt syntetyczny';
     const others=pool().filter(q=>q.slug!==p.slug).slice(0,4);$('pr-other-list').replaceChildren(...others.map(q=>link(q,true)));document.querySelector('.pr-other').hidden=!others.length;
     syncFavorite();renderMenu();if(focus){const next=new URL(location.href);next.searchParams.set('modlitwa',p.slug);next.searchParams.set('kategoria',category);next.searchParams.set('filtr',filter);history.pushState({},'',next);$('pr-title').focus({preventScroll:true})}
