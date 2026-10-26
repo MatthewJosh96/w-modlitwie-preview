@@ -11,16 +11,11 @@
   ];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const escape = value => value.replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
-  const initials = name => {
-    const words = name.normalize('NFC').trim().match(/\p{L}[\p{L}\p{M}]*/gu) || [];
-    while (words.length > 1 && ['śp','ks','s','o','bp'].includes(words[0].toLocaleLowerCase('pl-PL'))) words.shift();
-    return words.length ? [Array.from(words[0])[0], words.length > 1 ? Array.from(words[words.length - 1])[0] : ''].join('').toLocaleUpperCase('pl-PL') : '';
-  };
   const lights = '<span class="memorial-background-glow glow-left"></span><span class="memorial-background-glow glow-middle"></span><span class="memorial-background-glow glow-upper-one"></span><span class="memorial-background-glow glow-upper-two"></span><span class="memorial-background-glow glow-lower"></span><span class="memorial-background-glow glow-edge"></span><span class="memorial-background-glow glow-reflection-one"></span><span class="memorial-background-glow glow-reflection-two"></span>';
 
   const noFrame = '<img class="gallery-card-no-frame" src="./assets/memorial-scene-no-frame.webp" alt="" width="1836" height="856" loading="lazy">';
   function card(person) {
-    const portrait = person.portrait ? `<svg class="gallery-card-portrait" viewBox="0 0 1836 856" preserveAspectRatio="none"><defs><clipPath id="frame-${person.id}"><path d="M 145 160 L 475 181 L 525 635 L 185 658 Z"></path></clipPath></defs><g clip-path="url(#frame-${person.id})"><image href="${person.portrait}" width="600" height="750" preserveAspectRatio="xMidYMid slice" transform="matrix(.57 .035 .052 .68 145 160)"></image></g></svg><img class="gallery-card-foreground" src="./assets/memorial-scene-foreground.webp" alt="" width="1836" height="856" loading="lazy">` : `${noFrame}${initials(person.name) ? `<span class="memorial-initials gallery-initials" aria-hidden="true">${escape(initials(person.name))}</span>` : ''}`;
+    const portrait = person.portrait ? `<svg class="gallery-card-portrait" viewBox="0 0 1836 856" preserveAspectRatio="none"><defs><clipPath id="frame-${person.id}"><path d="M 145 160 L 475 181 L 525 635 L 185 658 Z"></path></clipPath></defs><g clip-path="url(#frame-${person.id})"><image href="${person.portrait}" width="600" height="750" preserveAspectRatio="xMidYMid slice" transform="matrix(.57 .035 .052 .68 145 160)"></image></g></svg><img class="gallery-card-foreground" src="./assets/memorial-scene-foreground.webp" alt="" width="1836" height="856" loading="lazy">` : noFrame;
     const flameIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c4.1 0 7-2.9 7-7 0-2.7-1.6-5-4.5-8-.1 2.3-1.1 3.4-2 3.9C12.1 7.4 10.3 5 8 2c.4 3.5-.7 5.3-2 7.3A9.4 9.4 0 0 0 5 15c0 4.1 2.9 7 7 7Z"/></svg>';
     const candleIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 10h8v11H8zM12 8c2-2 .7-3.8 0-5-.7 1.2-2 3 0 5Z"/></svg>';
     const rememberCount = Number.isInteger(person.rememberCount) && person.rememberCount >= 0 ? person.rememberCount.toLocaleString('pl-PL') : '—';
@@ -48,7 +43,7 @@
     if (recentList) recentList.innerHTML = people.slice(-3).reverse().map(person => {
       const thumbnail = person.portrait
         ? `<img src="${person.portrait}" alt="" width="48" height="48" loading="lazy">`
-        : `<span class="gallery-recent-initials" aria-hidden="true">${escape(initials(person.name))}</span>`;
+        : '<img src="./assets/memorial-scene-no-frame.webp" alt="" width="46" height="46" loading="lazy">';
       return `<a class="gallery-recent-item" href="./gallery-person.html?id=${person.id}"><span class="gallery-recent-thumb">${thumbnail}</span><span class="gallery-recent-name">${escape(person.name)}</span><span class="gallery-recent-arrow" aria-hidden="true">›</span></a>`;
     }).join('');
     function render() {
@@ -111,9 +106,6 @@
       document.querySelector('.memorial-foreground').hidden = false;
     } else {
       document.querySelector('.memorial-no-frame').hidden = false;
-      const letters = initials(person.name);
-      document.querySelector('.memorial-initials').textContent = letters;
-      document.querySelector('.memorial-initials').hidden = !letters;
     }
     const candleKey = `wmodlitwie_gallery_candle_${person.id}`;
     const candleDialog = document.querySelector('#person-candle-dialog');

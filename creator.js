@@ -16,11 +16,6 @@ import { controlsForFace, detectPortraitFaces, faceThumbnail, preparePortrait } 
     dziadek: 'Za rozmowy, cierpliwość i wspólne wspomnienia.'
   };
   const eternalRest = 'Wieczny odpoczynek racz im dać, Panie, a światłość wiekuista niechaj im świeci. Niech odpoczywają w pokoju wiecznym. Amen.';
-  const initials = name => {
-    const words = name.normalize('NFC').trim().match(/\p{L}[\p{L}\p{M}]*/gu) || [];
-    while (words.length > 1 && ['śp','ks','s','o','bp'].includes(words[0].toLocaleLowerCase('pl-PL'))) words.shift();
-    return words.length ? [Array.from(words[0])[0], words.length > 1 ? Array.from(words[words.length - 1])[0] : ''].join('').toLocaleUpperCase('pl-PL') : '';
-  };
   let step = 1;
   let image = null;
   let selection = 0;
@@ -111,9 +106,6 @@ import { controlsForFace, detectPortraitFaces, faceThumbnail, preparePortrait } 
 
   function update() {
     const name = $('#demo-name').value.trim() || 'Imię bliskiej osoby';
-    const letters = initials($('#demo-name').value);
-    $('#scene-initials').textContent = letters;
-    $('#scene-initials').hidden = photoChoice !== 'without' || !letters;
     const words = $('#demo-dedication').value.trim() || 'W ciszy i wdzięczności zachowujemy pamięć.';
     const signature = $('#demo-signature').value.trim();
     const birth = eventDate('birth'), death = eventDate('death');
@@ -235,9 +227,6 @@ import { controlsForFace, detectPortraitFaces, faceThumbnail, preparePortrait } 
     $('.memorial-portrait').toggleAttribute('hidden', choice !== 'with' || !photoData);
     $('.memorial-foreground').hidden = choice !== 'with' || !photoData;
     $('.memorial-no-frame').hidden = choice !== 'without';
-    const letters = initials($('#demo-name').value);
-    $('#scene-initials').textContent = letters;
-    $('#scene-initials').hidden = choice !== 'without' || !letters;
     setError('photo', '');
   }
   $$('[data-photo-choice]').forEach(button => button.addEventListener('click', () => choosePhoto(button.dataset.photoChoice)));
