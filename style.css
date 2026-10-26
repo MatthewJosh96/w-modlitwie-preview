@@ -834,3 +834,6 @@ body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-lit-
  .memorial-detail-scene .memorial-scene-content,.memorial-detail-scene.has-long-copy .memorial-scene-content{left:calc(50% + 87px);width:calc(50% - 112px)}
 }
 @media(max-width:1100px){.footer-compact .footer-inner{flex-wrap:wrap}.footer-compact nav{gap:0 12px}}
+
+/* Keep the return link in the banner corner, clear of the portrait. */
+.memorial-detail-scene .memorial-detail-back{top:0;left:16px;min-height:44px;margin:0}
