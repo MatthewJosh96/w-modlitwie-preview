@@ -102,9 +102,8 @@
       dates.hidden = false;
     }
     const facts = [
-      person.birthPlace && ['place','Miejsce urodzenia',person.birthPlace,''],
-      person.birth && ['birth','Data urodzenia',person.birth,''],
-      person.death && ['death','Data śmierci',person.death,''],
+      person.birth && ['birth','Data urodzenia',person.birth,person.birthPlace || ''],
+      person.death && ['death','Data śmierci',person.death,person.deathPlace || ''],
       person.family && ['family','Najbliżsi',person.family,'']
     ].filter(Boolean);
     if (facts.length) {
@@ -133,7 +132,23 @@
           'Byłaś dla nas przykładem wiary, siły i miłości. Twoja obecność nadal nas prowadzi.'
         ]
       : [person.dedication];
-    memoryList.innerHTML = examples.map((quote, index) => `<blockquote class="memorial-memory-card"><p>„${escape(quote)}”</p><footer>Przykładowe wspomnienie ${index + 1}</footer></blockquote>`).join('');
+    const authors = [['Anna','Córka','14 stycznia 2024'],['Piotr','Wnuk','2 stycznia 2024'],['Katarzyna','Synowa','28 grudnia 2023']];
+    memoryList.innerHTML = examples.map((quote, index) => {
+      const [name, relation, date] = person.id === 'helena' ? authors[index] : ['Bliska osoba','',''];
+      return `<blockquote class="memorial-memory-card"><p>„${escape(quote)}”</p><footer class="memorial-memory-author"><span class="memorial-memory-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3Z"/></svg></span><span class="memorial-memory-identity"><strong>${escape(name)}</strong><small>${escape(relation)}</small></span><time class="memorial-memory-date">${escape(date)}</time></footer></blockquote>`;
+    }).join('');
+    document.querySelector('#person-memories-dialog-list').innerHTML = memoryList.innerHTML;
+    for (const [openId, dialogId, closeId] of [
+      ['person-prayer-open','person-prayer','person-prayer-close'],
+      ['person-memories-all','person-memories-dialog','person-memories-close']
+    ]) {
+      const opener = document.getElementById(openId);
+      const dialog = document.getElementById(dialogId);
+      opener.addEventListener('click', () => dialog.showModal());
+      document.getElementById(closeId).addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+      dialog.addEventListener('close', () => opener.focus({preventScroll:true}));
+    }
 
     document.querySelector('#person-album-link').href = `./album.html?id=${encodeURIComponent(person.id)}`;
 
@@ -193,6 +208,12 @@
         photoStrip.append(button);
       });
     }
+    document.querySelector('#person-photos-all').addEventListener('click', event => {
+      if (!photos.length) return;
+      photoOpener = event.currentTarget;
+      showPhoto(0);
+      photoDialog.showModal();
+    });
     renderPhotos(illustrations, true);
     if (window.MemorialAlbumStore?.load) {
       window.MemorialAlbumStore.load(person.id).then(album => {
@@ -235,6 +256,8 @@
       document.querySelector('#person-period').textContent = lit ? 'Znicz zapalony na tym urządzeniu' : 'Bezpłatny gest pamięci';
       document.querySelector('#person-light-label').textContent = lit ? 'Znicz pamięci zapalony' : 'Zapal znicz pamięci';
       candleButton.setAttribute('aria-label', lit ? `Znicz pamięci zapalony: ${person.name}` : `Zapal znicz pamięci: ${person.name}`);
+      document.querySelector('#person-count').textContent = String((person.id === 'helena' ? 312 : 0) + (lit ? 1 : 0));
+      document.querySelector('#person-count-note').textContent = 'Licznik przykładowy · zapis lokalny';
       syncMotion();
     }
     syncCandle();
