@@ -875,3 +875,6 @@ body[data-gallery-page="person"] .memorial-scene:not(.is-burning) .memorial-lit-
 .memorial-about-facts-only .memorial-about-quote{display:none}
 .memorial-detail-body>.memorial-about-facts-only .memorial-detail-facts{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:16px;padding-top:16px}
 @media(max-width:570px){.memorial-detail-body>.memorial-about-facts-only{padding:20px}.memorial-detail-body>.memorial-about-facts-only .memorial-detail-facts{grid-template-columns:1fr}}
+
+/* Podgląd świecy: czytelne reguły bez zmiany układu. */
+.memorial-candle-duration{border:0;padding:0;margin:18px 0 10px}.memorial-candle-duration legend{font-weight:600;margin-bottom:8px}.memorial-candle-duration label{display:block;margin:8px 0;line-height:1.5}.gallery-demo-note{margin:0 0 16px;color:#626b7c;font-size:13px;line-height:1.6}
