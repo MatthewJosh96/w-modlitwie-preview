@@ -18,9 +18,11 @@
     const portrait = person.portrait ? `<svg class="gallery-card-portrait" viewBox="0 0 1836 856" preserveAspectRatio="none"><defs><clipPath id="frame-${person.id}"><path d="M 145 160 L 475 181 L 525 635 L 185 658 Z"></path></clipPath></defs><g clip-path="url(#frame-${person.id})"><image href="${person.portrait}" width="600" height="750" preserveAspectRatio="xMidYMid slice" transform="matrix(.57 .035 .052 .68 145 160)"></image></g></svg><img class="gallery-card-foreground" src="./assets/memorial-scene-foreground.webp" alt="" width="1836" height="856" loading="lazy">` : noFrame;
     const flameIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c4.1 0 7-2.9 7-7 0-2.7-1.6-5-4.5-8-.1 2.3-1.1 3.4-2 3.9C12.1 7.4 10.3 5 8 2c.4 3.5-.7 5.3-2 7.3A9.4 9.4 0 0 0 5 15c0 4.1 2.9 7 7 7Z"/></svg>';
     const candleIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 10h8v11H8zM12 8c2-2 .7-3.8 0-5-.7 1.2-2 3 0 5Z"/></svg>';
-    const rememberCount = Number.isInteger(person.rememberCount) && person.rememberCount >= 0 ? person.rememberCount.toLocaleString('pl-PL') : '—';
-    const years = person.birthYear && person.deathYear ? `${person.birthYear} – ${person.deathYear}` : person.birthYear ? `ur. ${person.birthYear}` : person.deathYear ? `zm. ${person.deathYear}` : '';
-    return `<a class="gallery-card${person.eternalLight ? ' gallery-card-eternal' : ''}" href="./gallery-person.html?id=${person.id}"><div class="gallery-card-scene" aria-hidden="true"><div class="gallery-card-art"><img src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856" loading="lazy">${portrait}<span class="gallery-card-flame"><img src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856" loading="lazy"></span><span class="gallery-card-glow"></span></div></div><div class="gallery-card-info"><h2>${escape(person.name)}</h2><p class="gallery-card-years">${years || escape(person.dedication)}</p>${person.eternalLight ? `<span class="gallery-eternal-label">${flameIcon}Wieczny znicz</span>` : ''}<div class="gallery-card-footer"><span class="gallery-memory-count" aria-label="Osób pamiętających: ${rememberCount === '—' ? 'brak danych' : rememberCount}">${candleIcon}${rememberCount} osób pamięta</span><span class="gallery-card-arrow" aria-hidden="true">›</span></div></div></a>`;
+    const rememberCount = Number.isInteger(person.rememberCount) && person.rememberCount >= 0 ? person.rememberCount.toLocaleString('pl-PL') : null;
+    const birth = person.birth || (person.birthYear ? String(person.birthYear) : '');
+    const death = person.death || (person.deathYear ? String(person.deathYear) : '');
+    const years = birth && death ? `${birth} – ${death}` : birth ? `ur. ${birth}` : death ? `zm. ${death}` : '';
+    return `<a class="gallery-card${person.eternalLight ? ' gallery-card-eternal' : ''}" href="./gallery-person.html?id=${person.id}"><div class="gallery-card-scene" aria-hidden="true"><div class="gallery-card-art"><img src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856" loading="lazy">${portrait}<span class="gallery-card-flame"><img src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856" loading="lazy"></span><span class="gallery-card-glow"></span></div></div><div class="gallery-card-info"><h2>${escape(person.name)}</h2><p class="gallery-card-years">${escape(years || person.dedication)}</p>${person.eternalLight ? `<span class="gallery-eternal-label">${flameIcon}Wieczny znicz</span>` : ''}<div class="gallery-card-footer">${rememberCount !== null ? `<span class="gallery-memory-count">${candleIcon}${rememberCount} osób pamięta</span>` : '<span>Zobacz wspomnienie</span>'}<span class="gallery-card-arrow" aria-hidden="true">›</span></div></div></a>`;
   }
 
   function syncMotion() {
@@ -81,7 +83,8 @@
     document.querySelector('#person-memory').textContent = person.dedication;
     document.querySelector('#person-period').textContent = person.eternalLight ? 'Wieczny znicz' : 'Symboliczny znicz pamięci';
     const candleCount = Number.isInteger(person.candleCount) && person.candleCount >= 0 ? person.candleCount.toLocaleString('pl-PL') : null;
-    document.querySelector('#person-count').textContent = candleCount || '—';
+    document.querySelector('#person-count').textContent = candleCount ?? '';
+    document.querySelector('.memorial-detail-count').hidden = candleCount === null;
     document.querySelector('.memorial-detail-count').setAttribute('aria-label',`Osób, które zapaliły znicz: ${candleCount || 'brak danych'}`);
     if (person.birth || person.death) {
       const dates = document.querySelector('#person-dates');
