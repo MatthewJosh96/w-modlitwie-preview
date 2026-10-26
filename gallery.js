@@ -12,30 +12,20 @@
   const searchKey = value => value.normalize('NFKD').toLocaleLowerCase('pl-PL').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l').replace(/\s+/g, ' ').trim();
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const escape = value => value.replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
-  const lights = '<span class="memorial-background-glow glow-left"></span><span class="memorial-background-glow glow-middle"></span><span class="memorial-background-glow glow-upper-one"></span><span class="memorial-background-glow glow-upper-two"></span><span class="memorial-background-glow glow-lower"></span><span class="memorial-background-glow glow-edge"></span><span class="memorial-background-glow glow-reflection-one"></span><span class="memorial-background-glow glow-reflection-two"></span>';
-
-  const DAY = 86_400_000;
-  const candleKey = person => `wmodlitwie_gallery_candle_${person.id}`;
+  const candleKey = person => `wmodlitwie_free_candle_${person.id}`;
   function readCandle(person) {
-    try {
-      const entry = JSON.parse(localStorage.getItem(candleKey(person)) || 'null');
-      if (!entry || typeof entry !== 'object') return null;
-      const endsAt = Number(entry.endsAt);
-      return {words: typeof entry.words === 'string' ? entry.words : '', signature: typeof entry.signature === 'string' ? entry.signature : '', endsAt: Number.isFinite(endsAt) && endsAt > 0 ? endsAt : 0};
-    } catch { return null; }
+    try { return localStorage.getItem(candleKey(person)) === 'lit'; }
+    catch { return false; }
   }
-  const isBurning = entry => !!entry && entry.endsAt > Date.now();
-  const formatEnd = entry => new Intl.DateTimeFormat('pl-PL',{dateStyle:'long',timeStyle:'short',timeZone:'Europe/Warsaw'}).format(entry.endsAt);
+  const isBurning = entry => entry === true;
   const noFrame = '<img class="gallery-card-no-frame" src="./assets/memorial-scene-no-frame.webp" alt="" width="1836" height="856" loading="lazy">';
   function card(person) {
     const burning = isBurning(readCandle(person));
     const portrait = person.portrait ? `<svg class="gallery-card-portrait" viewBox="0 0 1836 856" preserveAspectRatio="none"><defs><clipPath id="frame-${person.id}"><path d="M 145 160 L 475 181 L 525 635 L 185 658 Z"></path></clipPath></defs><g clip-path="url(#frame-${person.id})"><image href="${person.portrait}" width="600" height="750" preserveAspectRatio="xMidYMid slice" transform="matrix(.57 .035 .052 .68 145 160)"></image></g></svg><img class="gallery-card-foreground" src="./assets/memorial-scene-foreground.webp" alt="" width="1836" height="856" loading="lazy">` : noFrame;
-    const candleIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 10h8v11H8zM12 8c2-2 .7-3.8 0-5-.7 1.2-2 3 0 5Z"/></svg>';
-    const rememberCount = Number.isInteger(person.rememberCount) && person.rememberCount >= 0 ? person.rememberCount.toLocaleString('pl-PL') : null;
     const birth = person.birth || (person.birthYear ? String(person.birthYear) : '');
     const death = person.death || (person.deathYear ? String(person.deathYear) : '');
     const years = birth && death ? `${birth} – ${death}` : birth ? `ur. ${birth}` : death ? `zm. ${death}` : '';
-    return `<a class="gallery-card${burning ? ' is-burning' : ''}" href="./gallery-person.html?id=${person.id}"><div class="gallery-card-scene" aria-hidden="true"><div class="gallery-card-art"><img src="./assets/memorial-scene-${burning ? 'lit' : 'unlit'}.webp" alt="" width="1836" height="856" loading="lazy">${portrait}${burning ? '<span class="gallery-card-flame"><img src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856" loading="lazy"></span><span class="gallery-card-glow"></span>' : ''}</div></div><div class="gallery-card-info"><h2>${escape(person.name)}</h2><p class="gallery-card-years">${escape(years || person.dedication)}</p><div class="gallery-card-footer">${rememberCount !== null ? `<span class="gallery-memory-count">${candleIcon}${rememberCount} osób pamięta</span>` : '<span>Zobacz wspomnienie</span>'}<span class="gallery-card-arrow" aria-hidden="true">›</span></div></div></a>`;
+    return `<a class="gallery-card${burning ? ' is-burning' : ''}" href="./gallery-person.html?id=${person.id}"><div class="gallery-card-scene" aria-hidden="true"><div class="gallery-card-art"><img src="./assets/memorial-scene-${burning ? 'lit' : 'unlit'}.webp" alt="" width="1836" height="856" loading="lazy">${portrait}${burning ? '<span class="gallery-card-flame"><img src="./assets/memorial-scene-lit.webp" alt="" width="1836" height="856" loading="lazy"></span><span class="gallery-card-glow"></span>' : ''}</div></div><div class="gallery-card-info"><h2>${escape(person.name)}</h2><p class="gallery-card-years">${escape(years || person.dedication)}</p><div class="gallery-card-footer"><span>Zobacz wspomnienie</span><span class="gallery-card-arrow" aria-hidden="true">›</span></div></div></a>`;
   }
 
   function syncMotion() {
@@ -85,7 +75,6 @@
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') render(); });
     window.addEventListener('focus', render);
     window.addEventListener('storage', render);
-    window.setInterval(render, 15_000);
   } else {
     const id = new URLSearchParams(location.search).get('id');
     const person = people.find(entry => entry.id === id);
@@ -100,17 +89,13 @@
     if (!person.biography) {
       document.querySelector('#person-about').classList.add('memorial-about-facts-only');
       document.querySelector('#person-about-title').textContent = 'Życie';
+      document.querySelector('#person-biography').hidden = true;
     }
     if (person.biography) {
       document.querySelector('#person-biography').textContent = person.biography;
       document.querySelector('#person-about').hidden = false;
     }
-    document.querySelector('#person-memory').textContent = person.dedication;
-    document.querySelector('#person-period').textContent = 'Symboliczny znicz pamięci';
-    const candleCount = Number.isInteger(person.candleCount) && person.candleCount >= 0 ? person.candleCount.toLocaleString('pl-PL') : null;
-    document.querySelector('#person-count').textContent = candleCount ?? '';
-    document.querySelector('.memorial-detail-count').hidden = candleCount === null;
-    document.querySelector('.memorial-detail-count').setAttribute('aria-label',`Osób, które zapaliły znicz: ${candleCount || 'brak danych'}`);
+
     if (person.birth || person.death) {
       const dates = document.querySelector('#person-dates');
       dates.textContent = [person.birth,person.death].filter(Boolean).join(' – ');
@@ -129,6 +114,9 @@
       target.hidden = false;
       document.querySelector('#person-about').hidden = false;
     }
+    if (document.querySelector('#person-about').hidden) {
+      document.querySelector('.memorial-profile-layout').classList.add('has-no-about');
+    }
     if (person.portrait) {
       document.querySelector('#person-portrait').setAttribute('href',person.portrait);
       document.querySelector('.memorial-portrait').removeAttribute('hidden');
@@ -136,54 +124,137 @@
     } else {
       document.querySelector('.memorial-no-frame').hidden = false;
     }
+    // Fictional fixture content is visibly labelled as a preview.
+    const memoryList = document.querySelector('#person-memories-list');
+    const examples = person.id === 'helena'
+      ? [
+          'Dziękuję za każdą rozmowę i za to, że zawsze wierzyłaś we mnie. Będziesz na zawsze w moim sercu.',
+          'Twój ciepły uśmiech i dobroć pozostają z nami na zawsze.',
+          'Byłaś dla nas przykładem wiary, siły i miłości. Twoja obecność nadal nas prowadzi.'
+        ]
+      : [person.dedication];
+    memoryList.innerHTML = examples.map((quote, index) => `<blockquote class="memorial-memory-card"><p>„${escape(quote)}”</p><footer>Przykładowe wspomnienie ${index + 1}</footer></blockquote>`).join('');
+
+    document.querySelector('#person-album-link').href = `./album.html?id=${encodeURIComponent(person.id)}`;
+
+    const photoDialog = document.querySelector('#person-photo-dialog');
+    const photoStrip = document.querySelector('#person-photo-strip');
+    const localPhotoUrls = [];
+    let photos = [];
+    let photoIndex = 0;
+    let photoOpener = null;
+    const illustrations = [
+      ...(person.portrait ? [{src:person.portrait,caption:'Portret ilustracyjny',alt:`Ilustracyjny portret: ${person.name}`}] : []),
+      {src:'./images/hero-memory.webp',caption:'Obraz symboliczny',alt:'Symboliczny obraz miejsca pamięci'},
+      {src:'./images/memorial-creator-candle.webp',caption:'Obraz symboliczny',alt:'Symboliczna świeca pamięci'},
+      {src:'./assets/memorial-prayer-candles.webp',caption:'Obraz symboliczny',alt:'Świece modlitewne'}
+    ];
+    function showPhoto(index) {
+      photoIndex = (index + photos.length) % photos.length;
+      const photo = photos[photoIndex];
+      const large = document.querySelector('#person-photo-large');
+      large.src = photo.src;
+      large.alt = photo.alt;
+      document.querySelector('#person-photo-dialog-title').textContent = photo.caption;
+      document.querySelector('#person-photo-position').textContent = `${photoIndex + 1} z ${photos.length}`;
+      const multiple = photos.length > 1;
+      document.querySelector('#person-photo-previous').hidden = !multiple;
+      document.querySelector('#person-photo-next').hidden = !multiple;
+    }
+    function renderPhotos(entries, illustrative) {
+      photos = entries;
+      const section = document.querySelector('#person-photos');
+      section.hidden = !photos.length;
+      document.querySelector('#person-photos-note').textContent = illustrative ? 'Obrazy ilustracyjne · podgląd' : 'Zdjęcia zapisane na tym urządzeniu';
+      photoStrip.replaceChildren();
+      photos.slice(0, 5).forEach((photo, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'memorial-photo-thumb';
+        const more = index === 4 && photos.length > 5;
+        button.setAttribute('aria-label', more ? `Zobacz wszystkie zdjęcia (${photos.length})` : `Otwórz zdjęcie ${index + 1}: ${photo.caption}`);
+        const image = document.createElement('img');
+        image.src = photo.src;
+        image.alt = photo.alt;
+        image.loading = 'lazy';
+        button.append(image);
+        if (more) {
+          button.classList.add('memorial-photo-thumb-more');
+          const count = document.createElement('span');
+          count.setAttribute('aria-hidden', 'true');
+          count.textContent = `+${photos.length - 5}`;
+          button.append(count);
+        }
+        button.addEventListener('click', () => {
+          photoOpener = button;
+          showPhoto(index);
+          photoDialog.showModal();
+        });
+        photoStrip.append(button);
+      });
+    }
+    renderPhotos(illustrations, true);
+    if (window.MemorialAlbumStore?.load) {
+      window.MemorialAlbumStore.load(person.id).then(album => {
+        if (!Array.isArray(album?.photos) || !album.photos.length) return;
+        const entries = album.photos
+          .filter(photo => photo.blob instanceof Blob && photo.blob.type.startsWith('image/'))
+          .sort((a,b) => a.position - b.position)
+          .map((photo,index) => {
+            const url = URL.createObjectURL(photo.blob);
+            localPhotoUrls.push(url);
+            const caption = photo.caption?.trim() || `Zdjęcie ${index + 1}`;
+            return {src:url,caption,alt:caption};
+          });
+        if (entries.length) renderPhotos(entries, false);
+      }).catch(() => {
+        document.querySelector('#person-photos-note').textContent = 'Obrazy ilustracyjne · album lokalny jest niedostępny';
+      });
+    }
+    window.addEventListener('pagehide', event => {
+      if (!event.persisted) localPhotoUrls.forEach(url => URL.revokeObjectURL(url));
+    });
+    document.querySelector('#person-photo-close').addEventListener('click', () => photoDialog.close());
+    document.querySelector('#person-photo-previous').addEventListener('click', () => showPhoto(photoIndex - 1));
+    document.querySelector('#person-photo-next').addEventListener('click', () => showPhoto(photoIndex + 1));
+    photoDialog.addEventListener('click', event => { if (event.target === photoDialog) photoDialog.close(); });
+    photoDialog.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft') { event.preventDefault(); showPhoto(photoIndex - 1); }
+      if (event.key === 'ArrowRight') { event.preventDefault(); showPhoto(photoIndex + 1); }
+    });
+    photoDialog.addEventListener('close', () => photoOpener?.focus({preventScroll:true}));
+
     const candleDialog = document.querySelector('#person-candle-dialog');
     const candleButton = document.querySelector('#person-light');
     const candleCard = document.querySelector('#person-candle-card');
     let candleOpener = candleButton;
-    [candleButton, candleCard].forEach(button => {
-      button.addEventListener('pointerdown', () => { candleDialog.dataset.pointerOpen = 'true'; });
-      button.addEventListener('keydown', () => { delete candleDialog.dataset.pointerOpen; });
-    });
-    candleDialog.addEventListener('keydown', () => { delete candleDialog.dataset.pointerOpen; });
-    candleDialog.addEventListener('close', () => {
-      delete candleDialog.dataset.pointerOpen;
-      candleOpener.focus({ preventScroll: true });
-    });
     const candleStatus = document.querySelector('#person-candle-dialog-status');
-    let localCandle = readCandle(person);
     function syncCandle() {
-      localCandle = readCandle(person);
-      document.querySelector('.memorial-scene').classList.toggle('is-burning',isBurning(localCandle));
-      document.querySelector('#person-period').textContent = isBurning(localCandle) ? `Podgląd świecy do ${formatEnd(localCandle)}` : localCandle ? 'Okres podglądu świecy zakończony' : 'Bez zapalonej świecy';
-      document.querySelector('#person-light-label').textContent = isBurning(localCandle) ? 'Przedłuż podgląd świecy' : 'Zapal znicz w podglądzie';
-      candleButton.setAttribute('aria-label',isBurning(localCandle) ? `Przedłuż podgląd świecy: ${person.name}` : `Zapal znicz w podglądzie: ${person.name}`);
+      const lit = readCandle(person);
+      document.querySelector('.memorial-scene').classList.toggle('is-burning', lit);
+      document.querySelector('#person-period').textContent = lit ? 'Znicz zapalony na tym urządzeniu' : 'Bezpłatny gest pamięci';
+      document.querySelector('#person-light-label').textContent = lit ? 'Znicz pamięci zapalony' : 'Zapal znicz pamięci';
+      candleButton.setAttribute('aria-label', lit ? `Znicz pamięci zapalony: ${person.name}` : `Zapal znicz pamięci: ${person.name}`);
       syncMotion();
     }
     syncCandle();
     function openCandle(event) {
-      localCandle = readCandle(person);
       candleOpener = event.currentTarget;
-      candleOpener.focus({ preventScroll: true });
       document.querySelector('#person-candle-title').textContent = `Znicz pamięci — ${person.name}`;
-      document.querySelector('#person-candle-words').value = localCandle?.words || '';
-      document.querySelector('#person-candle-signature').value = localCandle?.signature || '';
-      candleStatus.textContent = isBurning(localCandle) ? `Świeca w podglądzie płonie do ${formatEnd(localCandle)}. Kolejny okres doda się do aktualnego końca.` : localCandle ? 'Poprzedni okres podglądu się skończył. Możesz zapalić świecę ponownie.' : '';
+      candleStatus.textContent = readCandle(person) ? 'Znicz jest już zapalony na tym urządzeniu.' : '';
+      document.querySelector('#person-candle-confirm').textContent = readCandle(person) ? 'Zamknij' : 'Zapal znicz';
       candleDialog.showModal();
     }
     candleButton.addEventListener('click', openCandle);
     candleCard.addEventListener('click', openCandle);
-    document.querySelector('#person-candle-close').addEventListener('click',() => candleDialog.close());
-    candleDialog.addEventListener('click',event => { if (event.target === candleDialog) candleDialog.close(); });
-    document.querySelector('#person-candle-confirm').addEventListener('click',() => {
-      const days = Number(document.querySelector('input[name="person-candle-duration"]:checked')?.value);
-      if (![30,90].includes(days)) { candleStatus.textContent = 'Wybierz czas świecy.'; return; }
-      const latestCandle = readCandle(person);
-      const entry = {endsAt:Math.max(Date.now(),latestCandle?.endsAt || 0)+days*DAY,words:document.querySelector('#person-candle-words').value.trim(),signature:document.querySelector('#person-candle-signature').value.trim()};
-      try { localStorage.setItem(candleKey(person),JSON.stringify(entry)); }
-      catch { candleStatus.textContent = 'Nie udało się zapisać znicza na tym urządzeniu. Sprawdź ustawienia przeglądarki.'; return; }
-      localCandle = entry;
+    document.querySelector('#person-candle-close').addEventListener('click', () => candleDialog.close());
+    candleDialog.addEventListener('click', event => { if (event.target === candleDialog) candleDialog.close(); });
+    candleDialog.addEventListener('close', () => candleOpener?.focus({preventScroll:true}));
+    document.querySelector('#person-candle-confirm').addEventListener('click', () => {
+      if (readCandle(person)) { candleDialog.close(); return; }
+      try { localStorage.setItem(candleKey(person), 'lit'); }
+      catch { candleStatus.textContent = 'Przeglądarka nie pozwala zapisać znicza. Możesz pomodlić się bez zapisu na tym urządzeniu.'; return; }
       syncCandle();
-      candleStatus.textContent = `Świeca w podglądzie płonie do ${formatEnd(entry)}.`;
       candleDialog.close();
     });
     document.querySelector('#person-share').addEventListener('click',async () => {
@@ -209,6 +280,6 @@
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') syncCandle(); });
     window.addEventListener('focus', syncCandle);
     window.addEventListener('storage', syncCandle);
-    window.setInterval(syncCandle, 15_000);
+
   }
 })();
