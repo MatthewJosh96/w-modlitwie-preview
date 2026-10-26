@@ -118,6 +118,7 @@
     candleButton.addEventListener('keydown',() => { delete candleDialog.dataset.pointerOpen; });
     candleDialog.addEventListener('keydown',() => { delete candleDialog.dataset.pointerOpen; });
     candleDialog.addEventListener('close',() => { delete candleDialog.dataset.pointerOpen; });
+    document.querySelector('#person-candle-card').addEventListener('click', () => candleButton.click());
     const candleStatus = document.querySelector('#person-candle-dialog-status');
     let localCandle = null;
     try { localCandle = JSON.parse(localStorage.getItem(candleKey) || 'null'); } catch { localCandle = null; }
@@ -158,6 +159,16 @@
         else status.textContent='Skopiuj adres z paska przeglądarki.';
       } catch (error) {if (error?.name !== 'AbortError') status.textContent='Skopiuj adres z paska przeglądarki.';}
     });
+    document.querySelectorAll('[data-share]').forEach(button => button.addEventListener('click', async () => {
+      const url = location.href.split('#')[0];
+      const kind = button.dataset.share;
+      const status = document.querySelector('#memorial-panel-status');
+      if (kind === 'copy') {
+        try { await navigator.clipboard.writeText(url); status.textContent = 'Link skopiowany.'; }
+        catch { status.textContent = `Skopiuj adres: ${url}`; }
+      } else if (kind === 'email') location.href = `mailto:?subject=${encodeURIComponent(person.name + ' — Miejsce Pamięci')}&body=${encodeURIComponent(url)}`;
+      else window.open(kind === 'facebook' ? `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}` : `https://wa.me/?text=${encodeURIComponent(person.name + ' — ' + url)}`, '_blank', 'noopener,noreferrer');
+    }));
     observer.observe(document.querySelector('.memorial-scene'));
   }
 })();
