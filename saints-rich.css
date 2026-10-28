@@ -1,0 +1,12 @@
+/* The existing .fr-* profile design is shared with John Paul II. */
+.fr-rich .fr-hero-image{object-position:center 20%}
+.fr-rich .fr-assisi img,.fr-rich .fr-similar-list img{object-position:77% 25%}
+.fr-rich .fr-hero h1{max-width:660px;text-wrap:balance}
+.fr-rich .fr-hero-quote{max-width:280px;font-size:18px}
+.fr-rich .fr-hero-quote small{font-style:normal}
+@media(max-width:760px){.fr-rich .fr-hero-image{object-position:78% 20%}.fr-rich .fr-hero h1{max-width:420px}.fr-rich .fr-assisi img{object-position:77% 20%}}
+.fr-rich .fr-panel{min-width:0}
+.fr-rich .fr-patron-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fr-rich .fr-patron-grid span,.fr-rich .fr-source a{overflow-wrap:anywhere}
+.fr-rich .fr-panel-head{flex-wrap:wrap}
+.fr-rich .fr-article-list a,.fr-rich .fr-similar-list a{grid-template-columns:58px minmax(0,1fr)}
